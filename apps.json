@@ -1,7 +1,7 @@
 {
   "name": "Official ProStore Repo",
   "identifier": "com.prostoreios.prostore.repo",
-  "sourceURL": "https://github.com/ProStore-iOS/ProStore",
+  "sourceURL": "https://ProStore-iOS.github.io/apps.json",
   "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/Sources/prostore/Assets.xcassets/AppIcon.appiconset/Icon-1024.png",
   "website": "https://ProStore-iOS.github.io",
   "ipawebsite": "https://github.com/ProStore-iOS/ProStore/releases",
@@ -25,6 +25,16 @@
         "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot5.png"
       ],
       "versions": [
+        {
+          "version": "1.0.2",
+          "date": "2025-09-12T07:38:59+0000",
+          "localizedDescription": "What's new in Version 1.0.2?\n- Update to v1.0.2\n- Fix ProStore repository JSON and create prostore.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.0.2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 1433088,
+          "sha256": "a02c89ab354996f9bb859d47c2bdc5cdb1521af40ddc97b2815bc5afb3c9c541",
+          "minOSVersion": "15.0",
+          "fullDate": "20250912073859"
+        },
         {
           "version": "1.0.1",
           "date": "2025-09-12T07:24:03+0000",
