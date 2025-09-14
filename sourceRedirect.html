@@ -18,11 +18,12 @@
 
             if(appName && path) {
                 const redirectURL = `${appName}://${path}=https://prostore-ios.github.io/apps.json`;
+
+                // Show redirecting message
+                document.body.innerHTML = `<p>Opening <strong>${appName}</strong>...</p>`;
+
                 // Redirect
                 window.location.href = redirectURL;
-
-                // Update manual link as fallback
-                document.body.innerHTML = `<p>Redirecting...<br>If nothing happens, <a href="${redirectURL}">click here</a>.</p>`;
             } else {
                 document.body.innerHTML = "<h1>Missing app or path parameter!</h1>";
             }
@@ -30,6 +31,6 @@
     </script>
 </head>
 <body>
-    <p>Redirecting…<br>If nothing happens, <a id="manual-link">click here</a>.</p>
+    <p>Redirecting…</p>
 </body>
 </html>
