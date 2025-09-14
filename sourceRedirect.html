@@ -13,28 +13,23 @@
 
         // Redirect immediately
         window.addEventListener('DOMContentLoaded', () => {
-            const appName = getQueryParam('app');        // e.g. altstore
+            const appName = getQueryParam('app');   // e.g., altstore
+            const path = getQueryParam('path');     // e.g., source
 
-            if(appName) {
-                // Construct the custom URL scheme
-                const redirectURL = `${appName}://source?url=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
+            if(appName && path) {
+                const redirectURL = `${appName}://${path}=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
+                // Redirect
                 window.location.href = redirectURL;
+
+                // Update manual link as fallback
+                document.body.innerHTML = `<p>Redirecting to <strong>${redirectURL}</strong>… If nothing happens, <a href="${redirectURL}">click here</a>.</p>`;
             } else {
-                // Fallback if parameters are missing
-                document.body.innerHTML = "<h1>Missing app parameter!</h1>";
+                document.body.innerHTML = "<h1>Missing app or path parameter!</h1>";
             }
         });
     </script>
 </head>
 <body>
-    <p>Redirecting… If nothing happens, <a id="manual-link">click here</a>.</p>
-    <script>
-        const manualLink = document.getElementById('manual-link');
-        const urlParams = new URLSearchParams(window.location.search);
-        const appName = urlParams.get('app');
-        if(appName) {
-            manualLink.href = `${appName}://source?url=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
-        }
-    </script>
+    <p>Redirecting…<br>If nothing happens, <a id="manual-link">click here</a>.</p>
 </body>
 </html>
