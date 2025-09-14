@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStore Redirect</title>
+    <script>
+        // Function to read URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Redirect immediately
+        window.addEventListener('DOMContentLoaded', () => {
+            const appName = getQueryParam('app');        // e.g. altstore
+
+            if(appName) {
+                // Construct the custom URL scheme
+                const redirectURL = `${appName}://source?url=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
+                window.location.href = redirectURL;
+            } else {
+                // Fallback if parameters are missing
+                document.body.innerHTML = "<h1>Missing app parameter!</h1>";
+            }
+        });
+    </script>
+</head>
+<body>
+    <p>Redirecting… If nothing happens, <a id="manual-link">click here</a>.</p>
+    <script>
+        const manualLink = document.getElementById('manual-link');
+        const urlParams = new URLSearchParams(window.location.search);
+        const appName = urlParams.get('app');
+        if(appName) {
+            manualLink.href = `${appName}://source?url=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
+        }
+    </script>
+</body>
+</html>
