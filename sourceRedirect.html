@@ -5,27 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProStore Redirect</title>
     <script>
-        // Function to read URL parameters
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        // Redirect immediately
         window.addEventListener('DOMContentLoaded', () => {
-            const appName = getQueryParam('app');   // e.g., altstore
-            const path = getQueryParam('path');     // e.g., source
+            const urlParams = new URLSearchParams(window.location.search);
+            const app = urlParams.get('app');
 
-            if(appName && path) {
-                const redirectURL = `${appName}://${path}=https://prostore-ios.github.io/apps.json`;
+            let redirectURL = null;
 
-                // Show redirecting message
-                document.body.innerHTML = `<p>Opening <strong>${appName}</strong>...</p>`;
+            // Hardcoded URLs for each app
+            switch(app) {
+                case 'altstore':
+                    redirectURL = 'altstore://source?url=https://prostore-ios.github.io/apps.json';
+                    break;
+                case 'sidestore':
+                    redirectURL = 'sidestore://source?url=https://prostore-ios.github.io/apps.json';
+                    break;
+                case 'esign':
+                    redirectURL = 'esign://addsource?url=https://prostore-ios.github.io/apps.json';
+                    break;
+                case 'scarlet':
+                    redirectURL = 'scarlet://repo=https://prostore-ios.github.io/apps.json';
+                    break;
+            }
 
-                // Redirect
+            if(redirectURL) {
+                document.body.innerHTML = `<p>Opening <strong>${app}</strong>…</p>`;
                 window.location.href = redirectURL;
             } else {
-                document.body.innerHTML = "<h1>Missing app or path parameter!</h1>";
+                document.body.innerHTML = "<h1>Invalid or missing app parameter!</h1>";
             }
         });
     </script>
