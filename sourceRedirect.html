@@ -17,12 +17,12 @@
             const path = getQueryParam('path');     // e.g., source
 
             if(appName && path) {
-                const redirectURL = `${appName}://${path}=${encodeURIComponent("https://prostore-ios.github.io/apps.json")}`;
+                const redirectURL = `${appName}://${path}=https://prostore-ios.github.io/apps.json`;
                 // Redirect
                 window.location.href = redirectURL;
 
                 // Update manual link as fallback
-                document.body.innerHTML = `<p>Redirecting to <strong>${redirectURL}</strong>… If nothing happens, <a href="${redirectURL}">click here</a>.</p>`;
+                document.body.innerHTML = `<p>Redirecting...<br>If nothing happens, <a href="${redirectURL}">click here</a>.</p>`;
             } else {
                 document.body.innerHTML = "<h1>Missing app or path parameter!</h1>";
             }
