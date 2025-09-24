@@ -83,44 +83,13 @@
   </header>
   <main>
     <h2>What is ProStore?</h2>
-    <p>ProStore is an iOS app that makes signing IPAs super easy! Manage your certificates and re-sign .ipa files effortlessly. Perfect for sideloading!</p>
+    <p>ProStore is actually an unmade app! For now, we're working on ProSign: The <b>best</b> on-device IPA signer!</p>
     <div class="buttons">
-      <a href="https://github.com/ProStore-iOS/ProStore" target="_blank">Learn More</a>
+      <a href="ProSign/">Learn More About ProSign</a>
     </div><br><br>
-
-    <h2>Sideload ProStore onto your device</h2>
-    <div class="buttons">
-      <button onclick="install('altstore')">Install with AltStore</button>
-      <button onclick="install('sidestore')">Install with SideStore</button>
-      <button onclick="install('esign')">Install with ESign</button>
-      <button onclick="install('scarlet')">Install with Scarlet</button>
-    </div>
   </main>
   <footer>
     &copy; 2025 ProStore iOS
   </footer>
-
-  <script>
-    function install(app) {
-      let redirectURL = '';
-      switch(app) {
-        case 'altstore':
-          redirectURL = 'altstore://source?url=https://prostore-ios.github.io/apps.json';
-          break;
-        case 'sidestore':
-          redirectURL = 'sidestore://source?url=https://prostore-ios.github.io/apps.json';
-          break;
-        case 'esign':
-          redirectURL = 'esign://addsource?url=https://prostore-ios.github.io/apps.json';
-          break;
-        case 'scarlet':
-          redirectURL = 'scarlet://repo=https://prostore-ios.github.io/apps.json';
-          break;
-      }
-      if (redirectURL) {
-        window.location.href = redirectURL;
-      }
-    }
-  </script>
 </body>
 </html>
