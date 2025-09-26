@@ -2,14 +2,9 @@
   "name": "Official ProStore Repo",
   "identifier": "com.prostoreios.prostore.repo",
   "sourceURL": "https://ProStore-iOS.github.io/apps.json",
-  "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/Sources/prostore/Assets.xcassets/AppIcon.appiconset/Icon-1024.png",
+  "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProSign/refs/heads/main/icon.png",
   "website": "https://ProStore-iOS.github.io",
-  "ipawebsite": "https://github.com/ProStore-iOS/ProStore/releases",
   "subtitle": "The BEST alternative app store for iOS!",
-  "META": {
-    "repoName": "Official ProStore Repo",
-    "repoIcon": "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/Sources/prostore/Assets.xcassets/AppIcon.appiconset/Icon-1024.png"
-  },
   "apps": [
     {
       "name": "ProSign",
@@ -25,6 +20,16 @@
         "https://raw.githubusercontent.com/ProStore-iOS/ProSign/refs/heads/main/gallery/Screenshot5.png"
       ],
       "versions": [
+        {
+          "version": "2.0.2",
+          "date": "2025-09-26T07:37:57+0000",
+          "localizedDescription": "What's new in Version 2.0.2?\n- Update to v2.0.2\n- Update app-repo\n- Fix YAML issues",
+          "downloadURL": "https://github.com/ProStore-iOS/ProSign/releases/download/v2.0.2/com.prostoreios.prosign-unsigned-ios.ipa",
+          "size": 3534706,
+          "sha256": "f0a44b4fc6ca1af2f072d4d7dc7657d8d19bb8505f1743ebeb9d8368dd7610b2",
+          "minOSVersion": "16.0",
+          "fullDate": "20250926073757"
+        },
         {
           "version": "2.0.1",
           "date": "2025-09-26T06:46:28+0000",
