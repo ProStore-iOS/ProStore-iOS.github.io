@@ -10,7 +10,7 @@
       "name": "ProSign",
       "bundleIdentifier": "com.prostoreios.prosign",
       "developerName": "ProStore iOS",
-      "localizedDescription": "The best on-device .ipa signer for iOS!",
+      "localizedDescription": "The BEST alternative app store for iOS!",
       "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProSign/refs/heads/main/Sources/prosign/Assets.xcassets/AppIcon.appiconset/Icon-1024.png",
       "screenshotURLs": [
         "https://raw.githubusercontent.com/ProStore-iOS/ProSign/refs/heads/main/gallery/Screenshot1.png",
@@ -20,6 +20,16 @@
         "https://raw.githubusercontent.com/ProStore-iOS/ProSign/refs/heads/main/gallery/Screenshot5.png"
       ],
       "versions": [
+        {
+          "version": "3.0.1",
+          "date": "2025-10-21T05:36:56+0000",
+          "localizedDescription": "What's new in Version 3.0.1?\n- Update repo\n- Update README with release info and links\n- Add files via upload\n- Revise README with images and credits\n- Update star history chart links in README\n- Update iconURL and localizedDescription in app-repo.json\n- Refactor app repo update to directly target ProStore-iOS.github.io/apps.json, remove local app-repo.json maintenance, and enable multi-app support via bundle-keyed updates",
+          "downloadURL": "https://github.com/ProStore-iOS/ProSign/releases/download/v3.0.1/com.prostoreios.prosign-unsigned-ios.ipa",
+          "size": 3771728,
+          "sha256": "bed865aefb7155e61f70faf9558aa7c1bd6b4bafbb13292cbee9b57adca14fbe",
+          "minOSVersion": "16.0",
+          "fullDate": "20251021053656"
+        },
         {
           "version": "3.0.0",
           "date": "2025-10-19T02:44:30+0000",
