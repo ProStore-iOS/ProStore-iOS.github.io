@@ -231,6 +231,32 @@
           "fullDate": "20250924070209"
         }
       ]
+    },
+    {
+      "name": "ProStore",
+      "bundleIdentifier": "com.prostoreios.prostore",
+      "developerName": "ProStore iOS",
+      "localizedDescription": "The BEST alternative app store for iOS!",
+      "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/Sources/prostore/Assets.xcassets/AppIcon.appiconset/Icon-1024.png",
+      "screenshotURLs": [
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot1.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot2.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot3.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot4.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot5.png"
+      ],
+      "versions": [
+        {
+          "version": "0.0.1",
+          "date": "2025-10-22T05:52:33+0000",
+          "localizedDescription": "What's new in Version 0.0.1?\n- Create build-unsigned-ipa.yml workflow\n- Delete icon.png\n- Add files via upload\n- Rename ProStore_Logo_Final_Better_Rounded_Small.png to icon.png\n- Replace ProSign with ProStore in README\n- Update branding\n- Update README.md formatting and content",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.0.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3292189,
+          "sha256": "ea9548b786c736f9711378054f89e62a07d85fd44d710175d44152c01808372b",
+          "minOSVersion": "16.0",
+          "fullDate": "20251022055233"
+        }
+      ]
     }
   ]
 }
