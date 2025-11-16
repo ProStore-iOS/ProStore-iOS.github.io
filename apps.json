@@ -21,26 +21,6 @@
       ],
       "versions": [
         {
-          "version": "3.1.0",
-          "date": "2025-11-16T00:29:54+0000",
-          "localizedDescription": "What's new in Version 3.1.0?\n- Revert AboutView to v3.0.1\n- Delete gallery directory\n- Add files via upload\n- Update ICON_URL for ProStore iOS build workflow\n- Fix formatting in credits section of README.md\n- Enhance AboutView with signing info display\n- Update CFBundleShortVersionString to 3.1.0\n- Refactor SigningInfoProvider to streamline data fetching\n- Update AboutView.swift\n- Refactor SigningInfoProvider and update AboutView",
-          "downloadURL": "https://github.com/ProStore-iOS/ProSign/releases/download/v3.1.0/com.prostoreios.prosign-unsigned-ios.ipa",
-          "size": 3771733,
-          "sha256": "6f1a4db84d455c706eff4a3a8dc8f7f190b54bc7d60c37ad9157ff23e815c6b8",
-          "minOSVersion": "16.0",
-          "fullDate": "20251116002954"
-        },
-        {
-          "version": "3.1.0",
-          "date": "2025-11-15T22:16:44+0000",
-          "localizedDescription": "What's new in Version 3.1.0?\n- Refactor SigningInfoProvider and update AboutView\n- Delete gallery directory\n- Add files via upload\n- Update ICON_URL for ProStore iOS build workflow\n- Fix formatting in credits section of README.md\n- Enhance AboutView with signing info display\n- Update CFBundleShortVersionString to 3.1.0\n- Refactor SigningInfoProvider to streamline data fetching\n- Update AboutView.swift",
-          "downloadURL": "https://github.com/ProStore-iOS/ProSign/releases/download/v3.1.0/com.prostoreios.prosign-unsigned-ios.ipa",
-          "size": 3787664,
-          "sha256": "d6b808966977bfdded337588ff08fc03422d4214cb58f5dcbb227595c84407de",
-          "minOSVersion": "16.0",
-          "fullDate": "20251115221644"
-        },
-        {
           "version": "3.0.1",
           "date": "2025-10-21T05:36:56+0000",
           "localizedDescription": "What's new in Version 3.0.1?\n- Update repo\n- Update README with release info and links\n- Add files via upload\n- Revise README with images and credits\n- Update star history chart links in README\n- Update iconURL and localizedDescription in app-repo.json\n- Refactor app repo update to directly target ProStore-iOS.github.io/apps.json, remove local app-repo.json maintenance, and enable multi-app support via bundle-keyed updates",
