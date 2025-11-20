@@ -231,6 +231,32 @@
           "fullDate": "20250924070209"
         }
       ]
+    },
+    {
+      "name": "ProStore",
+      "bundleIdentifier": "com.prostoreios.prostore",
+      "developerName": "ProStore iOS",
+      "localizedDescription": "The BEST alternative app store for iOS!",
+      "iconURL": "https://raw.githubusercontent.com/ProStore-iOS/ProStore-iOS.github.io/refs/heads/main/ProStore_icon.png",
+      "screenshotURLs": [
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot1.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot2.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot3.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot4.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot5.png"
+      ],
+      "versions": [
+        {
+          "version": "0.2.0",
+          "date": "2025-11-20T06:24:17+0000",
+          "localizedDescription": "What's new in Version 0.2.0?\n- Refactor GitHub Actions for IPA build and release\n- Update project.yml\n- Update project.yml\n- Remove unnecessary lines and clean up code\n- Refactor SignerView for improved clarity and structure\n- Update prostore.swift\n- Refactor SignerView for improved readability\n- Add IPA signing job to workflow\n- Rename build-unsigned-ipa.yml to build-ipa.yml\n- Add continue-on-error to upload steps in workflow\n- Update build-ipa.yml\n- Refactor IPA signing process in workflow\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Refactor signing process in build-ipa.yml\n- Enhance build-ipa workflow for signing IPAs\n- Update build-ipa.yml\n- Add placeholder appsView\n- Update README.md\n- Update README.md formatting and content\n- Add GitHub release creation and JSON update steps\n- Fix condition for creating GitHub release",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.2.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3317504,
+          "sha256": "70ed59fbaa07d6694271d7c2cb7eb58a350fb95dade2f7c75149fa8a4001066b",
+          "minOSVersion": "16.0",
+          "fullDate": "20251120062417"
+        }
+      ]
     }
   ]
 }
