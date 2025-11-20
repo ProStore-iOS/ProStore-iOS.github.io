@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.2.1",
+          "date": "2025-11-20T08:04:26+0000",
+          "localizedDescription": "What's new in Version 0.2.1?\n- Update project.yml\n- Remove unnecessary lines and clean up code\n- Refactor SignerView for improved clarity and structure\n- Update prostore.swift\n- Refactor SignerView for improved readability\n- Add IPA signing job to workflow\n- Rename build-unsigned-ipa.yml to build-ipa.yml\n- Add continue-on-error to upload steps in workflow\n- Update build-ipa.yml\n- Refactor IPA signing process in workflow\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Refactor signing process in build-ipa.yml\n- Enhance build-ipa workflow for signing IPAs\n- Update build-ipa.yml\n- Add placeholder appsView\n- Update README.md\n- Update README.md formatting and content\n- Add GitHub release creation and JSON update steps\n- Fix condition for creating GitHub release\n- Refactor GitHub Actions for IPA build and release\n- Update prostore.swift\n- Update prostore.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.2.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3317551,
+          "sha256": "74645bb6e57bf7cbdf82db00f30b5fe33ff68a94eef42b21473b1dbc91b4c183",
+          "minOSVersion": "16.0",
+          "fullDate": "20251120080426"
+        },
+        {
           "version": "0.2.0",
           "date": "2025-11-20T06:24:17+0000",
           "localizedDescription": "What's new in Version 0.2.0?\n- Refactor GitHub Actions for IPA build and release\n- Update project.yml\n- Update project.yml\n- Remove unnecessary lines and clean up code\n- Refactor SignerView for improved clarity and structure\n- Update prostore.swift\n- Refactor SignerView for improved readability\n- Add IPA signing job to workflow\n- Rename build-unsigned-ipa.yml to build-ipa.yml\n- Add continue-on-error to upload steps in workflow\n- Update build-ipa.yml\n- Refactor IPA signing process in workflow\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Update build-ipa.yml\n- Refactor signing process in build-ipa.yml\n- Enhance build-ipa workflow for signing IPAs\n- Update build-ipa.yml\n- Add placeholder appsView\n- Update README.md\n- Update README.md formatting and content\n- Add GitHub release creation and JSON update steps\n- Fix condition for creating GitHub release",
