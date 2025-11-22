@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.4.1",
+          "date": "2025-11-22T03:43:10+0000",
+          "localizedDescription": "What's new in Version 0.4.1?\n- Bug fix\n- Optimized AppsView for performance: async debounced search, LazyVStack scrolling, image caching, single-pass JSON decoding, and diff-based app updates\n- Performance Update\n- Bug fixes\n- Add image caching",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.4.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3348127,
+          "sha256": "79669ca8b77d36e2f07b53e1e9aa42cb6bc028368d33f2a8fd444e01593277a5",
+          "minOSVersion": "16.0",
+          "fullDate": "20251122034310"
+        },
+        {
           "version": "0.4.0",
           "date": "2025-11-22T03:21:34+0000",
           "localizedDescription": "What's new in Version 0.4.0?\n- Update to v0.4.0\n- Minor bug fix\n- Add 'Equaltable' to AppVersion\n- make search bar visible\n- Add AppTesters in credits",
