@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.3.2",
+          "date": "2025-11-22T01:56:15+0000",
+          "localizedDescription": "What's new in Version 0.3.2?\n- Update project.yml\n- Update default view",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.3.2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3341643,
+          "sha256": "7488db2947611fab15b23a0accff36150407012a47d2421ed5074349f7e6feb0",
+          "minOSVersion": "16.0",
+          "fullDate": "20251122015615"
+        },
+        {
           "version": "0.3.1",
           "date": "2025-11-22T00:13:36+0000",
           "localizedDescription": "What's new in Version 0.3.1?\n- Fix sidebar and navigation & other bug fixes\n- update\n- Update README with installation and credits section\n- Update appsView.swift",
