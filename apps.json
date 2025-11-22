@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.5.1",
+          "date": "2025-11-22T04:12:17+0000",
+          "localizedDescription": "What's new in Version 0.5.1?\n- Add more app repos",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.5.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3363037,
+          "sha256": "1727d4a928d2726d434fb9685b5f3ef1c7516c01f5e623a4d2b35f13fcb85791",
+          "minOSVersion": "16.0",
+          "fullDate": "20251122041217"
+        },
+        {
           "version": "0.5.0",
           "date": "2025-11-22T04:01:45+0000",
           "localizedDescription": "What's new in Version 0.5.0?\n- Update to v0.5.0",
