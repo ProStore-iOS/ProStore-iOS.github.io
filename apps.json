@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.5.0",
+          "date": "2025-11-22T04:01:45+0000",
+          "localizedDescription": "What's new in Version 0.5.0?\n- Update to v0.5.0",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.5.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3361400,
+          "sha256": "046fdaedfbaac6009a4bc32eb0b4ac59707e88e5db10a4bafadc5e9e30b5d350",
+          "minOSVersion": "16.0",
+          "fullDate": "20251122040145"
+        },
+        {
           "version": "0.4.2",
           "date": "2025-11-22T04:00:19+0000",
           "localizedDescription": "What's new in Version 0.4.2?\n- UI Improvements - v0.4.2\n- Bug fixes\n- Add image caching\n- Bug fix\n- Add AppDetailView\n- Bug fixes, update names in main and update to v0.5.0\n- Fix another bug :|\n- Update certificateView for even sized certificates",
