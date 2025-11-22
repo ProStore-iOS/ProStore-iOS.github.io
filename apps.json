@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.4.0",
+          "date": "2025-11-22T03:21:34+0000",
+          "localizedDescription": "What's new in Version 0.4.0?\n- Update to v0.4.0\n- Minor bug fix\n- Add 'Equaltable' to AppVersion\n- make search bar visible\n- Add AppTesters in credits",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.4.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3348525,
+          "sha256": "88ee61e712eefbe1b19ff6f8d88921e14d8e069a4db34795244c87c00a6a107d",
+          "minOSVersion": "16.0",
+          "fullDate": "20251122032134"
+        },
+        {
           "version": "0.3.2",
           "date": "2025-11-22T01:56:15+0000",
           "localizedDescription": "What's new in Version 0.3.2?\n- Update project.yml\n- Update default view",
