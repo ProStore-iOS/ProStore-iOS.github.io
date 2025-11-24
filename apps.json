@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.5.2",
+          "date": "2025-11-24T06:06:43+0000",
+          "localizedDescription": "What's new in Version 0.5.2?\n- Bug fix\n- Fix text alignment in AppDetailView by forcing VStack to use full width\n- Instead of showing 'Unknown' in details view, just don't show those fields\n- Add CertRevokeChecker for certificate validation\n- Enhance CertificateView with status tracking\n- Refactor CertificateView and AddCertificateView\n- Refactor CertRevokeChecker for improved functionality\n- Refactor AppsView and add image retry logic\n- UI Updates, Cert Revoke Check, and improvements & bug fixes",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.5.2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3373930,
+          "sha256": "6b060e6678fd9440b365db7dde85cf283dccd4db06397d3a6020d34a77f1aab2",
+          "minOSVersion": "16.0",
+          "fullDate": "20251124060643"
+        },
+        {
           "version": "0.5.1",
           "date": "2025-11-22T04:12:17+0000",
           "localizedDescription": "What's new in Version 0.5.1?\n- Add more app repos",
