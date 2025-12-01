@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.1",
+          "date": "2025-12-01T06:54:57+0000",
+          "localizedDescription": "What's new in Version 0.8.1?\n- Bug fix\n- Enhance UpdaterWebView with navigation handling",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3433378,
+          "sha256": "10289af8b1a37c90a22b3856f2db7ffdb230503a35d4ba7b48e26e7709f7ab51",
+          "minOSVersion": "16.0",
+          "fullDate": "20251201065457"
+        },
+        {
           "version": "0.8.0",
           "date": "2025-12-01T06:17:50+0000",
           "localizedDescription": "What's new in Version 0.8.0?\n- Add UpdaterView\n- Refactor AppsView to avoid compiler timeouts and fix date formatter warnings\n- Remove AppTesters credit as we now use multiple app sources\n- Add equatable fields so Swift can synthesize no-unavailable-conformance",
