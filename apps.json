@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.6.2",
+          "date": "2025-12-01T05:44:59+0000",
+          "localizedDescription": "What's new in Version 0.6.2?\n- Add another app source coz why not\n- Remove duplicate AppDetailsView",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.6.2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3409788,
+          "sha256": "c0c320d398d583b53fdf93b5a04870ae4fc0f6694e84e603daf7a89e4d5494a2",
+          "minOSVersion": "16.0",
+          "fullDate": "20251201054459"
+        },
+        {
           "version": "0.6.1",
           "date": "2025-12-01T05:38:26+0000",
           "localizedDescription": "What's new in Version 0.6.1?\n- Remove duplicate AppDetailsView\n- Add more App Repos\n- fix",
