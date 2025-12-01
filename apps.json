@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.4",
+          "date": "2025-12-01T08:03:14+0000",
+          "localizedDescription": "What's new in Version 0.8.4?\n- Update project.yml with new version details\n- Refactor UpdaterView and add notification support",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.4/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3433521,
+          "sha256": "c9ad68a19b62fd2f58e8ee93d41ad6fc6c2ed37c5dd2d02c8ec8e6247a152458",
+          "minOSVersion": "16.0",
+          "fullDate": "20251201080314"
+        },
+        {
           "version": "0.8.3",
           "date": "2025-12-01T07:55:59+0000",
           "localizedDescription": "What's new in Version 0.8.3?\n- Update to v0.8.3\n- Enhance UpdaterView with refresh and notifications\n- Update UpdaterView.swift",
