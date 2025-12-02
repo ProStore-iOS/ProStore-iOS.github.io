@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.6",
+          "date": "2025-12-02T06:14:49+0000",
+          "localizedDescription": "What's new in Version 0.8.6?\n- fix: move image cache set to .onAppear in AppRowView to avoid buildExpression error\n- Improve list performance: debounce search/sort, background processing & CachedApp\n- Add Image cache & major performance improvements\n- Update to v0.8.6\n- Add missing stuff",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.6/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3443758,
+          "sha256": "54357dcc54432399126f23cd5a7cb0c793b68db3562b3d0db43a9fd5e30f1613",
+          "minOSVersion": "16.0",
+          "fullDate": "20251202061449"
+        },
+        {
           "version": "0.8.5",
           "date": "2025-12-01T21:11:27+0000",
           "localizedDescription": "What's new in Version 0.8.5?\n- Bug fixes & Improvements\n- Update UpdaterView.swift",
