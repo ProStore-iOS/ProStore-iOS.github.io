@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.8",
+          "date": "2025-12-03T05:57:33+0000",
+          "localizedDescription": "What's new in Version 0.8.8?\n- Fix ambiguous stupid error\n- Fix sorting\n- Enhance UpdaterWebView with JavaScript support\n- Update certChecker to use applep12 API\n- Update to v0.8.8\n- Fix",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.8/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3453146,
+          "sha256": "dd7ab8409620260c192db1d1677a2e565d8e7f203d40f85ace9c5ad5e904b87a",
+          "minOSVersion": "16.0",
+          "fullDate": "20251203055733"
+        },
+        {
           "version": "0.8.7",
           "date": "2025-12-02T08:31:12+0000",
           "localizedDescription": "What's new in Version 0.8.7?\n- Fix sorting\n- Add missing stuff\n- fix: move image cache set to .onAppear in AppRowView to avoid buildExpression error\n- Fix A-Z sorting and remove expand/collapse buttons\n- Update to v0.8.7",
