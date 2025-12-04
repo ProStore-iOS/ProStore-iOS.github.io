@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.10",
+          "date": "2025-12-04T20:44:11+0000",
+          "localizedDescription": "What's new in Version 0.8.10?\n- Fix issue with certificate status\n- Remove privacy from logging\n- Refactor parseHTML for improved readability and logic",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.10/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3461870,
+          "sha256": "4ddb4143e628508106e53434e0c1993650f1f99c9a8be200b08f588c3064aaf0",
+          "minOSVersion": "16.0",
+          "fullDate": "20251204204411"
+        },
+        {
           "version": "0.8.9",
           "date": "2025-12-04T05:55:23+0000",
           "localizedDescription": "What's new in Version 0.8.9?\n- Remove privacy from logging\n- Fix\n- Fix ambiguous stupid error\n- Add debug logs\n- Debug update 0.8.9",
