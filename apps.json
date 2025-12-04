@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.11",
+          "date": "2025-12-04T21:02:52+0000",
+          "localizedDescription": "What's new in Version 0.8.11?\n- Update project.yml with new version details\n- Refactor HTML parsing in certChecker.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.11/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3464103,
+          "sha256": "76e3c82fc21af802864c168f560c86e9e94e6ecf5a7150b6758d9fb2fa3cec5d",
+          "minOSVersion": "16.0",
+          "fullDate": "20251204210252"
+        },
+        {
           "version": "0.8.10",
           "date": "2025-12-04T20:44:11+0000",
           "localizedDescription": "What's new in Version 0.8.10?\n- Fix issue with certificate status\n- Remove privacy from logging\n- Refactor parseHTML for improved readability and logic",
