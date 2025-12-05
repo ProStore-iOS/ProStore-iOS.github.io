@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.9.0",
+          "date": "2025-12-05T07:18:16+0000",
+          "localizedDescription": "What's new in Version 0.9.0?\n- Remove loyahdev certificates\n- Add AppleP12 Credit and remove loyahdev certs and credit.",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.9.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3436507,
+          "sha256": "adcfc13414cd30346ffe8fe37ebbceecf35418b3d530e4c4803eea5fa5b4d7a7",
+          "minOSVersion": "16.0",
+          "fullDate": "20251205071816"
+        },
+        {
           "version": "0.8.13",
           "date": "2025-12-05T05:56:45+0000",
           "localizedDescription": "What's new in Version 0.8.13?\n- Update project.yml\n- Rename duplicate var\n- Update CertificateView.swift",
