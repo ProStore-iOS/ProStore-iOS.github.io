@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.10.0",
+          "date": "2025-12-05T08:17:19+0000",
+          "localizedDescription": "What's new in Version 0.10.0?\n- Remove SignerView\n- Remove logging file\n- Add download/sign feature\n- Add DownloadSignManager\n- Fix bug",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.10.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3429039,
+          "sha256": "1e35ebeadf93f0c72613fa41be669755f57c54fa4d41b40ec77bdd3336592160",
+          "minOSVersion": "16.0",
+          "fullDate": "20251205081719"
+        },
+        {
           "version": "0.9.0",
           "date": "2025-12-05T07:18:16+0000",
           "localizedDescription": "What's new in Version 0.9.0?\n- Remove loyahdev certificates\n- Add AppleP12 Credit and remove loyahdev certs and credit.",
