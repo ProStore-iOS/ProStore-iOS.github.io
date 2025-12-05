@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.8.13",
+          "date": "2025-12-05T05:56:45+0000",
+          "localizedDescription": "What's new in Version 0.8.13?\n- Update project.yml\n- Rename duplicate var\n- Update CertificateView.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.8.13/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3462660,
+          "sha256": "bd5eae4d579f11583a9b6edc14899612a25a88c7892c0990cf4f973a80e98f3f",
+          "minOSVersion": "16.0",
+          "fullDate": "20251205055645"
+        },
+        {
           "version": "0.8.12",
           "date": "2025-12-05T05:46:45+0000",
           "localizedDescription": "What's new in Version 0.8.12?\n- Rename duplicate var\n- Update to v0.8.12\n- Remove newlines",
