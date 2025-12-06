@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d2",
+          "date": "2025-12-06T05:10:21+0000",
+          "localizedDescription": "What's new in Version 0.11.0d2?\n- Fix stuff\n- Remove duplicate percentage in signing stage\n- Fix again\n- Fix",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3444532,
+          "sha256": "25aa86dd553ef456072b6388d2968425fcc1da5f1a97f51bf2ab50192b3d1d97",
+          "minOSVersion": "16.0",
+          "fullDate": "20251206051021"
+        },
+        {
           "version": "0.11.0d",
           "date": "2025-12-06T01:44:57+0000",
           "localizedDescription": "What's new in Version 0.11.0d?\n- Fix\n- DEV UPDATE: Add generateCert and test install\n- Fix bug\n- Fix other bug\n- Remove duplicate percentage in signing stage\n- Fix again",
