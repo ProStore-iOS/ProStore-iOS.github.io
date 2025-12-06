@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d5",
+          "date": "2025-12-06T05:59:39+0000",
+          "localizedDescription": "What's new in Version 0.11.0d5?\n- Refactor SetupView and CertServerManager\n- Remove test install\n- Improve setup and allow showing via About.\n- Add GCDWebServer\n- FIx\n- Fix GCDWebServer package URL\n- Refactor SetupView to use CertServerManager",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d5/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3501360,
+          "sha256": "86f3ed098536795584c1a8849697bf929437b3575db164b115a34664f6892e73",
+          "minOSVersion": "16.0",
+          "fullDate": "20251206055939"
+        },
+        {
           "version": "0.11.0d4",
           "date": "2025-12-06T05:28:56+0000",
           "localizedDescription": "What's new in Version 0.11.0d4?\n- Update to v0.11.0d4\n- Add full setup",
