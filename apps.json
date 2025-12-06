@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d",
+          "date": "2025-12-06T01:44:57+0000",
+          "localizedDescription": "What's new in Version 0.11.0d?\n- Fix\n- DEV UPDATE: Add generateCert and test install\n- Fix bug\n- Fix other bug\n- Remove duplicate percentage in signing stage\n- Fix again",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3444612,
+          "sha256": "cdbb51f57eaf0cecf7eb6e56ccc50a69b38f7845e46d271143c178327cb210b3",
+          "minOSVersion": "16.0",
+          "fullDate": "20251206014457"
+        },
+        {
           "version": "0.10.1",
           "date": "2025-12-06T00:26:27+0000",
           "localizedDescription": "What's new in Version 0.10.1?\n- Fix downloadURL and rename sign button\n- Add DownloadSignManager\n- Fix bug\n- Remove SignerView\n- Delete Sources/prostore/views/SignerView.swift",
