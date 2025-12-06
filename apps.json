@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d8",
+          "date": "2025-12-06T10:33:28+0000",
+          "localizedDescription": "What's new in Version 0.11.0d8?\n- Fix\n- Update print statement from 'Hello' to 'Goodbye'\n- Update bundle version and short version string",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d8/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3527730,
+          "sha256": "e155a1492d8bb718b7bf3cc7aea5aaabc59d21e791884d5d453b74c890053aaa",
+          "minOSVersion": "16.0",
+          "fullDate": "20251206103328"
+        },
+        {
           "version": "0.11.0d7",
           "date": "2025-12-06T07:16:57+0000",
           "localizedDescription": "What's new in Version 0.11.0d7?\n- Update to 0.11.0d7\n- remove passweord from p12\n- Fix stuff\n- Add missing brace\n- Fix bug\n- Fix\n- Fix again\n- Squash bug\n- Fix another bug\n- Fix another bug causing 'cannot connect to 127.0.0.1'",
