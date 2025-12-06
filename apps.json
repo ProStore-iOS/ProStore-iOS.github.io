@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d6",
+          "date": "2025-12-06T07:07:49+0000",
+          "localizedDescription": "What's new in Version 0.11.0d6?\n- Fix another bug\n- Refactor SetupView to use CertServerManager\n- Refactor SetupView and CertServerManager\n- Remove logging\n- Refactor SetupView and CertServerManager\n- Add install feature\n- remove passweord from p12\n- Fix stuff\n- Add missing brace\n- Fix bug\n- Fix\n- Fix again\n- Squash bug",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d6/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3515680,
+          "sha256": "6ac644f208f17fb389dfec4d9d35f84cf69c87c07f98f04bc5465161708ce8f2",
+          "minOSVersion": "16.0",
+          "fullDate": "20251206070749"
+        },
+        {
           "version": "0.11.0d5",
           "date": "2025-12-06T05:59:39+0000",
           "localizedDescription": "What's new in Version 0.11.0d5?\n- Refactor SetupView and CertServerManager\n- Remove test install\n- Improve setup and allow showing via About.\n- Add GCDWebServer\n- FIx\n- Fix GCDWebServer package URL\n- Refactor SetupView to use CertServerManager",
