@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.12.0d1",
+          "date": "2025-12-07T21:46:57+0000",
+          "localizedDescription": "What's new in Version 0.12.0d1?\n- Refactor installApp function with import statement\n- Fix another bug\n- Replace installApp with placeholder\n- Update SetupView",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3485512,
+          "sha256": "174ce5a59d14353e9ffe624e693954d36337ada2f4f2d5f1cdd94d472d07cd3c",
+          "minOSVersion": "16.0",
+          "fullDate": "20251207214657"
+        },
+        {
           "version": "0.11.0d12",
           "date": "2025-12-07T04:06:24+0000",
           "localizedDescription": "What's new in Version 0.11.0d12?\n- Fix another bug\n- Fix bug & update to v0.11.0d12",
