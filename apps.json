@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d12",
+          "date": "2025-12-07T04:06:24+0000",
+          "localizedDescription": "What's new in Version 0.11.0d12?\n- Fix another bug\n- Fix bug & update to v0.11.0d12",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d12/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3532641,
+          "sha256": "2f2270efa2938a5acdd599aae04ef2c53e098323c8acadbf93af9b33b71d22c5",
+          "minOSVersion": "16.0",
+          "fullDate": "20251207040624"
+        },
+        {
           "version": "0.11.0d11",
           "date": "2025-12-07T03:40:43+0000",
           "localizedDescription": "What's new in Version 0.11.0d11?\n- Update to dev update 11 v0.11.0\n- Update ProStore to use password",
