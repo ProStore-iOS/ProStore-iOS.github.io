@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.11.0d9",
+          "date": "2025-12-07T03:21:26+0000",
+          "localizedDescription": "What's new in Version 0.11.0d9?\n- Update print statement from 'Hello' to 'Goodbye'\n- Fix\n- Refactor certificate generation and error handling\n- Update\n- Update project.yml with new version and properties",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.11.0d9/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3531421,
+          "sha256": "54fae4dad8a2f2860e7363ffa447a959a2a26564f9a1d39efb22d2ae39daf75c",
+          "minOSVersion": "16.0",
+          "fullDate": "20251207032126"
+        },
+        {
           "version": "0.11.0d8",
           "date": "2025-12-06T10:33:28+0000",
           "localizedDescription": "What's new in Version 0.11.0d8?\n- Fix\n- Update print statement from 'Hello' to 'Goodbye'\n- Update bundle version and short version string",
