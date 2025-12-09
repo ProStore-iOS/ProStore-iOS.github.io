@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.12.0d3",
+          "date": "2025-12-09T04:21:50+0000",
+          "localizedDescription": "What's new in Version 0.12.0d3?\n- Update version numbers in project.yml\n- Update SetupView.swift\n- Refactor SetupView shortcut installation logic",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d3/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 3443113,
+          "sha256": "3dff701e085b7c424947f3d6a4d57646f56ab2cb00d3af4bf1bb728d175980c9",
+          "minOSVersion": "16.0",
+          "fullDate": "20251209042150"
+        },
+        {
           "version": "0.12.0d2",
           "date": "2025-12-09T04:11:05+0000",
           "localizedDescription": "What's new in Version 0.12.0d2?\n- Refactor OfficialCertsDownloader.swift structure\n- Refactor installApp function with import statement\n- Refactor SetupView for shortcut URL handling\n- Add showCertError state to AppDetailView\n- Implement alert for missing certificate selection\n- Add alert for missing certificate selection\n- Update project.yml with new versioning\n- Refactor CertificatesManager to use Combine\n- Refactor AppDetailView for certificate management\n- Refactor CertificateView and AddCertificateView\n- Refactor CertificateView and AddCertificateView\n- Refactor CertificatesManager for improved identity handling",
