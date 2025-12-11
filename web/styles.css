@@ -70,5 +70,6 @@
         cursor: pointer;
         background-color: skyblue;
         width: 100%;
+        margin: 0;
         height: 5dvh;
       }
