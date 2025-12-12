@@ -30,6 +30,13 @@ main {
   flex-shrink: 0;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5dvw; /* space between dots and title */
+  margin-left: 2dvw; /* optional, spacing from left edge */
+}
+
 .app-title {
   margin-left: 2dvw;
   font-family: "Aptos", "Arial", sans-serif;
@@ -108,7 +115,7 @@ main {
   border: none;
   background-color: lightgreen;
   font-size: 3dvw;
-  border-radius: 1dvw;
+  border-radius: 0.75dvw;
 }
 
 .advanced-href {
