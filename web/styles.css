@@ -76,6 +76,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1dvw;
+  font-size: 1.5dvw;
   box-sizing: border-box;
 }
