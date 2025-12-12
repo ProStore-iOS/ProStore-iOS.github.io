@@ -84,13 +84,13 @@ main {
   font-size: 5dvw;
   font-family: "Arial", sans-serif;
   text-align: center;
-  margin: 5px auto 0 auto;
-  width: fit-content;
+  margin: 0; /* you can remove margin auto now */
 }
 
 .panel {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* horizontal center */
+  align-items: flex-start; /* align to top */
+  padding-top: 5px; /* optional: some spacing from top */
 }
