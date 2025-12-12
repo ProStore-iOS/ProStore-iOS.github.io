@@ -33,7 +33,6 @@ main {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 1.5dvw; /* space between dots and title */
   margin-left: 2dvw; /* optional, spacing from left edge */
 }
 
