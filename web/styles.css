@@ -79,3 +79,10 @@ main {
   font-size: 1.5dvw;
   box-sizing: border-box;
 }
+
+.title {
+  font-size: 40dvw;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  margin-top: 10px;
+}
