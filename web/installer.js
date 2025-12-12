@@ -1,18 +1,48 @@
+let currentPhase = 0; // current displayed phase
+let targetPhase = 0;  // target phase you want to reach
+
 function loadingImg(phase) {
-    const img = document.querySelector('.logo-img');
-    if (!img) return;
+    targetPhase = Math.max(0, Math.min(phase, 100));
+    animatePhase();
+}
 
-    phase = Math.max(0, Math.min(phase, 100));
-    const degrees = (phase / 100) * 360;
+let animating = false;
 
-    img.style.webkitMaskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
-    img.style.maskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
-    img.style.webkitMaskRepeat = 'no-repeat';
-    img.style.maskRepeat = 'no-repeat';
-    img.style.webkitMaskPosition = 'center';
-    img.style.maskPosition = 'center';
-    img.style.webkitMaskSize = 'contain';
-    img.style.maskSize = 'contain';
+function animatePhase() {
+    if (animating) return; // prevent multiple loops
+    animating = true;
+
+    function step() {
+        const img = document.querySelector('.logo-img');
+        if (!img) {
+            animating = false;
+            return;
+        }
+
+        // smooth approach using linear interpolation
+        currentPhase += (targetPhase - currentPhase) * 0.05; // 0.05 = smoothing factor
+        if (Math.abs(currentPhase - targetPhase) < 0.1) currentPhase = targetPhase;
+
+        const degrees = (currentPhase / 100) * 360;
+
+        img.style.webkitMaskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
+        img.style.maskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
+
+        img.style.webkitMaskRepeat = 'no-repeat';
+        img.style.maskRepeat = 'no-repeat';
+        img.style.webkitMaskPosition = 'center';
+        img.style.maskPosition = 'center';
+        img.style.webkitMaskSize = 'contain';
+        img.style.maskSize = 'contain';
+
+        if (currentPhase !== targetPhase) {
+            requestAnimationFrame(step);
+        } else {
+            animating = false;
+        }
+    }
+
+    requestAnimationFrame(step);
 }
 
 let pulseState = null;
