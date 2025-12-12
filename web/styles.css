@@ -133,6 +133,8 @@ main {
 .advanced-href {
   bottom: 0;
   left: 0;
+  margin-bottom: 1dvh;
+  margin-left: 1dvh;
   position: absolute;
   font-size: 2dvw;
 }
