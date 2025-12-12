@@ -70,9 +70,9 @@ main {
 .sidebar-item {
   cursor: pointer;
   background-color: skyblue;
-  height: 5dvh;
+  height: 7dvh;
   width: 100%;
-  /* Remove padding-left, it’s handled by sidebar */
+  padding-left: 2px;
   display: flex;
   align-items: center;
   font-size: clamp(1.6dvh, 2.2dvh, 3dvh);
