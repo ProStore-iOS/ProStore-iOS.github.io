@@ -21,7 +21,7 @@ function pulse(state) {
     if (!img) return;
 
     let startTime;
-    const duration = 1000; // full pulse cycle in ms (0.8 → 1 → 0.8)
+    const duration = 3000;
 
     if (state === 'reset') {
         cancelAnimationFrame(pulseState);
