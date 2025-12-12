@@ -54,3 +54,5 @@ function pulse(state) {
 
     pulseState = requestAnimationFrame(animate);
 }
+
+pulse('reset');
