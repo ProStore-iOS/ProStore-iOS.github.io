@@ -90,9 +90,10 @@ main {
 .panel {
   flex: 1;
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: flex-start; /* align to top */
-  padding-top: 5px; /* optional: some spacing from top */
+  flex-direction: column; /* STACK VERTICAL */
+  justify-content: flex-start; 
+  align-items: center; /* CENTER EVERYTHING HORIZONTALLY */
+  padding-top: 5px;
   position: relative;
 }
 
