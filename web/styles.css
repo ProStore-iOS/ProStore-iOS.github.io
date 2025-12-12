@@ -76,6 +76,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(2dvh);
+  font-size: 2dvh;
   box-sizing: border-box;
 }
