@@ -15,7 +15,7 @@ function loadingImg(phase) {
     img.style.maskSize = 'contain';
 }
 
-let pulseInterval = null;
+let pulseState = null;
 function pulse(state) {
     const img = document.querySelector('.logo-img');
     if (!img) return;
