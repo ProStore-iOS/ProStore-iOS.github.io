@@ -75,6 +75,7 @@ main {
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: clamp(1dvh, 3dvh, 4dvh);
   box-sizing: border-box;
 }
