@@ -122,6 +122,12 @@ main {
   background-color: lightgreen;
   font-size: 3dvw;
   border-radius: 0.75dvw;
+  cursor: pointer;
+}
+
+.install-button:hover {
+  background-color: limegreen; /* slightly darker/stronger green */
+  transform: scale(1.05);      /* pop effect */
 }
 
 .advanced-href {
