@@ -108,11 +108,12 @@ main {
   border: none;
   background-color: lightgreen;
   font-size: 3dvw;
+  border-radius: 1dvw;
 }
 
 .advanced-href {
   bottom: 0;
   left: 0;
   position: absolute;
-  font-size: 1dvw;
+  font-size: 2dvw;
 }
