@@ -93,6 +93,7 @@ main {
   justify-content: center; /* horizontal center */
   align-items: flex-start; /* align to top */
   padding-top: 5px; /* optional: some spacing from top */
+  position: relative;
 }
 
 .logo-img {
@@ -109,4 +110,5 @@ main {
 .advanced-href {
   bottom: 0;
   left: 0;
+  position: absolute;
 }
