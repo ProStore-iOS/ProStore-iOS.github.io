@@ -87,3 +87,10 @@ main {
   margin: 5px auto 0 auto;
   width: fit-content;
 }
+
+.panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
