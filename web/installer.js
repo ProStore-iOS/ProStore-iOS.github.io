@@ -8,9 +8,9 @@ function loadingImg(phase) {
     // Convert phase to degrees
     const degrees = (phase / 100) * 360;
 
-    // White = fully visible, semi-transparent = 70% opacity
-    img.style.webkitMaskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
-    img.style.maskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.7) ${degrees}deg 360deg)`;
+    // White = fully visible, semi-transparent = 50% opacity
+    img.style.webkitMaskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.5) ${degrees}deg 360deg)`;
+    img.style.maskImage = `conic-gradient(rgba(255,255,255,1) 0deg ${degrees}deg, rgba(255,255,255,0.5) ${degrees}deg 360deg)`;
     img.style.webkitMaskRepeat = 'no-repeat';
     img.style.maskRepeat = 'no-repeat';
     img.style.webkitMaskPosition = 'center';
