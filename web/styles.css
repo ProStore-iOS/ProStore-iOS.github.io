@@ -26,34 +26,41 @@ main {
   border-top-right-radius: 3dvw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* keeps a right area available */
   flex-shrink: 0;
+  padding: 0 1.5dvw; /* left/right padding instead of margins */
+  box-sizing: border-box;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  margin-left: 2dvw; /* optional, spacing from left edge */
-}
-
-.app-title {
-  margin-left: 2dvw;
-  font-family: "Aptos", "Arial", sans-serif;
-  font-weight: bold;
-  font-size: 4dvh;
+  gap: 1.2dvw;   /* space between dot cluster and title */
+  white-space: nowrap; /* prevents title wrapping */
 }
 
 .dot-container {
   display: flex;
   align-items: center;
-  gap: 1dvw;
-  padding-right: 1.5dvw;
+  gap: 0.6dvw;   /* space between the dots themselves */
+  /* no extra padding needed */
 }
 
 .dot {
-  height: 3dvh;
-  width: 3dvh;
+  height: 2.6dvh;   /* slightly smaller so it aligns with text */
+  width: 2.6dvh;
   border-radius: 50%;
+  box-shadow: 0 0 0.15dvw rgba(0,0,0,0.12);
+}
+
+.app-title {
+  /* remove margin-left (header-left gap handles spacing) */
+  font-family: "Aptos", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 3.6dvh; /* tuned to fit the header height */
+  color: white;      /* better contrast on gray background */
+  margin: 0;
+  padding: 0;
 }
 
 .content-area {
