@@ -84,6 +84,6 @@ main {
   font-size: 5dvw;
   font-family: "Arial", sans-serif;
   text-align: center;
-  justify-content: center;
-  margin-top: 5px;
+  margin: 5px auto 0 auto;
+  width: fit-content;
 }
