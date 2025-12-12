@@ -257,14 +257,12 @@ function install() {
     // start polling every 0.5s immediately
     const interval = setInterval(() => {
         const status = installer.getStatus(); // % progress
-        console.log("Progress:", status, "%");
         loadingImg(status);
 
         // stop when finished
         if (status >= 100 || installer.isFinished) {
             clearInterval(interval);
-            console.log("Install finished!");
-            console.log(installer.getInstallLink());
+            window.location.href = installer.getInstallLink();
             pulse(false);
         }
     }, 500);
