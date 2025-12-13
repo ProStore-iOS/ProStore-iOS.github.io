@@ -229,10 +229,31 @@ let installer = (function () {
           const recommended = await _getRecommendedCertificate();
           if (recommended) {
             // Try to find a release that mentions the recommended certificate in name, tag_name or body
-            const found = releases.find(r => {
-              const hay = ((r.name || "") + " " + (r.tag_name || "") + " " + (r.body || "")).toLowerCase();
-              return hay.includes(recommended.toLowerCase());
-            });
+const normalise = s =>
+  s.toLowerCase()
+   .replace(/[^a-z0-9]+/g, ' ')
+   .trim();
+
+const recNorm = normalise(recommended);
+
+const found = releases.find(r => {
+  const textHay = normalise(
+    (r.name || "") + " " +
+    (r.tag_name || "") + " " +
+    (r.body || "")
+  );
+
+  if (textHay.includes(recNorm)) return true;
+
+  // 🔥 CHECK ASSET FILENAMES (THIS WAS MISSING)
+  if (Array.isArray(r.assets)) {
+    return r.assets.some(a =>
+      a.name && normalise(a.name).includes(recNorm)
+    );
+  }
+
+  return false;
+});
             if (found) {
               chosenRelease = found;
               console.log("Using release matched to recommended certificate:", chosenRelease.name || chosenRelease.tag_name);
