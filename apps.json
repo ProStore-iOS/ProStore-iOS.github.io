@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.12.0d4",
+          "date": "2025-12-13T00:50:52+0000",
+          "localizedDescription": "What's new in Version 0.12.0d4?\n- Fix: resolves the Swift concurrency error in Swift 6 and allows your async installApp function to be called in a compile-safe way.\n- Enhance installApp function with heartbeat and installer\n- Update project.yml with new version numbers\n- Update AboutView.swift\n- Add IDeviceSwift import to installApp function\n- Change installApp to async function\n- Fix async functions",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d4/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5467462,
+          "sha256": "7a075532491caf0fd6f06b1ac92d0c8630dae60288c8e9317d67f005e84fe0de",
+          "minOSVersion": "16.0",
+          "fullDate": "20251213005052"
+        },
+        {
           "version": "0.12.0d3",
           "date": "2025-12-09T04:21:50+0000",
           "localizedDescription": "What's new in Version 0.12.0d3?\n- Update version numbers in project.yml\n- Update SetupView.swift\n- Refactor SetupView shortcut installation logic",
