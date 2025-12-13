@@ -230,10 +230,10 @@ let installer = (function () {
 
     // When the flow is finished, returns the itms-services link string (or null if not finished).
     // The returned link uses the same install path as the original flow:
-    // itms-services://?action=download-manifest&url=<encoded INSTALL_BASE>/<id>/install
+    // itms-services://?action=download-manifest&url=<encoded INSTALL_BASE>/<id>/manifest.plist
     getInstallLink: function () {
       if (!_finished || !_installData || !_installData.id) return null;
-      const manifestUrl = `${INSTALL_BASE}/${_installData.id}/install`;
+      const manifestUrl = `${INSTALL_BASE}/${_installData.id}/manifest.plist`;
       return `itms-services://?action=download-manifest&url=${encodeURIComponent(manifestUrl)}`;
     },
 
