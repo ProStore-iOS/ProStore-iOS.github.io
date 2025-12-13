@@ -93,6 +93,7 @@ let installer = (function () {
   const PREFLIGHT_URL = "https://ipa.s0n1c.ca/preflight";
   const INSTALL_BASE = "https://ipa.s0n1c.ca";
   const DEFAULT_REPO = "ProStore-iOS/ProStore"; // repo to inspect by default
+  const README_RAW = "https://raw.githubusercontent.com/ProStore-iOS/certificates/refs/heads/main/README.md";
 
   // internal state
   let _progress = 0;           // 0..100
@@ -131,13 +132,49 @@ let installer = (function () {
     return res.json();
   }
 
+  async function _fetchText(url, opts = {}) {
+    const res = await fetch(url, opts);
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      const msg = `HTTP ${res.status}${text ? " - " + text : ""}`;
+      const e = new Error(msg);
+      e.status = res.status;
+      throw e;
+    }
+    return res.text();
+  }
+
+  // Try to fetch the README and extract the Recommend Certificate short name
+  async function _getRecommendedCertificate() {
+    try {
+      const raw = await _fetchText(README_RAW);
+      // Grab the Recommend Certificate section (everything after its heading until next '---' or next heading)
+      const sectionMatch = raw.match(/#\s*Recommend Certificate\s*([\s\S]*?)(?:\n---|\n#|$)/i);
+      const section = sectionMatch ? sectionMatch[1] : raw;
+
+      // Find the first bold line inside that section: **...**
+      const boldMatch = section.match(/\*\*(.+?)\*\*/);
+      if (!boldMatch) return null;
+
+      let rec = boldMatch[1].trim();
+      // Remove trailing " - ❌ Revoked" or any " - ..." suffix
+      rec = rec.replace(/['"“”]/g, '').split(/\s*-\s*/)[0].trim();
+      if (!rec) return null;
+      console.log("Recommended certificate parsed from README:", rec);
+      return rec;
+    } catch (e) {
+      console.warn("Failed to fetch/parse recommended certificate README:", e);
+      return null;
+    }
+  }
+
   return {
     // Return percentage (integer)
     getStatus: function () {
       return _progress;
     },
 
-    // Begin the install flow (auto-select latest release & preferred asset)
+    // Begin the install flow (auto-select release & preferred asset)
     // options: { repo: "owner/repo", token: "GITHUB_PAT (optional)", preferPrerelease: false }
     // Returns a Promise that resolves to the final preflight response object when finished.
     beginInstall: async function (options = {}) {
@@ -174,29 +211,67 @@ let installer = (function () {
           .filter(r => preferPrerelease ? true : !r.prerelease)
           .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
+        // If no visible after filtering, fallback to non-draft
+        let defaultRelease = null;
         if (!visible.length) {
-          // if strict filter removed everything, try less strict (non-draft)
           const fallback = releases.filter(r => !r.draft).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
           if (!fallback.length) throw new Error("No suitable releases found (all drafts?).");
-          _releaseInfo = fallback[0];
+          defaultRelease = fallback[0];
         } else {
-          _releaseInfo = visible[0]; // latest
+          defaultRelease = visible[0];
         }
 
         _setProgress(30);
 
-        // pick an asset (prefer "signed" .ipa)
-        const chosen = _chooseAssetFromRelease(_releaseInfo);
-        if (!chosen) throw new Error("No .ipa assets found in the latest release.");
-        _chosenAsset = chosen;
+        // TRY: get recommended certificate name from README and find matching release
+        let chosenRelease = null;
+        try {
+          const recommended = await _getRecommendedCertificate();
+          if (recommended) {
+            // Try to find a release that mentions the recommended certificate in name, tag_name or body
+            const found = releases.find(r => {
+              const hay = ((r.name || "") + " " + (r.tag_name || "") + " " + (r.body || "")).toLowerCase();
+              return hay.includes(recommended.toLowerCase());
+            });
+            if (found) {
+              chosenRelease = found;
+              console.log("Using release matched to recommended certificate:", chosenRelease.name || chosenRelease.tag_name);
+            } else {
+              console.log("Recommended certificate not found in releases; will fall back to latest release.");
+            }
+          } else {
+            console.log("No recommended certificate parsed; using latest release fallback.");
+          }
+        } catch (e) {
+          console.warn("Error while trying to apply recommended certificate logic:", e);
+        }
+
+        // If we didn't pick a recommended release, use the default latest/visible
+        _releaseInfo = chosenRelease || defaultRelease;
 
         _setProgress(45);
+
+        // pick an asset (prefer "signed" .ipa)
+        let chosen = _chooseAssetFromRelease(_releaseInfo);
+        if (!chosen) {
+          // If the chosen release didn't have an ipa, try to fallback to the visible list to find any release with an .ipa
+          const otherWithIpa = (visible.length ? visible : releases).find(r => _chooseAssetFromRelease(r));
+          if (otherWithIpa) {
+            _releaseInfo = otherWithIpa;
+            chosen = _chooseAssetFromRelease(otherWithIpa);
+          }
+        }
+
+        if (!chosen) throw new Error("No .ipa assets found in the selected release(s).");
+        _chosenAsset = chosen;
+
+        _setProgress(60);
 
         // Prepare signing using preflight endpoint (same as original flow)
         const ipaUrl = chosen.browser_download_url;
         if (!ipaUrl) throw new Error("Chosen asset has no browser_download_url.");
 
-        _setProgress(60);
+        _setProgress(75);
 
         const resp = await fetch(PREFLIGHT_URL, {
           method: "POST",
