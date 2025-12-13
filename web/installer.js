@@ -250,28 +250,72 @@ let installer = (function () {
   };
 })();
 
-function install() {
+let _downloadInterval = null;
+
+async function startDownload() {
+    const dlBtn = document.querySelector('.download-button');
+    const installBtn = document.querySelector('.install-button');
+    if (!dlBtn || !installBtn) return;
+
+    // UI: disable download and show immediate feedback
+    dlBtn.disabled = true;
+    dlBtn.textContent = 'Downloading...';
     pulse(true);
     loadingImg(0);
 
-    // start polling every 0.5s immediately
-    const interval = setInterval(() => {
-        const status = installer.getStatus(); // % progress
+    // start a short interval to update progress UI from installer.getStatus()
+    _downloadInterval = setInterval(() => {
+        const status = installer.getStatus(); // 0..100
         loadingImg(status);
-
-        // stop when finished
-        if (status >= 100 || installer.isFinished) {
-            clearInterval(interval);
-            window.location.href = installer.getInstallLink();
-            pulse(false);
-        }
+        dlBtn.textContent = `Downloading... ${status}%`;
     }, 500);
 
-    // start the install
-    installer.beginInstall({ repo: "ProStore-iOS/ProStore", token: null })
-        .catch(err => {
-            console.error("Install failed:", err);
-            clearInterval(interval);
-            pulse(false);
-        });
+    try {
+        // start the install flow (returns preflight info when finished)
+        const data = await installer.beginInstall({ repo: "ProStore-iOS/ProStore", token: null });
+
+        // finished: stop polling and show install button instead of redirect
+        clearInterval(_downloadInterval);
+        _downloadInterval = null;
+        loadingImg(100);
+        pulse(false);
+
+        // swap the download button for the install button
+        dlBtn.style.display = 'none';
+        installBtn.style.display = '';
+        installBtn.disabled = false;
+        installBtn.textContent = 'Install'; // could show version/name if you want
+
+        // Optionally store data somewhere or show extra info:
+        // console.log('Preflight data:', data);
+    } catch (err) {
+        // error handling: re-enable button, clear polling, show message
+        clearInterval(_downloadInterval);
+        _downloadInterval = null;
+        pulse(false);
+        loadingImg(0);
+
+        dlBtn.disabled = false;
+        dlBtn.textContent = 'Download';
+        console.error('Install failed:', err);
+        alert('Download failed: ' + (err && err.message ? err.message : err));
+    }
+}
+
+// When the user clicks Install, run the itms-services link
+function performInstall() {
+    const installBtn = document.querySelector('.install-button');
+    if (!installBtn) return;
+
+    const link = installer.getInstallLink();
+    if (!link) {
+        alert('Install link not available. Please try Download again.');
+        return;
+    }
+
+    installBtn.disabled = true;
+    installBtn.textContent = 'Installing...';
+
+    // Trigger the itms-services install
+    window.location.href = link;
 }
