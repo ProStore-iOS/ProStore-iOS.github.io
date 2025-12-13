@@ -29,7 +29,13 @@
         <div class="panel">
           <h1 class="title">ProStore Installer</h1><br>
           <img class="logo-img" src="https://github.com/ProStore-iOS/ProStore/raw/main/icon.png"><br>
-          <button class="install-button" onclick="install();">Install</button><br>
+
+          <!-- Download button (visible initially) -->
+          <button class="download-button" onclick="startDownload();">Download</button>
+
+          <!-- Install button (hidden until download completes) -->
+          <button class="install-button" onclick="performInstall();" style="display:none;">Install</button><br>
+
           <a class="advanced-href" href="advanced_installer.html">Advanced Installer</a>
         </div>
       </div>
