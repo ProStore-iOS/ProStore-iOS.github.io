@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "0.12.0d6",
+          "date": "2025-12-13T04:36:11+0000",
+          "localizedDescription": "What's new in Version 0.12.0d6?\n- Update version\n- Fix swift 6 compile errors\n- fix: fully fix DownloadSignManager for Swift 6 + real-world use\n- Fix bugs\n- Fix bug\n- Squash pesky bug\n- Remove cert error stuff\n- Update updater links\n- Fix stuff",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d6/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5465334,
+          "sha256": "42b97a9ba04de5813085c92c45b69928209f564241ef47030d284f2230c5895b",
+          "minOSVersion": "16.0",
+          "fullDate": "20251213043611"
+        },
+        {
           "version": "0.12.0d5",
           "date": "2025-12-13T04:07:50+0000",
           "localizedDescription": "What's new in Version 0.12.0d5?\n- Squash pesky bug\n- Update AboutView.swift\n- Add IDeviceSwift import to installApp function\n- Change installApp to async function\n- Fix async functions\n- Fix: resolves the Swift concurrency error in Swift 6 and allows your async installApp function to be called in a compile-safe way.\n- Fix certificate detection\n- Fix swift 6 compile errors\n- fix: fully fix DownloadSignManager for Swift 6 + real-world use\n- Fix bugs\n- Fix bug",
