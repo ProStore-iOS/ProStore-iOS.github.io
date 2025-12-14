@@ -1,3 +1,11 @@
+/* certStyles.css
+   Works with your existing styles.css (which you pasted).
+   - Forces .panel to allow full-width children (fixes centering/overflow)
+   - Responsive grid: multiple cards per row (auto-fit / auto-fill)
+   - Cards sized sensibly (not too tall) and content clipped elegantly
+   - Keeps light theme visual look
+*/
+
 :root{
   --bg: #f6f7fb;
   --panel: #ffffff;
@@ -12,110 +20,73 @@
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-/* Layout basics */
-html,body{
-  height:100%;
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  font-size:14px;
-}
+/* -------------------------
+   Panel / layout adjustments
+   ------------------------- */
 
-.app-root {
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-/* Header */
-.header-bar {
-  display:flex;
-  align-items:center;
-  padding:12px 18px;
-  background:transparent;
-}
-.header-left { display:flex; align-items:center; gap:12px; }
-.dot-container { display:flex; gap:6px; align-items:center; }
-.dot { width:12px; height:12px; border-radius:50%; box-shadow: rgba(2,6,23,0.06) 0 1px 2px; }
-.app-title { margin:0; font-weight:600; font-size:16px; color:var(--text); }
-
-/* Main content area */
-.content-area {
-  flex:1;
-  display:flex;
-  gap:12px;
-  padding: 12px;
-  box-sizing:border-box;
-  align-items:stretch;
-}
-
-/* Sidebar */
-.sidebar {
-  width:220px;
-  min-width:160px;
-  max-width:240px;
-  background:transparent;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.sidebar-item {
-  padding:10px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  color:var(--muted);
-  font-weight:600;
-}
-.sidebar-item.active {
-  color: var(--primary);
-  background: linear-gradient(180deg, rgba(37,99,235,0.06), rgba(37,99,235,0.03));
-}
-
-/* Panel: main scroll area */
-.panel {
-  flex:1;
+/* Make sure panel lets children use full width and allows proper scrolling.
+   Using higher specificity to safely override your styles.css align-items:center. */
+main .panel {
+  align-items: stretch;         /* allow grid to expand horizontally */
+  padding: 18px;                /* consistent inner padding */
   background: var(--panel);
-  padding: 18px;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  min-height:0; /* important so children can scroll */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;                /* critical for flex children to scroll */
   overflow: hidden;
+  box-sizing: border-box;
+  min-width: 0;                 /* critical to allow shrinking without forcing single-column */
 }
 
-/* Make the content inside the panel scrollable if tall */
-.cert-list, .updates-box, .recommended-box {
-  /* visual grouping only; cert-list will flex-grow */
-}
+/* If your base styles are even more specific, this extra selector helps ensure override */
+body main .panel { min-width: 0; }
 
-/* Recommended box */
+/* -------------------------
+   Recommended box
+   ------------------------- */
 .recommended-box {
   border-left: 4px solid var(--primary);
   padding: 12px 14px;
   background: linear-gradient(180deg, #ffffff, #fbfcff);
   border-radius: 8px;
+  box-sizing: border-box;
 }
 .recommended-box h3 { margin:0 0 6px 0; color:var(--primary); font-weight:600; }
 .recommended-box p { margin:0; color:var(--muted); }
 
-/* Certificate list area should scroll while keeping header + recommended + updates visible */
+/* -------------------------
+   Cert list grid (RESPONSIVE)
+   ------------------------- */
+/* Grid is the primary scrollable area inside the panel */
 .cert-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  width: 100%;
+  /* auto-fit/auto-fill combined with minmax ensures responsive multi-column */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 12px;
   margin-top: 6px;
-  /* allow cert-list to take remaining space then scroll if overflowing */
+
+  /* allow grid to grow and scroll vertically inside the panel */
   flex: 1 1 auto;
-  min-height: 0; /* allow proper scroll */
-  overflow: auto;
+  min-height: 0;   /* critical for children scrolling inside flex container */
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 6px; /* room for scrollbar */
+  box-sizing: border-box;
 }
 
-/* individual card */
+/* Small tweak for very narrow screens */
+@media (max-width: 360px) {
+  .cert-list { grid-template-columns: 1fr; gap:10px; }
+}
+
+/* -------------------------
+   Certificate card
+   ------------------------- */
+/* Make card compact (not too tall) while still flexible */
 .cert-card {
   background: var(--panel);
   border: 1px solid var(--card-border);
@@ -123,33 +94,67 @@ html,body{
   border-radius: 10px;
   cursor: pointer;
   transition: transform .12s ease, box-shadow .12s ease;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes footer down without needing huge height */
+  gap: 10px;
+  box-sizing: border-box;
+
+  /* sensible size constraints so card never gets huge */
+  min-height: 100px;
+  max-height: 160px;
+  height: auto;
+  overflow: hidden; /* clip overflowing text nicely */
 }
+
+/* hover pop */
 .cert-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 26px rgba(15,23,36,0.08);
 }
+
+/* Top row: title + badge */
 .card-top {
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
+  gap: 10px;
 }
+
+/* title: clamp lines so long names don't expand the card too much */
 .card-title {
   font-weight:600;
   font-size:15px;
   color:var(--text);
   line-height:1.2;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* show up to 2 lines */
+  -webkit-box-orient: vertical;
+  word-break: break-word;
 }
-.card-meta { font-size:13px; color:var(--muted); }
+
+/* meta smaller and muted */
+.card-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Badges */
 .badge {
   padding:6px 8px;
   border-radius:999px;
   font-size:12px;
   font-weight:700;
-  display:inline-block;
-  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   min-width:78px;
   text-align:center;
 }
@@ -164,23 +169,36 @@ html,body{
   border: 1px solid rgba(14,165,164,0.12);
 }
 
-/* small footer row inside card */
+/* Footer row */
 .card-footer {
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
   margin-top:6px;
+  font-size:13px;
+  color:var(--muted);
 }
-.card-footer .small { font-size:12px; color:var(--muted); }
+.card-footer .small { font-size:13px; color:var(--muted); }
 
-/* Updates box */
+/* If content needs a little vertical spacing but we want to keep max-height */
+.card-main {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  overflow: hidden;
+}
+
+/* -------------------------
+   Updates area
+   ------------------------- */
 .updates-box {
   margin-top:6px;
   padding:12px;
   background:var(--glass);
   border-radius:10px;
   border:1px solid var(--card-border);
+  box-sizing: border-box;
 }
 .updates-title { margin: 0 0 8px 0; font-weight:600; color:var(--text); }
 .updates-inner {
@@ -190,7 +208,9 @@ html,body{
 }
 .update-item { margin-bottom:8px; font-size:13px; color:var(--muted); }
 
-/* Modal */
+/* -------------------------
+   Modal styles (keeps modal consistent)
+   ------------------------- */
 .modal {
   position:fixed;
   inset:0;
@@ -208,6 +228,7 @@ html,body{
   padding:20px;
   box-shadow: 0 20px 60px rgba(2,6,23,0.35);
   position:relative;
+  box-sizing: border-box;
 }
 .modal-close {
   position:absolute;
@@ -232,32 +253,24 @@ html,body{
   font-weight:600;
 }
 
-/* small responsive tweaks */
-@media (max-width:880px){
-  .sidebar { display:none; }
+/* -------------------------
+   Accessibility / focus
+   ------------------------- */
+.cert-card:focus {
+  outline: 3px solid rgba(37,99,235,0.12);
+  outline-offset: 2px;
+}
+
+/* -------------------------
+   Responsive tweaks
+   ------------------------- */
+@media (max-width: 880px) {
+  /* Hide sidebar on small screens - keep panel full width */
+  .sidebar { display: none !important; }
   .content-area { padding: 12px; }
 }
-@media (max-width:420px){
+
+@media (max-width: 420px) {
+  .cert-list { grid-template-columns: 1fr; gap:10px; }
   .modal-panel { padding:14px; }
-  .cert-list { gap:10px; }
-}
-
-/* 🚨 CRITICAL FIX: allow grid to use full width */
-.panel {
-  min-width: 0;
-}
-
-/* allow cert grid to expand and wrap properly */
-.cert-list {
-  width: 100%;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  align-items: stretch;
-}
-
-/* ensure flex parents don’t force single column */
-.content-area,
-.panel {
-  box-sizing: border-box;
 }
