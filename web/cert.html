@@ -45,10 +45,16 @@
           <div id="certList" class="cert-list" aria-live="polite"></div>
 
           <!-- Updates -->
-          <div id="updates" class="updates-box">
-            <h3 class="updates-title">📰 Updates</h3>
-            <div id="updatesInner" class="updates-inner"></div>
-          </div>
+<!-- Updates -->
+<div id="updates" class="updates-box">
+  <div class="updates-header">
+    <h3 class="updates-title">📰 Updates</h3>
+    <!-- The caret button: shows '^' and rotates when expanded -->
+    <button id="updatesToggle" class="updates-toggle" aria-expanded="false" title="Toggle updates">^</button>
+  </div>
+
+  <div id="updatesInner" class="updates-inner"></div>
+</div>
         </div>
       </div>
     </main>
