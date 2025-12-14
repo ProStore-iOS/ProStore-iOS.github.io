@@ -2,6 +2,7 @@
 <html lang="en-AU">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>ProStore Web</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="certStyles.css">
@@ -9,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <main>
+    <main class="app-root">
       <div class="header-bar">
         <div class="header-left">
           <div class="dot-container">
@@ -35,8 +36,13 @@
           <!-- Recommended -->
           <div id="recommended" class="recommended-box" aria-live="polite"></div>
 
+          <!-- Controls row (optional future extension) -->
+          <div class="controls-row">
+            <!-- placeholder: search/filter could go here later -->
+          </div>
+
           <!-- Cards container -->
-          <div id="certList" class="cert-list"></div>
+          <div id="certList" class="cert-list" aria-live="polite"></div>
 
           <!-- Updates -->
           <div id="updates" class="updates-box">
@@ -47,7 +53,7 @@
       </div>
     </main>
 
-    <!-- Modal for details -->
+    <!-- Modal for certificate details -->
     <div id="certModal" class="modal" aria-hidden="true">
       <div class="modal-panel" role="dialog" aria-modal="true">
         <button id="modalClose" class="modal-close" title="Close">✕</button>
