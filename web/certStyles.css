@@ -1,351 +1,253 @@
 /* certStyles.css
-   Works with your existing styles.css (which you pasted).
-   - Forces .panel to allow full-width children (fixes centering/overflow)
-   - Responsive grid: multiple cards per row (auto-fit / auto-fill)
-   - Cards sized sensibly (not too tall) and content clipped elegantly
-   - Keeps light theme visual look
+   ONLY extra styles for certificate-manager page elements + hamburger
+   (Relies on variables & base layout from styles.css)
 */
 
-:root{
-  --bg: #f6f7fb;
-  --panel: #ffffff;
-  --muted: #6b7280;
-  --text: #0f1724;
-  --primary: #2563eb;
-  --revoked: #ef4444;
-  --signed: #0ea5a4;
-  --card-border: rgba(15,23,36,0.06);
-  --glass: rgba(15,23,36,0.02);
-  --shadow: 0 6px 18px rgba(15,23,36,0.06);
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+/* ---------- Sidebar active item ---------- */
+.sidebar-item.active{
+  color: var(--text);
+  background: linear-gradient(90deg, rgba(78,229,255,0.04), rgba(139,92,246,0.03));
+  border-color: rgba(78,229,255,0.08);
+  box-shadow: 0 6px 18px rgba(78,229,255,0.03);
 }
 
-/* -------------------------
-   Panel / layout adjustments
-   ------------------------- */
-
-/* Make sure panel lets children use full width and allows proper scrolling.
-   Using higher specificity to safely override your styles.css align-items:center. */
-main .panel {
-  align-items: stretch;         /* allow grid to expand horizontally */
-  padding: 18px;                /* consistent inner padding */
-  background: var(--panel);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-height: 0;                /* critical for flex children to scroll */
-  overflow: hidden;
-  box-sizing: border-box;
-  min-width: 0;                 /* critical to allow shrinking without forcing single-column */
-}
-
-/* If your base styles are even more specific, this extra selector helps ensure override */
-body main .panel { min-width: 0; }
-
-/* -------------------------
-   Recommended box
-   ------------------------- */
-.recommended-box {
-  border-left: 4px solid var(--primary);
-  padding: 12px 14px;
-  background: linear-gradient(180deg, #ffffff, #fbfcff);
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-.recommended-box h3 { margin:0 0 6px 0; color:var(--primary); font-weight:600; }
-.recommended-box p { margin:0; color:var(--muted); }
-
-/* -------------------------
-   Cert list grid (RESPONSIVE)
-   ------------------------- */
-/* responsive cert grid — tighter rows on desktop, comfy on mobile */
-.cert-list {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  /* gap: <row> <column> -> row gap smaller on desktop, column gap comfortable */
-  gap: 10px 14px;
-  margin-top: 6px;
-
-  /* allow grid to grow and scroll vertically inside the panel */
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 6px;
-  box-sizing: border-box;
-}
-
-/* extra-tight rows for very large screens */
-@media (min-width: 1400px) {
-  .cert-list {
-    gap: 8px 16px; /* slightly tighter vertical spacing, more horizontal breathing room */
-  }
-}
-
-/* keep a comfortable single-column layout on tiny phones */
-@media (max-width: 360px) {
-  .cert-list { grid-template-columns: 1fr; gap: 10px; }
-}
-
-/* -------------------------
-   Certificate card
-   ------------------------- */
-/* Make card compact (not too tall) while still flexible */
-.cert-card {
-  background: var(--panel);
+/* ---------- Recommended box (small summary card) ---------- */
+.recommended-box{
+  width:100%;
+  margin-bottom:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
   border: 1px solid var(--card-border);
   padding: 12px;
   border-radius: 10px;
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* pushes footer down without needing huge height */
-  gap: 10px;
-  box-sizing: border-box;
-
-  /* sensible size constraints so card never gets huge */
-  min-height: 100px;
-  max-height: 160px;
-  height: auto;
-  overflow: hidden; /* clip overflowing text nicely */
-}
-
-/* hover pop */
-.cert-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 26px rgba(15,23,36,0.08);
-}
-
-/* Top row: title + badge */
-.card-top {
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap: 10px;
-}
-
-/* title: clamp lines so long names don't expand the card too much */
-.card-title {
-  font-weight:600;
-  font-size:15px;
-  color:var(--text);
-  line-height:1.2;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;        /* show up to 2 lines */
-  -webkit-box-orient: vertical;
-  word-break: break-word;
-}
-
-/* meta smaller and muted */
-.card-meta {
-  font-size: 13px;
   color: var(--muted);
-  margin-top: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-
-/* Badges */
-.badge {
-  padding:6px 8px;
-  border-radius:999px;
-  font-size:12px;
+.recommended-box h3{
+  margin:0 0 6px 0;
+  font-size: 0.98rem;
+  color: var(--accent);
   font-weight:700;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:78px;
-  text-align:center;
 }
-.badge.revoked {
-  background: rgba(239,68,68,0.08);
-  color: var(--revoked);
-  border: 1px solid rgba(239,68,68,0.12);
-}
-.badge.signed {
-  background: rgba(14,165,164,0.08);
-  color: var(--signed);
-  border: 1px solid rgba(14,165,164,0.12);
+.recommended-box p{
+  margin:0;
+  color: var(--text);
+  font-weight:600;
+  line-height:1.25;
 }
 
-/* Footer row */
-.card-footer {
+/* ---------- Controls row (placeholder) ---------- */
+.controls-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin: 8px 0 12px 0;
+}
+
+/* ---------- Certificate cards grid ---------- */
+.cert-list{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top:6px;
+}
+
+/* card */
+.cert-card{
+  background: rgba(255,255,255,0.013);
+  border: 1px solid var(--card-border);
+  padding: 12px;
+  border-radius: 12px;
+  transition: transform .16s ease, box-shadow .16s ease;
+  cursor: pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:92px;
+}
+.cert-card:focus{
+  outline: 3px solid rgba(78,229,255,0.08);
+  outline-offset: 3px;
+}
+.cert-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(2,6,23,0.5);
+}
+
+/* card internals */
+.card-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-top:6px;
-  font-size:13px;
-  color:var(--muted);
+  margin-bottom:8px;
 }
-.card-footer .small { font-size:13px; color:var(--muted); }
-
-/* If content needs a little vertical spacing but we want to keep max-height */
-.card-main {
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  overflow: hidden;
+.card-title{
+  font-weight:700;
+  color: var(--text);
+  font-size: 1rem;
+}
+.card-meta{
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top:4px;
 }
 
-/* -------------------------
-   Updates area (collapsible) - dynamic height
-   ------------------------- */
-.updates-box {
+/* badge */
+.badge{
+  font-size: 0.78rem;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-weight:800;
+  display:inline-block;
+  line-height:1;
+  white-space:nowrap;
+}
+.badge.signed{
+  background: linear-gradient(90deg, rgba(78,229,255,0.12), rgba(139,92,246,0.08));
+  color: #021018; /* dark text like our primary buttons */
+  box-shadow: 0 6px 14px rgba(78,229,255,0.03);
+}
+.badge.revoked{
+  background: linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06));
+  color: var(--text);
+  box-shadow: none;
+}
+
+/* footer small info */
+.card-footer .small{
+  color: var(--muted);
+  font-size: 0.85rem;
   margin-top:6px;
+}
+
+/* ---------- Updates area (collapsible) ---------- */
+/* lightweight styles only */
+.updates-box{
+  margin-top:12px;
   padding:12px;
-  background:var(--glass);
+  background: var(--glass);
   border-radius:10px;
   border:1px solid var(--card-border);
   box-sizing: border-box;
-  overflow: visible; /* allow inner to expand dynamically */
-  transition: box-shadow .12s ease;
+  overflow: hidden;
+}
+.updates-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.updates-title{
+  margin:0;
+  font-size:0.96rem;
+  color: var(--muted);
+  font-weight:700;
+}
+.updates-toggle{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.04);
+  padding:6px 8px;
+  border-radius:8px;
+  cursor:pointer;
+  color: var(--muted);
+  transition: transform .18s ease, color .14s;
+}
+.updates-toggle.rotated{ transform: rotate(180deg); color: var(--accent); }
+
+.updates-inner{
+  margin-top:10px;
+  max-height:0;
+  overflow:hidden;
+  transition: max-height .22s ease, padding .18s ease;
+  padding-top:0;
+  padding-bottom:0;
+}
+.update-item{
+  padding:8px 10px;
+  border-radius:8px;
+  background: rgba(255,255,255,0.008);
+  border:1px solid transparent;
+  color: var(--text);
+  font-size:0.95rem;
+  margin-bottom:8px;
 }
 
-/* header row: title + toggle on right */
-.updates-header {
+/* when expanded some small padding fallback (JS resets exact height) */
+.updates-box.expanded .updates-inner{ padding-top:8px; padding-bottom:8px; }
+
+/* ---------- Modal (certificate details) ---------- */
+.modal{
+  position: fixed;
+  inset: 0;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.updates-title { 
-  margin: 0; 
-  font-weight:600; 
-  color:var(--text); 
-  font-size:15px; 
-}
-
-/* toggle button (the ^) */
-.updates-toggle {
-  border: none;
-  background: transparent;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 6px;
-  color: var(--muted);
-  transition: transform .18s ease, background .12s ease, color .12s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 34px;
-  min-height: 34px;
-}
-.updates-toggle:focus {
-  outline: 3px solid rgba(37,99,235,0.12);
-  outline-offset: 2px;
-}
-.updates-toggle:hover {
-  background: rgba(15,23,36,0.02);
-  color: var(--text);
-}
-.updates-toggle.rotated {
-  transform: rotate(180deg);
-}
-
-/* inner content (height controlled dynamically by JS) */
-.updates-inner {
-  max-height: 0; /* collapsed by default; JS will set px when expanded */
-  overflow: hidden;
-  padding-top: 10px;
-  padding-bottom: 6px;
-  transition: max-height .28s cubic-bezier(.2,.8,.2,1), padding .18s ease;
-}
-
-/* collapsed specifics */
-.updates-box.collapsed .updates-inner {
-  max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* cosmetic for items */
-.update-item { 
-  margin-bottom:8px; 
-  font-size:13px; 
-  color:var(--muted); 
-}
-
-/* responsive tweaks for tiny screens */
-@media (max-width:420px) {
-  .updates-header { gap:8px; }
-  .updates-title { font-size:14px; }
-}
-
-/* -------------------------
-   Modal styles (keeps modal consistent)
-   ------------------------- */
-.modal {
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
   justify-content:center;
-  background: rgba(10,12,20,0.35);
-  z-index:9999;
+  background: rgba(2,6,23,0.6);
+  z-index: 1400;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .16s ease;
 }
-.modal.show { display:flex; }
-.modal-panel {
-  background:var(--panel);
-  width: min(720px, 96%);
-  border-radius:12px;
-  padding:20px;
-  box-shadow: 0 20px 60px rgba(2,6,23,0.35);
+.modal.show{
+  opacity:1;
+  pointer-events: auto;
+}
+.modal-panel{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid var(--card-border);
+  padding: 20px;
+  border-radius: 12px;
+  width: clamp(320px, 72vw, 760px);
+  max-height: 90vh;
+  overflow:auto;
   position:relative;
-  box-sizing: border-box;
+  box-shadow: 0 30px 80px rgba(2,6,23,0.75);
 }
-.modal-close {
+.modal-close{
   position:absolute;
-  right:12px;
   top:10px;
-  border:none;
+  right:10px;
   background:transparent;
-  font-size:16px;
+  border:none;
+  color: var(--muted);
+  font-size:1.05rem;
   cursor:pointer;
-  color:var(--muted);
-}
-.modal-meta { color:var(--muted); margin:8px 0; font-size:13px; }
-.modal-dates { margin:8px 0; font-size:13px; color:var(--muted); }
-.modal-download a {
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 14px;
+  padding:6px;
   border-radius:8px;
-  background:var(--primary);
-  color:white;
+}
+.modal-close:focus-visible{ outline: 3px solid rgba(78,229,255,0.12); }
+.modal-meta, .modal-dates{ color: var(--muted); margin-top:8px; font-weight:600; }
+.modal-download{ margin-top:12px; }
+
+/* Download link inside modal styled as primary button */
+.download-link{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color:#021018;
+  font-weight:700;
   text-decoration:none;
-  font-weight:600;
 }
 
-/* -------------------------
-   Accessibility / focus
-   ------------------------- */
-.cert-card:focus {
-  outline: 3px solid rgba(37,99,235,0.12);
-  outline-offset: 2px;
+/* Accessibility focus for interactive elements inside the cert area */
+.recommended-box a:focus,
+.cert-card:focus,
+.updates-toggle:focus,
+.download-link:focus{
+  outline: 3px solid rgba(78,229,255,0.10);
+  outline-offset: 3px;
 }
 
-/* -------------------------
-   Responsive tweaks
-   ------------------------- */
-@media (max-width: 880px) {
-  /* Hide sidebar on small screens - keep panel full width */
-  .sidebar { display: none !important; }
-  .content-area { padding: 12px; }
+/* ---------- Hamburger (visual) ---------- */
+/* only the minimal visual tweaks here; behaviour is JS-driven */
+.hamburger{
+  display:none; /* base layout shows/hides in styles.css media queries; keep safe here */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--muted);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
 }
-
-@media (max-width: 420px) {
-  .cert-list { grid-template-columns: 1fr; gap:10px; }
-  .modal-panel { padding:14px; }
-}
+/* shown by styles.css media query — keep visual consistent */
