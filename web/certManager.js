@@ -37,9 +37,6 @@ function parseCertTable(md) {
     // split by '|' and trim
     const parts = line.split("|").map(p => p.trim());
     // expected parts: ["", "Company", "Type", "Status", "Valid From", "Valid To", "Download", ""]
-    // guard: ensure at least 7 meaningful columns
-    const meaningful = parts.filter((p, idx) => p !== "" || (idx > 0 && idx < parts.length - 1));
-    // We'll read by indexes, but check boundary
     const company = parts[1] || "";
     const type = parts[2] || "";
     const statusRaw = parts[3] || "";
@@ -93,23 +90,14 @@ function decodeSafe(u) {
 /* ---------- Rendering ---------- */
 
 function renderRecommended(md) {
-  // find the Recommend Certificate section
-  // README uses:
-  // # Recommend Certificate 
-  // **China Telecommunications Corporation V2 - ❌ Revoked**
-  //
-  // We'll capture the next non-empty line and strip stars.
   const lines = md.split("\n");
   let idx = lines.findIndex(l => l.trim().toLowerCase().startsWith("# recommend certificate"));
   let rec = "";
   if (idx !== -1) {
-    // find first non-empty line after the header
     for (let i = idx + 1; i < lines.length; i++) {
       const ln = lines[i].trim();
       if (!ln) continue;
-      // strip ** and md markup
       rec = ln.replace(/\*\*/g, "").trim();
-      // remove surrounding markdown quote markers or other noise
       rec = rec.replace(/^>\s?/, "").trim();
       break;
     }
@@ -117,11 +105,10 @@ function renderRecommended(md) {
 
   const el = document.getElementById("recommended");
   if (!rec) {
-    el.style.display = "none";
+    if (el) el.style.display = "none";
     return;
   }
-  // show plain text (no bold)
-  el.innerHTML = `<h3>⭐ Recommended Certificate</h3><p>${escapeHtml(rec)}</p>`;
+  if (el) el.innerHTML = `<h3>⭐ Recommended Certificate</h3><p>${escapeHtml(rec)}</p>`;
 }
 
 function renderCertCards(certs) {
@@ -183,20 +170,11 @@ function renderUpdates(md) {
 
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i].trim();
-
     if (!line) continue;
     if (line.startsWith("#")) break;
-
-    // 🚫 ignore markdown dividers like ---
     if (line === "---") continue;
-
-    // strip bold markers
     line = line.replace(/\*\*/g, "").trim();
-
-    // only keep real update lines
-    if (line.length > 2) {
-      updates.push(line);
-    }
+    if (line.length > 2) updates.push(line);
   }
 
   if (!updates.length) {
@@ -212,27 +190,35 @@ function renderUpdates(md) {
 /* ---------- Modal ---------- */
 function openModal(c) {
   const modal = document.getElementById("certModal");
+  if (!modal) return;
+
   document.getElementById("modalName").textContent = c.company;
   document.getElementById("modalMeta").textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
   document.getElementById("modalDates").textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
 
+  // Hide/remove the modal-note if present (removes the Disclaimer)
+  const noteEl = document.getElementById("modalNote");
+  if (noteEl) {
+    noteEl.innerHTML = "";
+    noteEl.style.display = "none";
+  }
+
   const dl = document.getElementById("modalDownload");
   dl.innerHTML = "";
   if (c.download) {
+    // Create a single anchor that shows the (decoded) URL as the button/text.
     const a = document.createElement("a");
     a.href = c.download;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.textContent = "Download";
+    // Show a decoded URL for readability (falls back to original if decode fails)
+    a.textContent = decodeSafe(c.download);
+    a.className = "download-link";
+    // Make it look/behave like a button if you want CSS for .download-link
+    a.setAttribute("role", "button");
     dl.appendChild(a);
 
-    // also show raw url (small)
-    const small = document.createElement("div");
-    small.style.marginTop = "8px";
-    small.style.fontSize = "12px";
-    small.style.color = "var(--muted)";
-    small.textContent = c.download;
-    dl.appendChild(small);
+    // NOTE: we intentionally do NOT add a small raw URL under the button — per request.
   } else {
     dl.innerHTML = `<div style="color:var(--muted);">No download link found.</div>`;
   }
