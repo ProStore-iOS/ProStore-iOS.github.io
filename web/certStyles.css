@@ -1,9 +1,9 @@
 /* certStyles.css
-   ONLY extra styles for certificate-manager page elements + hamburger
-   (Relies on variables & base layout from styles.css)
+   Only the extra rules needed for certificate manager page + hamburger fixes.
+   Assumes variables & base layout exist in styles.css.
 */
 
-/* ---------- Sidebar active item ---------- */
+/* --- Ensure active sidebar item styling (scoped) --- */
 .sidebar-item.active{
   color: var(--text);
   background: linear-gradient(90deg, rgba(78,229,255,0.04), rgba(139,92,246,0.03));
@@ -11,7 +11,22 @@
   box-shadow: 0 6px 18px rgba(78,229,255,0.03);
 }
 
-/* ---------- Recommended box (small summary card) ---------- */
+/* --- Prevent horizontal overflow caused by panel/content area --- */
+.content-area{
+  /* avoid accidental horizontal overflow from children */
+  overflow-x: hidden;
+  position: relative; /* needed for positioned children like update popup */
+}
+
+/* Panel should not create horizontal scroll and should scroll vertically within the content-area */
+.panel{
+  overflow-x: hidden;    /* no horizontal scroll */
+  overflow-y: auto;      /* vertical scrolling inside the panel */
+  min-height: 0;         /* allow proper flexbox scrolling */
+  box-sizing: border-box;
+}
+
+/* --- Recommended box / cert grid (scoped) --- */
 .recommended-box{
   width:100%;
   margin-bottom:12px;
@@ -20,37 +35,19 @@
   padding: 12px;
   border-radius: 10px;
   color: var(--muted);
-}
-.recommended-box h3{
-  margin:0 0 6px 0;
-  font-size: 0.98rem;
-  color: var(--accent);
-  font-weight:700;
-}
-.recommended-box p{
-  margin:0;
-  color: var(--text);
-  font-weight:600;
-  line-height:1.25;
+  box-sizing: border-box;
 }
 
-/* ---------- Controls row (placeholder) ---------- */
-.controls-row{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin: 8px 0 12px 0;
-}
-
-/* ---------- Certificate cards grid ---------- */
+/* grid of cert cards */
 .cert-list{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
   margin-top:6px;
+  box-sizing: border-box;
 }
 
-/* card */
+/* cert card basics */
 .cert-card{
   background: rgba(255,255,255,0.013);
   border: 1px solid var(--card-border);
@@ -62,65 +59,15 @@
   flex-direction:column;
   justify-content:space-between;
   min-height:92px;
+  box-sizing: border-box;
 }
-.cert-card:focus{
-  outline: 3px solid rgba(78,229,255,0.08);
-  outline-offset: 3px;
-}
-.cert-card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 22px 48px rgba(2,6,23,0.5);
-}
+.cert-card:focus{ outline: 3px solid rgba(78,229,255,0.08); outline-offset:3px; }
 
-/* card internals */
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:8px;
-}
-.card-title{
-  font-weight:700;
-  color: var(--text);
-  font-size: 1rem;
-}
-.card-meta{
-  color: var(--muted);
-  font-size: 0.88rem;
-  margin-top:4px;
-}
+/* badges */
+.badge.signed{ background: linear-gradient(90deg, rgba(78,229,255,0.12), rgba(139,92,246,0.08)); color:#021018; }
+.badge.revoked{ background: linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06)); color:var(--text); }
 
-/* badge */
-.badge{
-  font-size: 0.78rem;
-  padding: 6px 8px;
-  border-radius: 999px;
-  font-weight:800;
-  display:inline-block;
-  line-height:1;
-  white-space:nowrap;
-}
-.badge.signed{
-  background: linear-gradient(90deg, rgba(78,229,255,0.12), rgba(139,92,246,0.08));
-  color: #021018; /* dark text like our primary buttons */
-  box-shadow: 0 6px 14px rgba(78,229,255,0.03);
-}
-.badge.revoked{
-  background: linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06));
-  color: var(--text);
-  box-shadow: none;
-}
-
-/* footer small info */
-.card-footer .small{
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-top:6px;
-}
-
-/* ---------- Updates area (collapsible) ---------- */
-/* lightweight styles only */
+/* --- Updates: expand UPWARDS and overlay cert list --- */
 .updates-box{
   margin-top:12px;
   padding:12px;
@@ -128,20 +75,22 @@
   border-radius:10px;
   border:1px solid var(--card-border);
   box-sizing: border-box;
-  overflow: hidden;
+
+  /* allow the inner popup to overflow upward */
+  overflow: visible;
+  position: relative; /* anchor for the absolute-updates-inner */
 }
+
+/* header row */
 .updates-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
 }
-.updates-title{
-  margin:0;
-  font-size:0.96rem;
-  color: var(--muted);
-  font-weight:700;
-}
+.updates-title{ margin:0; font-size:0.96rem; color: var(--muted); font-weight:700; }
+
+/* toggle button (visual only) */
 .updates-toggle{
   background:transparent;
   border:1px solid rgba(255,255,255,0.04);
@@ -150,17 +99,30 @@
   cursor:pointer;
   color: var(--muted);
   transition: transform .18s ease, color .14s;
+  box-sizing: border-box;
 }
 .updates-toggle.rotated{ transform: rotate(180deg); color: var(--accent); }
 
+/* the inner content will float ABOVE (expand upwards) */
 .updates-inner{
-  margin-top:10px;
-  max-height:0;
-  overflow:hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 8px); /* sit above the updates header, with a small gap */
+  max-height: 0;
+  overflow: auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(2,6,23,0.6);
+  padding-left: 8px;
+  padding-right: 8px;
   transition: max-height .22s ease, padding .18s ease;
-  padding-top:0;
-  padding-bottom:0;
+  z-index: 1300; /* sit above cert cards */
+  box-sizing: border-box;
 }
+
+/* visual spacing for items inside the floating updates panel */
 .update-item{
   padding:8px 10px;
   border-radius:8px;
@@ -168,86 +130,21 @@
   border:1px solid transparent;
   color: var(--text);
   font-size:0.95rem;
-  margin-bottom:8px;
+  margin:8px;
 }
 
-/* when expanded some small padding fallback (JS resets exact height) */
+/* when JS expands, JS will set maxHeight; ensure padding exists as fallback */
 .updates-box.expanded .updates-inner{ padding-top:8px; padding-bottom:8px; }
 
-/* ---------- Modal (certificate details) ---------- */
-.modal{
-  position: fixed;
-  inset: 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: rgba(2,6,23,0.6);
-  z-index: 1400;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .16s ease;
-}
-.modal.show{
-  opacity:1;
-  pointer-events: auto;
-}
+/* --- Modal adjustments (scoped) --- */
 .modal-panel{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border:1px solid var(--card-border);
-  padding: 20px;
-  border-radius: 12px;
-  width: clamp(320px, 72vw, 760px);
+  box-sizing: border-box;
   max-height: 90vh;
-  overflow:auto;
-  position:relative;
-  box-shadow: 0 30px 80px rgba(2,6,23,0.75);
-}
-.modal-close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:transparent;
-  border:none;
-  color: var(--muted);
-  font-size:1.05rem;
-  cursor:pointer;
-  padding:6px;
-  border-radius:8px;
-}
-.modal-close:focus-visible{ outline: 3px solid rgba(78,229,255,0.12); }
-.modal-meta, .modal-dates{ color: var(--muted); margin-top:8px; font-weight:600; }
-.modal-download{ margin-top:12px; }
-
-/* Download link inside modal styled as primary button */
-.download-link{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:10px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color:#021018;
-  font-weight:700;
-  text-decoration:none;
+  overflow:auto; /* allow modal content to scroll vertically */
 }
 
-/* Accessibility focus for interactive elements inside the cert area */
-.recommended-box a:focus,
-.cert-card:focus,
-.updates-toggle:focus,
-.download-link:focus{
-  outline: 3px solid rgba(78,229,255,0.10);
-  outline-offset: 3px;
+/* small-screen niceties */
+@media (max-width: 520px){
+  .updates-inner{ right: auto; left: 6px; bottom: calc(100% + 6px); max-width: calc(100vw - 12px); }
+  .cert-list{ gap: 10px; }
 }
-
-/* ---------- Hamburger (visual) ---------- */
-/* only the minimal visual tweaks here; behaviour is JS-driven */
-.hamburger{
-  display:none; /* base layout shows/hides in styles.css media queries; keep safe here */
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  border: 1px solid rgba(255,255,255,0.04);
-  color: var(--muted);
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-}
-/* shown by styles.css media query — keep visual consistent */
