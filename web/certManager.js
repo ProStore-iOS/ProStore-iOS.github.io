@@ -178,13 +178,23 @@ function renderUpdates(md) {
   const after = md.substring(idx + "# Updates".length);
   const lines = after.split("\n");
   const updates = [];
+
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
+    let line = lines[i].trim();
+
     if (!line) continue;
     if (line.startsWith("#")) break;
-    // Accept lines starting with ** or plain lines
-    const cleaned = line.replace(/\*\*/g, "").trim();
-    if (cleaned) updates.push(cleaned);
+
+    // 🚫 ignore markdown dividers like ---
+    if (line === "---") continue;
+
+    // strip bold markers
+    line = line.replace(/\*\*/g, "").trim();
+
+    // only keep real update lines
+    if (line.length > 2) {
+      updates.push(line);
+    }
   }
 
   if (!updates.length) {
@@ -192,7 +202,9 @@ function renderUpdates(md) {
     return;
   }
 
-  container.innerHTML = updates.map(u => `<div class="update-item">${escapeHtml(u)}</div>`).join("");
+  container.innerHTML = updates
+    .map(u => `<div class="update-item">${escapeHtml(u)}</div>`)
+    .join("");
 }
 
 /* ---------- Modal ---------- */
