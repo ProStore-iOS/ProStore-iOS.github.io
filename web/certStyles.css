@@ -241,3 +241,23 @@ html,body{
   .modal-panel { padding:14px; }
   .cert-list { gap:10px; }
 }
+
+/* 🚨 CRITICAL FIX: allow grid to use full width */
+.panel {
+  min-width: 0;
+}
+
+/* allow cert grid to expand and wrap properly */
+.cert-list {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: stretch;
+}
+
+/* ensure flex parents don’t force single column */
+.content-area,
+.panel {
+  box-sizing: border-box;
+}
