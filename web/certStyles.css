@@ -60,27 +60,34 @@ body main .panel { min-width: 0; }
 /* -------------------------
    Cert list grid (RESPONSIVE)
    ------------------------- */
-/* Grid is the primary scrollable area inside the panel */
+/* responsive cert grid — tighter rows on desktop, comfy on mobile */
 .cert-list {
   display: grid;
   width: 100%;
-  /* auto-fit/auto-fill combined with minmax ensures responsive multi-column */
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px;
+  /* gap: <row> <column> -> row gap smaller on desktop, column gap comfortable */
+  gap: 10px 14px;
   margin-top: 6px;
 
   /* allow grid to grow and scroll vertically inside the panel */
   flex: 1 1 auto;
-  min-height: 0;   /* critical for children scrolling inside flex container */
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 6px; /* room for scrollbar */
+  padding-right: 6px;
   box-sizing: border-box;
 }
 
-/* Small tweak for very narrow screens */
+/* extra-tight rows for very large screens */
+@media (min-width: 1400px) {
+  .cert-list {
+    gap: 8px 16px; /* slightly tighter vertical spacing, more horizontal breathing room */
+  }
+}
+
+/* keep a comfortable single-column layout on tiny phones */
 @media (max-width: 360px) {
-  .cert-list { grid-template-columns: 1fr; gap:10px; }
+  .cert-list { grid-template-columns: 1fr; gap: 10px; }
 }
 
 /* -------------------------
