@@ -11,6 +11,8 @@ async function init() {
     const certs = parseCertTable(md);
     renderCertCards(certs);
     renderUpdates(md);
+
+    setupUpdatesToggle(); // <-- initialise toggle after updates rendered
   } catch (err) {
     console.error(err);
     const certList = document.getElementById("certList");
@@ -181,6 +183,55 @@ function renderUpdates(md) {
   container.innerHTML = updates
     .map(u => `<div class="update-item">${escapeHtml(u)}</div>`)
     .join("");
+}
+
+/* ---------- Updates toggle (collapsible) ---------- */
+
+function setupUpdatesToggle() {
+  const updatesBox = document.getElementById("updates");
+  const toggleBtn = document.getElementById("updatesToggle");
+  const updatesInner = document.getElementById("updatesInner");
+  if (!updatesBox || !toggleBtn || !updatesInner) return;
+
+  // default collapsed state on first load (change if you want expanded by default)
+  const storageKey = "prostore_updates_expanded";
+  // If no saved state, default to collapsed (true)
+  const saved = localStorage.getItem(storageKey);
+  const initialCollapsed = saved === null ? true : (saved === "false" ? false : (saved === "true" ? false : true)); // keep collapsed if missing
+  // simplified: if saved === "1" expand, else collapse: but we used true/false strings for clarity
+
+  // Utility to set state
+  function setCollapsed(collapsed, skipSave = false) {
+    if (collapsed) {
+      updatesBox.classList.add("collapsed");
+      updatesBox.classList.remove("expanded");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      toggleBtn.classList.remove("rotated"); // caret shows ^
+    } else {
+      updatesBox.classList.remove("collapsed");
+      updatesBox.classList.add("expanded");
+      toggleBtn.setAttribute("aria-expanded", "true");
+      toggleBtn.classList.add("rotated"); // caret flips to look like v
+    }
+    if (!skipSave) localStorage.setItem(storageKey, (!collapsed).toString());
+  }
+
+  // init
+  setCollapsed(initialCollapsed, true);
+
+  // click handler
+  toggleBtn.addEventListener("click", () => {
+    const isCollapsed = updatesBox.classList.contains("collapsed");
+    setCollapsed(!isCollapsed);
+  });
+
+  // keyboard support
+  toggleBtn.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleBtn.click();
+    }
+  });
 }
 
 /* ---------- Modal ---------- */
