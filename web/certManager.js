@@ -13,7 +13,8 @@ async function init() {
     renderUpdates(md);
   } catch (err) {
     console.error(err);
-    document.getElementById("certList").innerHTML = `<p style="color:#ef4444">Failed to load certificate data.</p>`;
+    const certList = document.getElementById("certList");
+    if (certList) certList.innerHTML = `<p style="color:#ef4444">Failed to load certificate data.</p>`;
   }
 }
 
@@ -34,9 +35,7 @@ function parseCertTable(md) {
   for (let i = start + 2; i < lines.length; i++) {
     const line = lines[i].trim();
     if (!line.startsWith("|")) break;
-    // split by '|' and trim
     const parts = line.split("|").map(p => p.trim());
-    // expected parts: ["", "Company", "Type", "Status", "Valid From", "Valid To", "Download", ""]
     const company = parts[1] || "";
     const type = parts[2] || "";
     const statusRaw = parts[3] || "";
@@ -62,28 +61,24 @@ function parseCertTable(md) {
 
 function stripMd(s) {
   if (!s) return "";
-  // only remove bold markers **, leave links intact
   return s.replace(/\*\*/g, "").trim();
 }
 
 function extractUrlFromMd(s) {
   if (!s) return "";
-  // match Markdown link (exact URL)
   const m = s.match(/\[.*?\]\((https?:\/\/[^\)]+)\)/);
-  if (m && m[1]) return m[1]; // return exact URL from README.md
-
-  // fallback: if plain URL exists, just use it
+  if (m && m[1]) return m[1];
   const m2 = s.match(/https?:\/\/\S+/);
   if (m2) return m2[0];
-
   return "";
 }
 
 function decodeSafe(u) {
   try {
+    // decodeURI to retain characters that decodeURIComponent would throw on
     return decodeURIComponent(u);
   } catch (e) {
-    return u;
+    try { return decodeURI(u); } catch (e2) { return u; }
   }
 }
 
@@ -113,6 +108,7 @@ function renderRecommended(md) {
 
 function renderCertCards(certs) {
   const container = document.getElementById("certList");
+  if (!container) return;
   container.innerHTML = "";
 
   if (!certs.length) {
@@ -146,7 +142,6 @@ function renderCertCards(certs) {
       </div>
     `;
 
-    // open modal with details on click / enter
     card.addEventListener("click", () => openModal(c));
     card.addEventListener("keypress", (e) => { if (e.key === "Enter") openModal(c); });
 
@@ -157,6 +152,7 @@ function renderCertCards(certs) {
 function renderUpdates(md) {
   const idx = md.indexOf("# Updates");
   const container = document.getElementById("updatesInner");
+  if (!container) return;
   container.innerHTML = "";
 
   if (idx === -1) {
@@ -192,35 +188,55 @@ function openModal(c) {
   const modal = document.getElementById("certModal");
   if (!modal) return;
 
-  document.getElementById("modalName").textContent = c.company;
-  document.getElementById("modalMeta").textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
-  document.getElementById("modalDates").textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
-
-  // Hide/remove the modal-note if present (removes the Disclaimer)
-  const noteEl = document.getElementById("modalNote");
-  if (noteEl) {
-    noteEl.innerHTML = "";
-    noteEl.style.display = "none";
-  }
-
+  // Basic fields
+  const nameEl = document.getElementById("modalName");
+  const metaEl = document.getElementById("modalMeta");
+  const datesEl = document.getElementById("modalDates");
   const dl = document.getElementById("modalDownload");
-  dl.innerHTML = "";
-  if (c.download) {
-    // Create a single anchor that shows the (decoded) URL as the button/text.
-    const a = document.createElement("a");
-    a.href = c.download;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    // Show a decoded URL for readability (falls back to original if decode fails)
-    a.textContent = decodeSafe(c.download);
-    a.className = "download-link";
-    // Make it look/behave like a button if you want CSS for .download-link
-    a.setAttribute("role", "button");
-    dl.appendChild(a);
 
-    // NOTE: we intentionally do NOT add a small raw URL under the button — per request.
+  if (nameEl) nameEl.textContent = c.company;
+  if (metaEl) metaEl.textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
+  if (datesEl) datesEl.textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
+
+  // Force-hide/remove common modal-note elements that might contain the disclaimer
+  // (covers different naming conventions so it actually vanishes)
+  const noteSelectors = ['#modalNote', '#modal-note', '.modal-note', '[data-modal-note]'];
+  noteSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      el.innerHTML = "";
+      el.style.display = "none";
+      // also remove from DOM to be safe
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+  });
+
+  if (!dl) {
+    console.warn("modalDownload element not found");
   } else {
-    dl.innerHTML = `<div style="color:var(--muted);">No download link found.</div>`;
+    dl.innerHTML = "";
+    if (c.download) {
+      // Anchor (button) — visible text is "Download"
+      const a = document.createElement("a");
+      a.href = c.download;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = "Download";
+      a.className = "download-link";
+      a.setAttribute("role", "button");
+      dl.appendChild(a);
+
+      // Small raw URL under the button for readability/copying
+      const raw = document.createElement("div");
+      raw.className = "download-raw";
+      raw.style.marginTop = "8px";
+      raw.style.fontSize = "12px";
+      raw.style.color = "var(--muted)";
+      raw.style.wordBreak = "break-all";
+      raw.textContent = decodeSafe(c.download);
+      dl.appendChild(raw);
+    } else {
+      dl.innerHTML = `<div style="color:var(--muted);">No download link found.</div>`;
+    }
   }
 
   modal.classList.add("show");
