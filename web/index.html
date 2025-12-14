@@ -37,6 +37,74 @@
     <script>
       pulse('reset');
       loadingImg(0);
+
+      // SIDEBAR TOGGLE \\
+(function(){
+  const body = document.body;
+  const hamburger = document.querySelector('.hamburger');
+  if(!hamburger) return;
+  // create overlay node (used on mobile)
+  let overlay = document.querySelector('.sidebar-overlay');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  function openSidebar(){
+    body.classList.add('sidebar-open');
+    hamburger.setAttribute('aria-expanded','true');
+    // trap focus simple-ish - set focus to first sidebar item
+    const firstItem = document.querySelector('.sidebar .sidebar-item');
+    if(firstItem) firstItem.focus();
+  }
+  function closeSidebar(){
+    body.classList.remove('sidebar-open');
+    hamburger.setAttribute('aria-expanded','false');
+    hamburger.focus();
+  }
+  function toggleSidebar(){
+    if(body.classList.contains('sidebar-open')) closeSidebar();
+    else openSidebar();
+  }
+
+  hamburger.addEventListener('click', function(e){
+    e.stopPropagation();
+    toggleSidebar();
+  });
+
+  overlay.addEventListener('click', function(){
+    closeSidebar();
+  });
+
+  // close on escape
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && body.classList.contains('sidebar-open')){
+      closeSidebar();
+    }
+  });
+
+  // If a sidebar item is clicked on mobile, auto-close (and navigate)
+  document.addEventListener('click', function(e){
+    const item = e.target.closest('.sidebar-item');
+    if(!item) return;
+    // only auto-close on small screens (avoid closing on desktop)
+    if(window.innerWidth <= 860) {
+      // Slight delay to allow navigation/href to trigger
+      setTimeout(closeSidebar, 160);
+    }
+  });
+
+  // ensure state updates on resize (e.g., when rotating device)
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 860) {
+      // ensure sidebar visible on desktop
+      body.classList.remove('sidebar-open');
+      hamburger.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+
     </script>
   </body>
 </html>
