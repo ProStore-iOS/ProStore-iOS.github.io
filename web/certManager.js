@@ -30,20 +30,16 @@ function parseCertTable(md) {
   }
   if (start === -1) return [];
 
-  // skip header + separator
   const rows = [];
   for (let i = start + 2; i < lines.length; i++) {
     const line = lines[i].trim();
     if (!line.startsWith("|")) break;
-    // split by '|' and remove first/last empty segments
+    // split by '|' and trim
     const parts = line.split("|").map(p => p.trim());
-    // parts usually: ["", "Company", "Type", ... , ""]
-    // discard any leading/trailing empty strings
-    if (parts.length < 6) continue;
-    // filter out possible empty at start
-    const cols = parts.filter((c, idx) => c !== "" || (c === "" && idx > 0 && idx < parts.length - 1));
-    // safer: take last 6 non-empty-ish entries from the line
-    // but easier: take indices 1..6 in normal layout
+    // expected parts: ["", "Company", "Type", "Status", "Valid From", "Valid To", "Download", ""]
+    // guard: ensure at least 7 meaningful columns
+    const meaningful = parts.filter((p, idx) => p !== "" || (idx > 0 && idx < parts.length - 1));
+    // We'll read by indexes, but check boundary
     const company = parts[1] || "";
     const type = parts[2] || "";
     const statusRaw = parts[3] || "";
@@ -51,14 +47,13 @@ function parseCertTable(md) {
     const validTo = parts[5] || "";
     const downloadRaw = parts[6] || "";
 
-    const status = statusRaw.replace(/\*\*/g, "").trim();
-    const downloadUrlMatch = downloadRaw.match(/\((https?:\/\/[^\)]+)\)/);
-    const downloadUrl = downloadUrlMatch ? decodeURIComponent(downloadUrlMatch[1]) : (downloadRaw.match(/https?:\/\//) ? downloadRaw : "");
+    const status = stripMd(statusRaw);
+    const downloadUrl = extractUrlFromMd(downloadRaw);
 
     rows.push({
-      company: company,
+      company: stripMd(company),
       type: stripMd(type),
-      status: stripMd(status),
+      status: status,
       validFrom: stripMd(validFrom),
       validTo: stripMd(validTo),
       download: downloadUrl
@@ -69,19 +64,52 @@ function parseCertTable(md) {
 }
 
 function stripMd(s) {
+  if (!s) return "";
   return s.replace(/\*\*/g, "").replace(/\[|\]/g, "").trim();
+}
+
+function extractUrlFromMd(s) {
+  if (!s) return "";
+  // match (https://...)
+  const m = s.match(/\((https?:\/\/[^\)]+)\)/);
+  if (m && m[1]) return decodeSafe(m[1]);
+  // sometimes the link isn't wrapped in parentheses, try to find plain url
+  const m2 = s.match(/https?:\/\/\S+/);
+  if (m2) return decodeSafe(m2[0]);
+  return "";
+}
+
+function decodeSafe(u) {
+  try {
+    return decodeURIComponent(u);
+  } catch (e) {
+    return u;
+  }
 }
 
 /* ---------- Rendering ---------- */
 
 function renderRecommended(md) {
-  const m = md.match(/# Recommend Certificate\s+([\s\S]*?)\n\n/);
+  // find the Recommend Certificate section
+  // README uses:
+  // # Recommend Certificate 
+  // **China Telecommunications Corporation V2 - ❌ Revoked**
+  //
+  // We'll capture the next non-empty line and strip stars.
+  const lines = md.split("\n");
+  let idx = lines.findIndex(l => l.trim().toLowerCase().startsWith("# recommend certificate"));
   let rec = "";
-  if (m) rec = m[1].trim();
-  else {
-    // fallback: look for header then bold on next line
-    const m2 = md.match(/# Recommend Certificate\s*\n\*\*(.+?)\*\*/s);
-    if (m2) rec = m2[1].trim();
+  if (idx !== -1) {
+    // find first non-empty line after the header
+    for (let i = idx + 1; i < lines.length; i++) {
+      const ln = lines[i].trim();
+      if (!ln) continue;
+      // strip ** and md markup
+      rec = ln.replace(/\*\*/g, "").trim();
+      // remove surrounding markdown quote markers or other noise
+      rec = rec.replace(/^>\s?/, "").trim();
+      break;
+    }
   }
 
   const el = document.getElementById("recommended");
@@ -89,6 +117,7 @@ function renderRecommended(md) {
     el.style.display = "none";
     return;
   }
+  // show plain text (no bold)
   el.innerHTML = `<h3>⭐ Recommended Certificate</h3><p>${escapeHtml(rec)}</p>`;
 }
 
@@ -101,11 +130,11 @@ function renderCertCards(certs) {
     return;
   }
 
-  certs.forEach((c, idx) => {
-    const statusLower = c.status.toLowerCase();
+  certs.forEach((c) => {
+    const statusLower = (c.status || "").toLowerCase();
     const isRevoked = statusLower.includes("revok") || statusLower.includes("❌");
-    const badgeClass = isRevoked ? "revoked" : "valid";
-    const badgeText = c.status || (isRevoked ? "Revoked" : "Unknown");
+    const badgeClass = isRevoked ? "revoked" : "signed";
+    const badgeText = isRevoked ? "❌ Revoked" : "✅ Signed";
 
     const card = document.createElement("div");
     card.className = "cert-card";
@@ -128,7 +157,7 @@ function renderCertCards(certs) {
       </div>
     `;
 
-    // click handler opens modal with details
+    // open modal with details on click / enter
     card.addEventListener("click", () => openModal(c));
     card.addEventListener("keypress", (e) => { if (e.key === "Enter") openModal(c); });
 
@@ -146,7 +175,6 @@ function renderUpdates(md) {
     return;
   }
 
-  // capture content after "# Updates" until next heading that starts with '# ' or EOF
   const after = md.substring(idx + "# Updates".length);
   const lines = after.split("\n");
   const updates = [];
@@ -154,15 +182,9 @@ function renderUpdates(md) {
     const line = lines[i].trim();
     if (!line) continue;
     if (line.startsWith("#")) break;
-    // lines that start with ** are update entries in this README
-    if (line.startsWith("**") && line.endsWith("**")) {
-      updates.push(line.replace(/\*\*/g, ""));
-    } else if (line.startsWith("**")) {
-      updates.push(line.replace(/\*\*/g, ""));
-    } else {
-      // sometimes they aren't bold — include them too
-      updates.push(line);
-    }
+    // Accept lines starting with ** or plain lines
+    const cleaned = line.replace(/\*\*/g, "").trim();
+    if (cleaned) updates.push(cleaned);
   }
 
   if (!updates.length) {
@@ -177,18 +199,26 @@ function renderUpdates(md) {
 function openModal(c) {
   const modal = document.getElementById("certModal");
   document.getElementById("modalName").textContent = c.company;
-  document.getElementById("modalMeta").textContent = `${c.type} • Status: ${c.status}`;
+  document.getElementById("modalMeta").textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
   document.getElementById("modalDates").textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
 
   const dl = document.getElementById("modalDownload");
+  dl.innerHTML = "";
   if (c.download) {
     const a = document.createElement("a");
     a.href = c.download;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
     a.textContent = "Download";
-    dl.innerHTML = "";
     dl.appendChild(a);
+
+    // also show raw url (small)
+    const small = document.createElement("div");
+    small.style.marginTop = "8px";
+    small.style.fontSize = "12px";
+    small.style.color = "var(--muted)";
+    small.textContent = c.download;
+    dl.appendChild(small);
   } else {
     dl.innerHTML = `<div style="color:var(--muted);">No download link found.</div>`;
   }
