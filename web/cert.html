@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-AU">
   <head>
+    <meta charset="utf-8" />
     <title>ProStore Web</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="certStyles.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -14,26 +17,47 @@
             <div class="dot" style="background-color: #febc2e;"></div>
             <div class="dot" style="background-color: #28c840;"></div>
           </div>
+
           <p class="app-title">ProStore Web</p>
         </div>
       </div>
 
       <div class="content-area">
         <div class="sidebar">
-          <div onclick="window.location.href='index.html'" class="sidebar-item">ProStore Installer</div>
-          <div onclick="window.location.href='cert.html'" class="sidebar-item active">Certificate Manager & Status</div>
-          <div onclick="window.location.href='converter.html'" class="sidebar-item">Certificate Converter</div>
+          <div onclick="window.location.href = 'index.html';" class="sidebar-item">ProStore Installer</div>
+          <div onclick="window.location.href = 'cert.html';" class="sidebar-item active">Certificate Manager & Status</div>
+          <div onclick="window.location.href = 'converter.html';" class="sidebar-item">Certificate Converter</div>
         </div>
 
         <div class="panel">
           <h1 class="title">Certificate Manager</h1>
 
-          <div id="recommended"></div>
-          <div id="certTable"></div>
-          <div id="updates"></div>
+          <!-- Recommended -->
+          <div id="recommended" class="recommended-box" aria-live="polite"></div>
+
+          <!-- Cards container -->
+          <div id="certList" class="cert-list"></div>
+
+          <!-- Updates -->
+          <div id="updates" class="updates-box">
+            <h3 class="updates-title">📰 Updates</h3>
+            <div id="updatesInner" class="updates-inner"></div>
+          </div>
         </div>
       </div>
     </main>
+
+    <!-- Modal for details -->
+    <div id="certModal" class="modal" aria-hidden="true">
+      <div class="modal-panel" role="dialog" aria-modal="true">
+        <button id="modalClose" class="modal-close" title="Close">✕</button>
+        <h2 id="modalName"></h2>
+        <div id="modalMeta" class="modal-meta"></div>
+        <div id="modalDates" class="modal-dates"></div>
+        <div id="modalDownload" class="modal-download"></div>
+        <p class="modal-note">Disclaimer: Certificates may be revoked at any time by Apple or the cert owner.</p>
+      </div>
+    </div>
 
     <script src="certManager.js"></script>
   </body>
