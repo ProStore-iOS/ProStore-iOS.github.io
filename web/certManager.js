@@ -65,17 +65,20 @@ function parseCertTable(md) {
 
 function stripMd(s) {
   if (!s) return "";
-  return s.replace(/\*\*/g, "").replace(/\[|\]/g, "").trim();
+  // only remove bold markers **, leave links intact
+  return s.replace(/\*\*/g, "").trim();
 }
 
 function extractUrlFromMd(s) {
   if (!s) return "";
-  // match (https://...)
-  const m = s.match(/\((https?:\/\/[^\)]+)\)/);
-  if (m && m[1]) return decodeSafe(m[1]);
-  // sometimes the link isn't wrapped in parentheses, try to find plain url
+  // match Markdown link (exact URL)
+  const m = s.match(/\[.*?\]\((https?:\/\/[^\)]+)\)/);
+  if (m && m[1]) return m[1]; // return exact URL from README.md
+
+  // fallback: if plain URL exists, just use it
   const m2 = s.match(/https?:\/\/\S+/);
-  if (m2) return decodeSafe(m2[0]);
+  if (m2) return m2[0];
+
   return "";
 }
 
