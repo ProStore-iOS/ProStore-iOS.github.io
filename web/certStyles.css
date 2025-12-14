@@ -197,9 +197,8 @@ body main .panel { min-width: 0; }
 }
 
 /* -------------------------
-   Updates area (collapsible)
+   Updates area (collapsible) - dynamic height
    ------------------------- */
-
 .updates-box {
   margin-top:6px;
   padding:12px;
@@ -207,7 +206,7 @@ body main .panel { min-width: 0; }
   border-radius:10px;
   border:1px solid var(--card-border);
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible; /* allow inner to expand dynamically */
   transition: box-shadow .12s ease;
 }
 
@@ -218,7 +217,12 @@ body main .panel { min-width: 0; }
   justify-content:space-between;
   gap:12px;
 }
-.updates-title { margin: 0; font-weight:600; color:var(--text); font-size:15px; }
+.updates-title { 
+  margin: 0; 
+  font-weight:600; 
+  color:var(--text); 
+  font-size:15px; 
+}
 
 /* toggle button (the ^) */
 .updates-toggle {
@@ -246,43 +250,34 @@ body main .panel { min-width: 0; }
   background: rgba(15,23,36,0.02);
   color: var(--text);
 }
-/* rotated class flips the caret to look like a v */
 .updates-toggle.rotated {
   transform: rotate(180deg);
 }
 
-/* inner content (animated open/close) */
+/* inner content (height controlled dynamically by JS) */
 .updates-inner {
-  max-height: 160px;         /* normal expanded height (clamped) */
-  overflow-y: auto;
+  max-height: 0; /* collapsed by default; JS will set px when expanded */
+  overflow: hidden;
   padding-top: 10px;
   padding-bottom: 6px;
   transition: max-height .28s cubic-bezier(.2,.8,.2,1), padding .18s ease;
 }
 
-/* collapsed state: hide the inner area smoothly */
+/* collapsed specifics */
 .updates-box.collapsed .updates-inner {
   max-height: 0;
   padding-top: 0;
   padding-bottom: 0;
 }
 
-/* expanded state (for clarity) */
-.updates-box.expanded .updates-inner {
-  max-height: 160px;
-  padding-top: 10px;
-  padding-bottom: 6px;
+/* cosmetic for items */
+.update-item { 
+  margin-bottom:8px; 
+  font-size:13px; 
+  color:var(--muted); 
 }
 
-/* small cosmetic when collapsed */
-.updates-box.collapsed {
-  box-shadow: none;
-}
-
-/* show single-line "No updates" content elegantly */
-.update-item { margin-bottom:8px; font-size:13px; color:var(--muted); }
-
-/* responsive tweaks if header wraps on tiny screens */
+/* responsive tweaks for tiny screens */
 @media (max-width:420px) {
   .updates-header { gap:8px; }
   .updates-title { font-size:14px; }
