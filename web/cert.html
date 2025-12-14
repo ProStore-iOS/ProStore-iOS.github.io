@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProStore Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="certStyles.css">
+  </head>
+  <body>
+    <main>
+      <div class="header-bar">
+        <div class="header-left">
+          <div class="dot-container">
+            <div class="dot" style="background-color: #ff5f57;"></div>
+            <div class="dot" style="background-color: #febc2e;"></div>
+            <div class="dot" style="background-color: #28c840;"></div>
+          </div>
+          <p class="app-title">ProStore Web</p>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div class="sidebar">
+          <div onclick="window.location.href='index.html'" class="sidebar-item">ProStore Installer</div>
+          <div onclick="window.location.href='cert.html'" class="sidebar-item active">Certificate Manager & Status</div>
+          <div onclick="window.location.href='converter.html'" class="sidebar-item">Certificate Converter</div>
+        </div>
+
+        <div class="panel">
+          <h1 class="title">Certificate Manager</h1>
+
+          <div id="recommended"></div>
+          <div id="certTable"></div>
+          <div id="updates"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="certManager.js"></script>
+  </body>
+</html>
