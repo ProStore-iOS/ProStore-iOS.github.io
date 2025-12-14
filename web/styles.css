@@ -251,3 +251,84 @@ html,body{
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; animation: none !important; }
 }
+
+/* MOBILE PORTRAIT FIXES — paste at the end of styles.css */
+
+/* make touch targets and type larger and more comfy on portrait phones */
+@media (orientation: portrait) and (max-width: 520px) {
+  /* boost the base sizing so clamp()/vw-based rules scale up */
+  html { font-size: 17px; }
+
+  /* tighten wrapper spacing and keep layout stacked */
+  .content-area {
+    margin: 14px auto;
+    padding: 0 12px;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  /* sidebar becomes a comfortable horizontal row with bigger tap areas */
+  .sidebar{
+    width:100%;
+    padding:10px;
+    gap:8px;
+    border-radius: 12px;
+    overflow:auto;
+  }
+
+  .sidebar-item{
+    padding: 14px 12px;
+    font-size: 1.05rem;
+    min-height: 48px;            /* good for thumbs */
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .panel{
+    padding: 16px;
+    align-items: center;
+  }
+
+  /* title slightly bigger and more readable */
+  .title{
+    font-size: clamp(1.25rem, 7.5vw, 1.6rem);
+    letter-spacing: 0.4px;
+  }
+
+  /* bigger logo so it reads at small sizes */
+  .logo-img{
+    width: clamp(72px, 22vw, 96px);
+    padding: 8px;
+  }
+
+  /* make buttons larger and easier to tap */
+  .download-button,
+  .install-button{
+    padding: 12px 22px;
+    font-size: 1.06rem;
+    min-height: 46px;
+    border-radius: 12px;
+  }
+
+  .advanced-href{
+    margin-top: 10px;
+    display:block;
+    font-size: 1rem;
+  }
+}
+
+/* extra boost for very narrow phones (old small devices) */
+@media (orientation: portrait) and (max-width: 360px) {
+  html { font-size: 18px; } /* give a final bump so UI isn't tiny */
+
+  .sidebar-item{ padding: 16px 14px; font-size: 1.08rem; min-height:50px; }
+  .title{ font-size: 1.45rem; }
+  .logo-img{ width: 84px; }
+  .download-button, .install-button{ font-size: 1.08rem; padding: 13px 24px; }
+}
+
+/* ensure reduced-motion still respected */
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none!important; }
+}
