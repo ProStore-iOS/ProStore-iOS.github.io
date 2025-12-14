@@ -152,8 +152,7 @@ function renderCertCards(certs) {
       </div>
 
       <div class="card-footer">
-        <div class="small">From: ${escapeHtml(c.validFrom)}</div>
-        <div class="small">To: ${escapeHtml(c.validTo)}</div>
+        <div class="small">Expires: ${escapeHtml(c.validTo)}</div>
       </div>
     `;
 
