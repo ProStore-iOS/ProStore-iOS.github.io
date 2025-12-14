@@ -3,7 +3,7 @@
    Assumes variables & base layout exist in styles.css.
 */
 
-/* --- Ensure active sidebar item styling (scoped) --- */
+/* ---------- Sidebar active item ---------- */
 .sidebar-item.active{
   color: var(--text);
   background: linear-gradient(90deg, rgba(78,229,255,0.04), rgba(139,92,246,0.03));
@@ -11,22 +11,20 @@
   box-shadow: 0 6px 18px rgba(78,229,255,0.03);
 }
 
-/* --- Prevent horizontal overflow caused by panel/content area --- */
+/* ---------- Prevent horizontal overflow ---------- */
 .content-area{
-  /* avoid accidental horizontal overflow from children */
   overflow-x: hidden;
-  position: relative; /* needed for positioned children like update popup */
+  position: relative;
 }
 
-/* Panel should not create horizontal scroll and should scroll vertically within the content-area */
 .panel{
-  overflow-x: hidden;    /* no horizontal scroll */
-  overflow-y: auto;      /* vertical scrolling inside the panel */
-  min-height: 0;         /* allow proper flexbox scrolling */
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 0;
   box-sizing: border-box;
 }
 
-/* --- Recommended box / cert grid (scoped) --- */
+/* ---------- Recommended box ---------- */
 .recommended-box{
   width:100%;
   margin-bottom:12px;
@@ -38,7 +36,7 @@
   box-sizing: border-box;
 }
 
-/* grid of cert cards */
+/* ---------- Certificate grid ---------- */
 .cert-list{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -47,7 +45,7 @@
   box-sizing: border-box;
 }
 
-/* cert card basics */
+/* ---------- Certificate cards ---------- */
 .cert-card{
   background: rgba(255,255,255,0.013);
   border: 1px solid var(--card-border);
@@ -61,13 +59,29 @@
   min-height:92px;
   box-sizing: border-box;
 }
-.cert-card:focus{ outline: 3px solid rgba(78,229,255,0.08); outline-offset:3px; }
 
-/* badges */
-.badge.signed{ background: linear-gradient(90deg, rgba(78,229,255,0.12), rgba(139,92,246,0.08)); color:#021018; }
-.badge.revoked{ background: linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06)); color:var(--text); }
+.cert-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(2,6,23,0.5);
+}
 
-/* --- Updates: expand UPWARDS and overlay cert list --- */
+.cert-card:focus{
+  outline: 3px solid rgba(78,229,255,0.08);
+  outline-offset:3px;
+}
+
+/* ---------- Badges ---------- */
+.badge.signed{
+  background: linear-gradient(90deg, rgba(78,229,255,0.12), rgba(139,92,246,0.08));
+  color:#021018;
+}
+
+.badge.revoked{
+  background: linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06));
+  color:var(--text);
+}
+
+/* ---------- Updates (expand UPWARDS) ---------- */
 .updates-box{
   margin-top:12px;
   padding:12px;
@@ -75,22 +89,24 @@
   border-radius:10px;
   border:1px solid var(--card-border);
   box-sizing: border-box;
-
-  /* allow the inner popup to overflow upward */
   overflow: visible;
-  position: relative; /* anchor for the absolute-updates-inner */
+  position: relative;
 }
 
-/* header row */
 .updates-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
 }
-.updates-title{ margin:0; font-size:0.96rem; color: var(--muted); font-weight:700; }
 
-/* toggle button (visual only) */
+.updates-title{
+  margin:0;
+  font-size:0.96rem;
+  color: var(--muted);
+  font-weight:700;
+}
+
 .updates-toggle{
   background:transparent;
   border:1px solid rgba(255,255,255,0.04);
@@ -98,31 +114,34 @@
   border-radius:8px;
   cursor:pointer;
   color: var(--muted);
-  transition: transform .18s ease, color .14s;
+  transition: transform .18s ease, color .14s ease;
   box-sizing: border-box;
 }
-.updates-toggle.rotated{ transform: rotate(180deg); color: var(--accent); }
 
-/* the inner content will float ABOVE (expand upwards) */
+.updates-toggle.rotated{
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+/* floating updates panel */
 .updates-inner{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(100% + 8px); /* sit above the updates header, with a small gap */
-  max-height: 0;
-  overflow: auto;
+  position:absolute;
+  left:0;
+  right:0;
+  bottom: calc(100% + 8px);
+  max-height:0;
+  overflow:auto;
   background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));
-  border: 1px solid var(--card-border);
-  border-radius: 10px;
+  border:1px solid var(--card-border);
+  border-radius:10px;
   box-shadow: 0 18px 50px rgba(2,6,23,0.6);
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left:8px;
+  padding-right:8px;
   transition: max-height .22s ease, padding .18s ease;
-  z-index: 1300; /* sit above cert cards */
-  box-sizing: border-box;
+  z-index:1300;
+  box-sizing:border-box;
 }
 
-/* visual spacing for items inside the floating updates panel */
 .update-item{
   padding:8px 10px;
   border-radius:8px;
@@ -133,18 +152,25 @@
   margin:8px;
 }
 
-/* when JS expands, JS will set maxHeight; ensure padding exists as fallback */
-.updates-box.expanded .updates-inner{ padding-top:8px; padding-bottom:8px; }
+.updates-box.expanded .updates-inner{
+  padding-top:8px;
+  padding-bottom:8px;
+}
 
-/* --- Modal adjustments (scoped) --- */
+/* ---------- Modal ---------- */
 .modal-panel{
   box-sizing: border-box;
   max-height: 90vh;
-  overflow:auto; /* allow modal content to scroll vertically */
+  overflow:auto;
 }
 
-/* small-screen niceties */
+/* ---------- Small screens ---------- */
 @media (max-width: 520px){
-  .updates-inner{ right: auto; left: 6px; bottom: calc(100% + 6px); max-width: calc(100vw - 12px); }
-  .cert-list{ gap: 10px; }
+  .updates-inner{
+    left:6px;
+    right:6px;
+    bottom: calc(100% + 6px);
+    max-width: calc(100vw - 12px);
+  }
+  .cert-list{ gap:10px; }
 }
