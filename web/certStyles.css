@@ -1,0 +1,61 @@
+#recommended, #updates {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1a1f3c, #12152a);
+}
+
+#recommended {
+  border-left: 5px solid #4f7cff;
+}
+
+#recommended h2 {
+  margin: 0 0 6px 0;
+  color: #4f7cff;
+}
+
+#updates h2 {
+  margin-bottom: 10px;
+}
+
+.update-item {
+  opacity: 0.9;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.cert-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cert-table th, .cert-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+.cert-table th {
+  background: #181c36;
+}
+
+.cert-table tr {
+  border-bottom: 1px solid #2a2f55;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.revoked {
+  color: #ff5f57;
+}
+
+.cert-table a {
+  color: #4f7cff;
+  text-decoration: none;
+}
+
+.cert-table a:hover {
+  text-decoration: underline;
+}
