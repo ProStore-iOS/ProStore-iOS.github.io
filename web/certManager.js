@@ -12,7 +12,7 @@ async function init() {
     renderCertCards(certs);
     renderUpdates(md);
 
-    setupUpdatesToggle(); // <-- initialise toggle after updates rendered
+    setupUpdatesToggle(); // initialise toggle after updates rendered
   } catch (err) {
     console.error(err);
     const certList = document.getElementById("certList");
@@ -193,33 +193,40 @@ function setupUpdatesToggle() {
   const updatesInner = document.getElementById("updatesInner");
   if (!updatesBox || !toggleBtn || !updatesInner) return;
 
-  // default collapsed state on first load (change if you want expanded by default)
   const storageKey = "prostore_updates_expanded";
-  // If no saved state, default to collapsed (true)
+  // stored as "1" = expanded, "0" = collapsed
   const saved = localStorage.getItem(storageKey);
-  const initialCollapsed = saved === null ? true : (saved === "false" ? false : (saved === "true" ? false : true)); // keep collapsed if missing
-  // simplified: if saved === "1" expand, else collapse: but we used true/false strings for clarity
+  const initialCollapsed = saved === null ? true : (saved === "1" ? false : true);
 
-  // Utility to set state
   function setCollapsed(collapsed, skipSave = false) {
     if (collapsed) {
       updatesBox.classList.add("collapsed");
       updatesBox.classList.remove("expanded");
       toggleBtn.setAttribute("aria-expanded", "false");
-      toggleBtn.classList.remove("rotated"); // caret shows ^
+      toggleBtn.classList.remove("rotated");
+      // collapse
+      updatesInner.style.maxHeight = "0px";
+      updatesInner.style.paddingTop = "0px";
+      updatesInner.style.paddingBottom = "0px";
+      if (!skipSave) localStorage.setItem(storageKey, "0");
     } else {
       updatesBox.classList.remove("collapsed");
       updatesBox.classList.add("expanded");
       toggleBtn.setAttribute("aria-expanded", "true");
-      toggleBtn.classList.add("rotated"); // caret flips to look like v
+      toggleBtn.classList.add("rotated");
+      // expand to exact content height
+      const h = updatesInner.scrollHeight;
+      updatesInner.style.maxHeight = h + "px";
+      // restore padding (CSS fallback values)
+      updatesInner.style.paddingTop = "";
+      updatesInner.style.paddingBottom = "";
+      if (!skipSave) localStorage.setItem(storageKey, "1");
     }
-    if (!skipSave) localStorage.setItem(storageKey, (!collapsed).toString());
   }
 
-  // init
+  // init collapsed by default
   setCollapsed(initialCollapsed, true);
 
-  // click handler
   toggleBtn.addEventListener("click", () => {
     const isCollapsed = updatesBox.classList.contains("collapsed");
     setCollapsed(!isCollapsed);
@@ -230,6 +237,24 @@ function setupUpdatesToggle() {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       toggleBtn.click();
+    }
+  });
+
+  // If content changes while expanded, grow/shrink to match
+  const mo = new MutationObserver(() => {
+    if (!updatesBox.classList.contains("collapsed")) {
+      // give the DOM a tick to settle then set exact height
+      requestAnimationFrame(() => {
+        updatesInner.style.maxHeight = updatesInner.scrollHeight + "px";
+      });
+    }
+  });
+  mo.observe(updatesInner, { childList: true, subtree: true, characterData: true });
+
+  // adjust on window resize
+  window.addEventListener("resize", () => {
+    if (!updatesBox.classList.contains("collapsed")) {
+      updatesInner.style.maxHeight = updatesInner.scrollHeight + "px";
     }
   });
 }
