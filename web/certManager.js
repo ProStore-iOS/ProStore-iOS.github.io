@@ -198,18 +198,6 @@ function openModal(c) {
   if (metaEl) metaEl.textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
   if (datesEl) datesEl.textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
 
-  // Force-hide/remove common modal-note elements that might contain the disclaimer
-  // (covers different naming conventions so it actually vanishes)
-  const noteSelectors = ['#modalNote', '#modal-note', '.modal-note', '[data-modal-note]'];
-  noteSelectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => {
-      el.innerHTML = "";
-      el.style.display = "none";
-      // also remove from DOM to be safe
-      if (el.parentNode) el.parentNode.removeChild(el);
-    });
-  });
-
   if (!dl) {
     console.warn("modalDownload element not found");
   } else {
