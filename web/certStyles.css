@@ -3,15 +3,16 @@
   --panel: #ffffff;
   --muted: #6b7280;
   --text: #0f1724;
-  --primary: #2563eb; /* blue */
+  --primary: #2563eb;
   --revoked: #ef4444;
-  --valid: #10b981;
+  --signed: #0ea5a4;
   --card-border: rgba(15,23,36,0.06);
   --glass: rgba(15,23,36,0.02);
   --shadow: 0 6px 18px rgba(15,23,36,0.06);
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
+/* Layout basics */
 html,body{
   height:100%;
   margin:0;
@@ -22,13 +23,73 @@ html,body{
   font-size:14px;
 }
 
-/* keep your main styles intact, this just targets the new components */
+.app-root {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Header */
+.header-bar {
+  display:flex;
+  align-items:center;
+  padding:12px 18px;
+  background:transparent;
+}
+.header-left { display:flex; align-items:center; gap:12px; }
+.dot-container { display:flex; gap:6px; align-items:center; }
+.dot { width:12px; height:12px; border-radius:50%; box-shadow: rgba(2,6,23,0.06) 0 1px 2px; }
+.app-title { margin:0; font-weight:600; font-size:16px; color:var(--text); }
+
+/* Main content area */
+.content-area {
+  flex:1;
+  display:flex;
+  gap:12px;
+  padding: 12px;
+  box-sizing:border-box;
+  align-items:stretch;
+}
+
+/* Sidebar */
+.sidebar {
+  width:220px;
+  min-width:160px;
+  max-width:240px;
+  background:transparent;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.sidebar-item {
+  padding:10px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  color:var(--muted);
+  font-weight:600;
+}
+.sidebar-item.active {
+  color: var(--primary);
+  background: linear-gradient(180deg, rgba(37,99,235,0.06), rgba(37,99,235,0.03));
+}
+
+/* Panel: main scroll area */
 .panel {
+  flex:1;
   background: var(--panel);
-  padding: 22px;
+  padding: 18px;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  margin: 18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height:0; /* important so children can scroll */
+  overflow: hidden;
+}
+
+/* Make the content inside the panel scrollable if tall */
+.cert-list, .updates-box, .recommended-box {
+  /* visual grouping only; cert-list will flex-grow */
 }
 
 /* Recommended box */
@@ -37,24 +98,21 @@ html,body{
   padding: 12px 14px;
   background: linear-gradient(180deg, #ffffff, #fbfcff);
   border-radius: 8px;
-  margin-bottom: 14px;
 }
-.recommended-box h3 {
-  margin: 0 0 6px 0;
-  color: var(--primary);
-  font-weight:600;
-}
-.recommended-box p {
-  margin:0;
-  color:var(--muted);
-}
+.recommended-box h3 { margin:0 0 6px 0; color:var(--primary); font-weight:600; }
+.recommended-box p { margin:0; color:var(--muted); }
 
-/* Certificate list (cards) */
+/* Certificate list area should scroll while keeping header + recommended + updates visible */
 .cert-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 6px;
+  /* allow cert-list to take remaining space then scroll if overflowing */
+  flex: 1 1 auto;
+  min-height: 0; /* allow proper scroll */
+  overflow: auto;
+  padding-right: 6px; /* room for scrollbar */
 }
 
 /* individual card */
@@ -84,26 +142,26 @@ html,body{
   color:var(--text);
   line-height:1.2;
 }
-.card-meta {
-  font-size:13px;
-  color:var(--muted);
-}
+.card-meta { font-size:13px; color:var(--muted); }
 .badge {
   padding:6px 8px;
   border-radius:999px;
   font-size:12px;
-  font-weight:600;
+  font-weight:700;
   display:inline-block;
+  white-space:nowrap;
+  min-width:78px;
+  text-align:center;
 }
 .badge.revoked {
   background: rgba(239,68,68,0.08);
   color: var(--revoked);
   border: 1px solid rgba(239,68,68,0.12);
 }
-.badge.valid {
-  background: rgba(16,185,129,0.08);
-  color: var(--valid);
-  border: 1px solid rgba(16,185,129,0.12);
+.badge.signed {
+  background: rgba(14,165,164,0.08);
+  color: var(--signed);
+  border: 1px solid rgba(14,165,164,0.12);
 }
 
 /* small footer row inside card */
@@ -114,14 +172,11 @@ html,body{
   gap:10px;
   margin-top:6px;
 }
-.card-footer .small {
-  font-size:12px;
-  color:var(--muted);
-}
+.card-footer .small { font-size:12px; color:var(--muted); }
 
 /* Updates box */
 .updates-box {
-  margin-top:20px;
+  margin-top:6px;
   padding:12px;
   background:var(--glass);
   border-radius:10px;
@@ -129,15 +184,11 @@ html,body{
 }
 .updates-title { margin: 0 0 8px 0; font-weight:600; color:var(--text); }
 .updates-inner {
-  max-height:140px; /* prevents cutting off — will scroll */
+  max-height:160px;
   overflow-y:auto;
   padding-right:6px;
 }
-.update-item {
-  margin-bottom:8px;
-  font-size:13px;
-  color:var(--muted);
-}
+.update-item { margin-bottom:8px; font-size:13px; color:var(--muted); }
 
 /* Modal */
 .modal {
@@ -182,7 +233,11 @@ html,body{
 }
 
 /* small responsive tweaks */
+@media (max-width:880px){
+  .sidebar { display:none; }
+  .content-area { padding: 12px; }
+}
 @media (max-width:420px){
-  .cert-list { grid-template-columns: 1fr; }
   .modal-panel { padding:14px; }
+  .cert-list { gap:10px; }
 }
