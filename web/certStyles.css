@@ -197,8 +197,9 @@ body main .panel { min-width: 0; }
 }
 
 /* -------------------------
-   Updates area
+   Updates area (collapsible)
    ------------------------- */
+
 .updates-box {
   margin-top:6px;
   padding:12px;
@@ -206,14 +207,86 @@ body main .panel { min-width: 0; }
   border-radius:10px;
   border:1px solid var(--card-border);
   box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow .12s ease;
 }
-.updates-title { margin: 0 0 8px 0; font-weight:600; color:var(--text); }
+
+/* header row: title + toggle on right */
+.updates-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.updates-title { margin: 0; font-weight:600; color:var(--text); font-size:15px; }
+
+/* toggle button (the ^) */
+.updates-toggle {
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--muted);
+  transition: transform .18s ease, background .12s ease, color .12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+}
+.updates-toggle:focus {
+  outline: 3px solid rgba(37,99,235,0.12);
+  outline-offset: 2px;
+}
+.updates-toggle:hover {
+  background: rgba(15,23,36,0.02);
+  color: var(--text);
+}
+/* rotated class flips the caret to look like a v */
+.updates-toggle.rotated {
+  transform: rotate(180deg);
+}
+
+/* inner content (animated open/close) */
 .updates-inner {
-  max-height:160px;
-  overflow-y:auto;
-  padding-right:6px;
+  max-height: 160px;         /* normal expanded height (clamped) */
+  overflow-y: auto;
+  padding-top: 10px;
+  padding-bottom: 6px;
+  transition: max-height .28s cubic-bezier(.2,.8,.2,1), padding .18s ease;
 }
+
+/* collapsed state: hide the inner area smoothly */
+.updates-box.collapsed .updates-inner {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* expanded state (for clarity) */
+.updates-box.expanded .updates-inner {
+  max-height: 160px;
+  padding-top: 10px;
+  padding-bottom: 6px;
+}
+
+/* small cosmetic when collapsed */
+.updates-box.collapsed {
+  box-shadow: none;
+}
+
+/* show single-line "No updates" content elegantly */
 .update-item { margin-bottom:8px; font-size:13px; color:var(--muted); }
+
+/* responsive tweaks if header wraps on tiny screens */
+@media (max-width:420px) {
+  .updates-header { gap:8px; }
+  .updates-title { font-size:14px; }
+}
 
 /* -------------------------
    Modal styles (keeps modal consistent)
