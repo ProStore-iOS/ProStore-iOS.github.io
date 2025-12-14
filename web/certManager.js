@@ -212,16 +212,6 @@ function openModal(c) {
       a.className = "download-link";
       a.setAttribute("role", "button");
       dl.appendChild(a);
-
-      // Small raw URL under the button for readability/copying
-      const raw = document.createElement("div");
-      raw.className = "download-raw";
-      raw.style.marginTop = "8px";
-      raw.style.fontSize = "12px";
-      raw.style.color = "var(--muted)";
-      raw.style.wordBreak = "break-all";
-      raw.textContent = decodeSafe(c.download);
-      dl.appendChild(raw);
     } else {
       dl.innerHTML = `<div style="color:var(--muted);">No download link found.</div>`;
     }
