@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.0.0",
+          "date": "2025-12-15T05:43:48+0000",
+          "localizedDescription": "What's new in Version 1.0.0?\n- Update project.yml\n- Update README.md\n- Revise SetupView with new StikDebug steps",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.0.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5464564,
+          "sha256": "c75eb6a0e845588d6a7fe704ef6cb6e6d1f08569f74064eacd45ca7ce474a2b1",
+          "minOSVersion": "16.0",
+          "fullDate": "20251215054348"
+        },
+        {
           "version": "0.12.0d6",
           "date": "2025-12-15T01:32:25+0000",
           "localizedDescription": "What's new in Version 0.12.0d6?\n- Update version\n- Fix swift 6 compile errors\n- fix: fully fix DownloadSignManager for Swift 6 + real-world use\n- Fix bugs\n- Fix bug\n- Squash pesky bug\n- Remove cert error stuff\n- Update updater links\n- Fix stuff",
