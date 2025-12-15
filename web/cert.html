@@ -6,19 +6,9 @@
     <title>ProStore Web</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="certStyles.css">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
       <div class="content-area">
-        <button class="hamburger" aria-label="Toggle sidebar" aria-expanded="false">
-  <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="22" height="2" rx="1" fill="currentColor"/>
-    <rect y="7" width="22" height="2" rx="1" fill="currentColor"/>
-    <rect y="14" width="22" height="2" rx="1" fill="currentColor"/>
-  </svg>
-</button>
-
         <div class="sidebar">
           <div onclick="window.location.href = 'index.html';" class="sidebar-item">ProStore Installer</div>
           <div onclick="window.location.href = 'cert.html';" class="sidebar-item active">Certificate Manager & Status</div>
@@ -39,7 +29,6 @@
           <!-- Cards container -->
           <div id="certList" class="cert-list" aria-live="polite"></div>
 
-          <!-- Updates -->
 <!-- Updates -->
 <div id="updates" class="updates-box">
   <div class="updates-header">
@@ -65,65 +54,5 @@
     </div>
 
     <script src="certManager.js"></script>
-    <script>
-      // sidebar-toggle (minimal) — add to certManager.js end
-(function(){
-  const body = document.body;
-  const hamburger = document.querySelector('.hamburger');
-  if(!hamburger) return;
-  // create overlay node if missing
-  let overlay = document.querySelector('.sidebar-overlay');
-  if(!overlay){
-    overlay = document.createElement('div');
-    overlay.className = 'sidebar-overlay';
-    document.body.appendChild(overlay);
-  }
-
-  function openSidebar(){
-    body.classList.add('sidebar-open');
-    hamburger.setAttribute('aria-expanded','true');
-    // focus first item for keyboard users
-    const first = document.querySelector('.sidebar .sidebar-item');
-    if(first) first.focus();
-  }
-  function closeSidebar(){
-    body.classList.remove('sidebar-open');
-    hamburger.setAttribute('aria-expanded','false');
-    hamburger.focus();
-  }
-  function toggleSidebar(){
-    if(body.classList.contains('sidebar-open')) closeSidebar();
-    else openSidebar();
-  }
-
-  hamburger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleSidebar();
-  });
-
-  overlay.addEventListener('click', closeSidebar);
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && body.classList.contains('sidebar-open')) closeSidebar();
-  });
-
-  // auto-close on menu item click for small screens
-  document.addEventListener('click', (e) => {
-    const item = e.target.closest('.sidebar-item');
-    if(!item) return;
-    if(window.innerWidth <= 860){
-      setTimeout(closeSidebar, 160);
-    }
-  });
-
-  // keep state sane when resizing/rotating
-  window.addEventListener('resize', () => {
-    if(window.innerWidth > 860) {
-      body.classList.remove('sidebar-open');
-      hamburger.setAttribute('aria-expanded','false');
-    }
-  });
-})();
-
-    </script>
   </body>
 </html>
