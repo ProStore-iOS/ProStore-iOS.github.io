@@ -132,10 +132,10 @@ function renderCertCards(certs) {
       <div class="card-top">
         <div>
           <div class="card-title">${escapeHtml(c.company)}</div>
-          <div class="card-meta">${escapeHtml(c.type)}</div>
-        </div>
-        <div>
+          <div>
           <span class="badge ${badgeClass}">${escapeHtml(badgeText)}</span>
+        </div>
+          <div class="card-meta">${escapeHtml(c.type)}</div>
         </div>
       </div>
 
