@@ -1,15 +1,25 @@
 /* =========================================
    certStyles.css
    ONLY extra styles for Certificate Manager
-   (Relies on variables & layout from styles.css)
    ========================================= */
+
+/* -------------------------
+   Panel layout tweak
+   (allow inner scrolling sections)
+   ------------------------- */
+
+.panel {
+  overflow: hidden; /* prevent horizontal scroll */
+  display: flex;
+  flex-direction: column;
+}
 
 /* -------------------------
    Recommended box
    ------------------------- */
 
 .recommended-box {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   padding: 14px 16px;
   border-radius: 12px;
   background: linear-gradient(
@@ -19,17 +29,35 @@
   );
   border: 1px solid var(--border);
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 /* -------------------------
    Cert list container
+   (OWN SCROLL AREA)
    ------------------------- */
 
 .cert-list {
+  flex: 1;                 /* fill remaining panel space */
+  overflow-y: auto;        /* vertical scroll ONLY */
+  overflow-x: hidden;
+
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  margin-top: 12px;
+  padding-right: 6px;      /* room for scrollbar */
+}
+
+/* Responsive grid: multiple certs across */
+@media (min-width: 600px) {
+  .cert-list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .cert-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* -------------------------
@@ -57,24 +85,23 @@
 .updates-box {
   position: sticky;
   bottom: 16px;
-  margin-top: 20px;
+  margin-top: 16px;
 
   background: var(--panel);
   border-radius: 14px;
   border: 1px solid var(--border);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 
-  overflow: visible; /* IMPORTANT: allow upward expansion */
-  z-index: 50;
+  overflow: visible;
+  z-index: 60;
+  flex-shrink: 0;
 }
 
-/* Header row */
 .updates-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  cursor: pointer;
 }
 
 .updates-title {
@@ -82,7 +109,6 @@
   font-size: 15px;
 }
 
-/* Caret toggle */
 .updates-toggle {
   border: none;
   background: transparent;
@@ -91,17 +117,14 @@
   transition: transform 0.18s ease;
 }
 
-/* -------------------------
-   Updates content (STARTS CLOSED)
-   ------------------------- */
-
+/* START CLOSED */
 .updates-inner {
   position: absolute;
-  bottom: 100%;            /* EXPAND UPWARDS */
+  bottom: 100%;
   left: 0;
   width: 100%;
 
-  max-height: 0;           /* START MINIMISED */
+  max-height: 0;
   overflow: hidden;
 
   background: var(--panel);
@@ -112,18 +135,17 @@
   transition: max-height 0.28s ease;
 }
 
-/* Expanded state (set via JS) */
+/* Expanded state */
 .updates-box.expanded .updates-inner {
-  max-height: 80vh;        /* grow to fit content */
+  max-height: 80vh;
   overflow-y: auto;
 }
 
-/* Rotate caret when open */
+/* Rotate caret */
 .updates-box.expanded .updates-toggle {
   transform: rotate(180deg);
 }
 
-/* Inner content padding */
 .updates-inner > * {
   padding: 12px 14px;
 }
@@ -139,7 +161,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 120;
 }
 
 .modal[aria-hidden="false"] {
