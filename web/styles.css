@@ -177,4 +177,10 @@ body {
   .sidebar-item {
     white-space: nowrap;
   }
+
+ .title {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0;
+}
 }
