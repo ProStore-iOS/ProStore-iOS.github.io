@@ -271,8 +271,8 @@ function openModal(c) {
   const dl = document.getElementById("modalDownload");
 
   if (nameEl) nameEl.textContent = c.company;
-  if (metaEl) metaEl.textContent = `${c.type} • Status: ${c.status || (c.status === "" ? "Unknown" : c.status)}`;
-  if (datesEl) datesEl.textContent = `Valid: ${c.validFrom} → ${c.validTo}`;
+  if (metaEl) metaEl.innerHTML = `${c.type} • <b>${c.status || (c.status === "" ? "Unknown" : c.status)}</b>`;
+  if (datesEl) datesEl.innerHTML = `<i>Valid from: ${c.validFrom}<br>Expires: ${c.validTo}</i>`;
 
   if (!dl) {
     console.warn("modalDownload element not found");
