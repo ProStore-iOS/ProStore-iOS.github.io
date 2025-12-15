@@ -76,6 +76,12 @@
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.1);
 }
 
+.card-title {
+   font-weight: bold;
+}
+
+.badge
+
 /* -------------------------
    Updates dropdown (DROP-UP)
    ------------------------- */
