@@ -9,10 +9,12 @@
   </head>
   <body>
       <div class="content-area">
+        <div class="sidebar-container">
         <div class="sidebar">
           <div onclick="window.location.href = 'index.html';" class="sidebar-item">ProStore Installer</div>
           <div onclick="window.location.href = 'cert.html';" class="sidebar-item active">Certificate Manager</div>
           <div onclick="window.location.href = 'converter.html';" class="sidebar-item">Certificate Converter</div>
+        </div>
         </div>
 
         <div class="panel">
@@ -54,5 +56,46 @@
     </div>
 
     <script src="certManager.js"></script>
+    <script>
+  (function() {
+    // run only if the elements exist
+    const container = document.querySelector('.sidebar-container');
+    const sidebar = container?.querySelector('.sidebar');
+
+    if (!container || !sidebar) return;
+
+    // tiny threshold to avoid fractional-pixel issues
+    const THRESH = 1;
+
+    function updateGradientState() {
+      // if no horizontal overflow, mark no-overflow
+      if (sidebar.scrollWidth <= sidebar.clientWidth + THRESH) {
+        container.classList.add('no-overflow');
+        container.classList.remove('scrolled-end');
+        return;
+      } else {
+        container.classList.remove('no-overflow');
+      }
+
+      // if scrolled to the far right, hide gradient
+      if (sidebar.scrollLeft + sidebar.clientWidth >= sidebar.scrollWidth - THRESH) {
+        container.classList.add('scrolled-end');
+      } else {
+        container.classList.remove('scrolled-end');
+      }
+    }
+
+    // listen to scroll + resize + orientation changes
+    sidebar.addEventListener('scroll', updateGradientState, { passive: true });
+    window.addEventListener('resize', updateGradientState);
+    window.addEventListener('orientationchange', updateGradientState);
+
+    // run initial check once DOM is ready
+    document.addEventListener('DOMContentLoaded', updateGradientState);
+    // also run immediately in case script is after DOM
+    updateGradientState();
+  })();
+</script>
+
   </body>
 </html>
