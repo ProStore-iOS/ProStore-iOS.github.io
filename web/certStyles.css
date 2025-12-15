@@ -4,14 +4,14 @@
    ========================================= */
 
 /* -------------------------
-   Panel layout tweak
-   (allow inner scrolling sections)
+   Panel fixes (CRITICAL)
    ------------------------- */
 
 .panel {
-  overflow: hidden; /* prevent horizontal scroll */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-items: stretch;     /* FORCE full width */
 }
 
 /* -------------------------
@@ -19,6 +19,7 @@
    ------------------------- */
 
 .recommended-box {
+  width: 100%;
   margin-bottom: 14px;
   padding: 14px 16px;
   border-radius: 12px;
@@ -38,26 +39,23 @@
    ------------------------- */
 
 .cert-list {
-  flex: 1;                 /* fill remaining panel space */
-  overflow-y: auto;        /* vertical scroll ONLY */
+  width: 100%;              /* KEY FIX */
+  min-width: 0;             /* flex/grid overflow fix */
+  flex: 1;
+
+  overflow-y: auto;
   overflow-x: hidden;
 
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
-  padding-right: 6px;      /* room for scrollbar */
+
+  padding-right: 6px;
 }
 
-/* Responsive grid: multiple certs across */
-@media (min-width: 600px) {
-  .cert-list {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  }
-}
-
-@media (max-width: 599px) {
-  .cert-list {
-    grid-template-columns: 1fr;
-  }
+/* Ensure cards don't shrink grid */
+.cert-card {
+  min-width: 0;
 }
 
 /* -------------------------
@@ -79,10 +77,11 @@
 }
 
 /* -------------------------
-   Updates dropdown (collapsible)
+   Updates dropdown (DROP-UP)
    ------------------------- */
 
 .updates-box {
+  width: 100%;              /* KEY FIX */
   position: sticky;
   bottom: 16px;
   margin-top: 16px;
@@ -97,7 +96,9 @@
   flex-shrink: 0;
 }
 
+/* Header row */
 .updates-header {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -109,6 +110,7 @@
   font-size: 15px;
 }
 
+/* Caret */
 .updates-toggle {
   border: none;
   background: transparent;
@@ -117,12 +119,17 @@
   transition: transform 0.18s ease;
 }
 
-/* START CLOSED */
+/* -------------------------
+   Updates content (START CLOSED)
+   ------------------------- */
+
 .updates-inner {
+  width: 100%;              /* KEY FIX */
+  min-width: 0;
+
   position: absolute;
   bottom: 100%;
   left: 0;
-  width: 100%;
 
   max-height: 0;
   overflow: hidden;
