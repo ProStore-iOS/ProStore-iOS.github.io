@@ -248,6 +248,16 @@
       "versions": [
         {
           "version": "0.12.0d6",
+          "date": "2025-12-15T01:32:25+0000",
+          "localizedDescription": "What's new in Version 0.12.0d6?\n- Update version\n- Fix swift 6 compile errors\n- fix: fully fix DownloadSignManager for Swift 6 + real-world use\n- Fix bugs\n- Fix bug\n- Squash pesky bug\n- Remove cert error stuff\n- Update updater links\n- Fix stuff",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d6/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5465332,
+          "sha256": "93b694a73059c5198ea1ff3d70aa95bbe0e33149fd467106fb92ddef0456622d",
+          "minOSVersion": "16.0",
+          "fullDate": "20251215013225"
+        },
+        {
+          "version": "0.12.0d6",
           "date": "2025-12-13T04:36:11+0000",
           "localizedDescription": "What's new in Version 0.12.0d6?\n- Update version\n- Fix swift 6 compile errors\n- fix: fully fix DownloadSignManager for Swift 6 + real-world use\n- Fix bugs\n- Fix bug\n- Squash pesky bug\n- Remove cert error stuff\n- Update updater links\n- Fix stuff",
           "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v0.12.0d6/com.prostoreios.prostore-unsigned-ios.ipa",
