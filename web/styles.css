@@ -186,3 +186,54 @@ body {
 }
    
 }
+
+/* SIDEBAR FIXES */
+
+/* =========================
+   Portrait phones (sidebar on TOP)
+   ========================= */
+@media (max-width: 900px) and (orientation: portrait) {
+  .content-area {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .sidebar-item {
+    white-space: nowrap;
+  }
+
+  .title {
+    font-size: 25px;
+    padding-bottom: 5px;
+  }
+}
+
+/* =========================
+   Landscape phones (sidebar on LEFT)
+   ========================= */
+@media (max-width: 900px) and (orientation: landscape) {
+  .content-area {
+    flex-direction: row;   /* BACK TO LEFT SIDEBAR */
+  }
+
+  .sidebar {
+    width: 220px;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .sidebar-item {
+    white-space: normal;
+  }
+
+  .panel {
+    padding: 24px;
+  }
+}
+
