@@ -198,8 +198,9 @@ let installer = (function () {
         _setProgress(30);
         // TRY: get recommended certificate name from README and find matching release
         let chosenRelease = null;
+        let recommended = null;
         try {
-          const recommended = await _getRecommendedCertificate();
+          recommended = await _getRecommendedCertificate();
           if (recommended) {
             // Try to find a release that mentions the recommended certificate in name, tag_name or body
 const normalise = s =>
