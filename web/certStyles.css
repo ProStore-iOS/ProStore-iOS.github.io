@@ -199,3 +199,10 @@
 .modal-download {
   margin-top: 12px;
 }
+
+
+@media (max-width: 900px) {
+   .recommended-box {
+      display: none;
+   }
+}
