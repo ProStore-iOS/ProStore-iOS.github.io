@@ -77,10 +77,32 @@
 }
 
 .card-title {
-   font-weight: bold;
+  font-weight:600;
+  font-size:15px;
+  color:var(--text);
+  line-height:1.2;
 }
-
-.badge
+.card-meta {
+  font-size:13px;
+  color:var(--muted);
+}
+.badge {
+  padding:6px 8px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  display:inline-block;
+}
+.badge.revoked {
+  background: rgba(239,68,68,0.08);
+  color: var(--revoked);
+  border: 1px solid rgba(239,68,68,0.12);
+}
+.badge.valid {
+  background: rgba(16,185,129,0.08);
+  color: var(--valid);
+  border: 1px solid rgba(16,185,129,0.12);
+}
 
 /* -------------------------
    Updates dropdown (DROP-UP)
