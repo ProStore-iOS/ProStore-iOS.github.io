@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.1.5",
+          "date": "2025-12-16T23:07:20+0000",
+          "localizedDescription": "What's new in Version 1.1.5?\n- Update version numbers in project.yml\n- Update CertificateView.swift\n- Update issue templates\n- Refactor OfficialCertsDownloader.swift structure\n- Refactor CertificateView and related structures",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.1.5/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5478760,
+          "sha256": "c5dfda38a0cb031aaebe39c372ed36540fa09a35cb3e17a1c20a2f64ea466a21",
+          "minOSVersion": "16.0",
+          "fullDate": "20251216230720"
+        },
+        {
           "version": "1.1.4",
           "date": "2025-12-16T05:59:28+0000",
           "localizedDescription": "What's new in Version 1.1.4?\n- Update CertificateView.swift\n- Refactor certificate fetching and validation logic\n- Add caching support to CertChecker class\n- In v1.1.4: Add certificate status caching and fix certificate tree selector",
