@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.1.0",
+          "date": "2025-12-16T00:14:34+0000",
+          "localizedDescription": "What's new in Version 1.1.0?\n- Merge pull request #2 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Update README.md\n- Fix formatting and update README content\n- Update README.md\n- Update README.md\n- Update README.md\n- Update README.md\n- Add files via upload\n- Enhance installApp to provide installation progress\n- Update DownloadSignManager.swift\n- Enhance DownloadSignManager with progress tracking\n- Update DownloadSignManager.swift\n- Update DownloadSignManager.swift\n- Update DownloadSignManager.swift\n- Update DownloadSignManager.swift\n- Add phase-aware progress reporting for signing\n- Update installApp.swift\n- Refactor DownloadSignManager for phase-aware installation\n- Update DownloadSignManager.swift\n- Update installApp.swift\n- Refactor installApp function for clarity and updates\n- Refactor installApp function for improved clarity\n- Enhance error handling and message display\n- Update installApp.swift\n- Update DownloadSignManager.swift\n- Enhance DownloadSignManager functionality\n- Refactor ProStore app structure and views\n- Update prostore.swift\n- Refactor DownloadSignManager for improved clarity\n- Update DownloadSignManager.swift\n- Implement error handling in AppDetailView\n- Refactor DownloadSignManager for better handling\n- Refactor DownloadSignManager for improved clarity\n- Change progress update to use strings instead of enums\n- Update installApp.swift\n- Refactor download button and remove error banner\n- Refactor DownloadSignManager for improved clarity\n- Refactor DownloadSignManager for improved clarity\n- Update DownloadSignManager.swift\n- Refactor DownloadSignManager for improved clarity\n- Refactor signer class and SigningManager methods\n- Enhance installation progress messages with emojis\n- Bump version to 1.1.0 and update build number\n- Merge branch 'main' into install-progress-and-user-friendly-errors",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.1.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5469343,
+          "sha256": "3b888a54803312141cbdf37f2147618e9f03eb3c72dc8703fe71f32c705fe61d",
+          "minOSVersion": "16.0",
+          "fullDate": "20251216001434"
+        },
+        {
           "version": "1.0.0",
           "date": "2025-12-15T05:43:48+0000",
           "localizedDescription": "What's new in Version 1.0.0?\n- Update project.yml\n- Update README.md\n- Revise SetupView with new StikDebug steps",
