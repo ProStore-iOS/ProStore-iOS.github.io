@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.1.3",
+          "date": "2025-12-16T03:05:24+0000",
+          "localizedDescription": "What's new in Version 1.1.3?\n- Update version and bundle identifier in project.yml\n- Merge pull request #4 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Update signer.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.1.3/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5472548,
+          "sha256": "f303c991454faf055cf1be86b4e0fb45a2eccf792586d1cb944af86d2f14954e",
+          "minOSVersion": "16.0",
+          "fullDate": "20251216030524"
+        },
+        {
           "version": "1.1.2",
           "date": "2025-12-16T03:00:07+0000",
           "localizedDescription": "What's new in Version 1.1.2?\n- Merge pull request #4 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Merge pull request #2 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Merge pull request #3 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Update project.yml\n- Implement error transformation in installApp function\n- Enhance DownloadSignManager with temp cleanup\n- Update project.yml\n- Merge branch 'main' into install-progress-and-user-friendly-errors",
