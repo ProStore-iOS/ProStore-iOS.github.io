@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProStore Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+      <div class="content-area">
+        <div class="sidebar">
+          <div onclick="window.location.href = 'index.html';" class="sidebar-item">ProStore Installer</div>
+          <div onclick="window.location.href = 'cert.html';" class="sidebar-item">Certificate Manager</div>
+          <div onclick="window.location.href = 'dns.html';" class="sidebar-item active">Anti-Revoke DNS</div>
+          <div onclick="window.location.href = 'docs/';" class="sidebar-item">Guide</div>
+        </div>
+
+        <div class="panel">
+          <h1 class="title">ProStore DNS</h1><br>
+          <h3>Stop apps from being revoked using the Khoindvn DNS!</h3><br>
+          <button class="download-button" onclick="window.location.href='https://github.com/esigncert/khoindvn/releases/download/DNS/signed_khoindvn.mobileconfig';">Install DNS</button>
+        </div>
+      </div>
+  </body>
+</html>

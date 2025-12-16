@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProStore Installer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f9f9f9;
+        color: #000;
+        padding: 20px;
+        max-width: 720px;
+        margin: 40px auto;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 6px;
+      }
+
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-weight: 600;
+      }
+
+      select,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+      }
+
+      button {
+        background: #007aff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background: #aaa;
+        cursor: default;
+      }
+
+      #appInfo {
+        margin: 20px 0;
+        text-align: center;
+        display: none;
+      }
+
+      #appInfo img {
+        width: 80px;
+        height: 80px;
+        border-radius: 16px;
+        margin: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+        background: #fff;
+      }
+
+      #name {
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      #version {
+        color: #555;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      #progressContainer {
+        width: 100%;
+        background: #eee;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 10px 0;
+        display: none;
+      }
+
+      #progress {
+        height: 8px;
+        background: #007aff;
+        width: 0%;
+        transition: width 0.3s;
+      }
+
+      #status {
+        margin: 10px 0;
+        font-size: 14px;
+        color: #555;
+        text-align: center;
+        min-height: 18px;
+      }
+
+      #installBtn {
+        display: none;
+        background: #34c759;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+
+      a.debug {
+        display: block;
+        margin-top: 6px;
+        font-size: 13px;
+        color: #007aff;
+        text-decoration: none;
+      }
+
+      .muted {
+        color: #666;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ProStore Installer</h1>
+    <label for="buildType">Build Type:</label>
+    <select id="buildType" aria-label="Build Type">
+      <option value="release">Release</option>
+      <option value="dev">Latest Dev Build / Alpha</option>
+    </select>
+    <!-- Release picker (hidden for dev builds) -->
+    <label for="releaseSelect" id="releaseLabel" style="display:none">Choose release:</label>
+    <select id="releaseSelect" style="display:none" aria-label="Choose release">
+      <option value="">Loading releases...</option>
+    </select>
+    <label for="ipaSelect">Select a certificate to install ProStore with:</label>
+    <select id="ipaSelect">
+      <option value="">Loading...</option>
+    </select>
+    <a class="debug" href="https://github.com/ProStore-iOS/certificates/blob/main/README.md" target="_blank" rel="noopener">Check Certificate Status</a>
+    <div id="appInfo" aria-live="polite">
+      <img id="icon" src="" alt="App Icon" />
+      <div id="name"></div>
+      <div id="version"></div>
+    </div>
+    <button id="downloadBtn" disabled>Download</button>
+    <div id="progressContainer">
+      <div id="progress"></div>
+    </div>
+    <div id="status"></div>
+    <button id="installBtn">Install on This Device</button>
+    <script>
+      const API_BASE = "https://api.github.com/repos/ProStore-iOS/ProStore/releases";
+      const ACTIONS_API = "https://api.github.com/repos/ProStore-iOS/ProStore/actions/runs";
+      const CERT_STATUS_URL = "https://raw.githubusercontent.com/ProStore-iOS/certificates/refs/heads/main/README.md";
+      const PREFLIGHT_URL = "https://ipa.s0n1c.ca/preflight";
+      const LITTERBOX_UPLOAD = "https://litterbox.catbox.moe/resources/internals/api.php";
+      const INSTALL_BASE = "https://ipa.s0n1c.ca";
+      // Example encrypted data (Base64 string)
+      const encryptedBase64 = "U2FsdGVkX19KsZgl+4hAbLMCgHeI25tuZyIEgqH1Ag/e++htsWPwDVBqy3vDePeCwvpt2r+dhXNBsmul7EbXmF47J7tF7kIM0mHhhIiBhx/ulWBf6Mu5p4sRJJAwkI44/klG1byoGJtFIQ9t1/Z3Yg==";
+      // Your key (must be the same key used for encryption)
+      const key = "supergamer474";
+      // Decrypt
+      const decrypted = CryptoJS.AES.decrypt(encryptedBase64, key);
+      // Convert decrypted data to Utf8 string
+      const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+      const GITHUB_PAT = decryptedText;
+      const select = document.getElementById("ipaSelect");
+      const buildTypeSelect = document.getElementById("buildType");
+      const releaseSelect = document.getElementById("releaseSelect");
+      const releaseLabel = document.getElementById("releaseLabel");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const installBtn = document.getElementById("installBtn");
+      const appInfo = document.getElementById("appInfo");
+      const iconImg = document.getElementById("icon");
+      const nameDiv = document.getElementById("name");
+      const versionDiv = document.getElementById("version");
+      const progressContainer = document.getElementById("progressContainer");
+      const progressBar = document.getElementById("progress");
+      const statusDiv = document.getElementById("status");
+      let certStatusMap = {}; // normalizedName -> "Signed" or "Revoked"
+      let releasesCache = [];
+
+      function normalizeName(name) {
+        return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      }
+      async function fetchCertStatus() {
+        try {
+          const res = await fetch(CERT_STATUS_URL);
+          const text = await res.text();
+          const lines = text.split('\n');
+          const map = {};
+          let inTable = false;
+          for (const line of lines) {
+            if (line.startsWith('| Company |')) {
+              inTable = true;
+              continue;
+            }
+            if (inTable && line.startsWith('|')) {
+              const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+              if (cols.length >= 3) {
+                const company = cols[0].replace(/^\*\*|\*\*$/g, '');
+                const status = cols[2].includes('✅') ? 'Signed' : 'Revoked';
+                map[normalizeName(company)] = status;
+              }
+            }
+          }
+          certStatusMap = map;
+          console.log('certStatusMap', certStatusMap);
+        } catch (e) {
+          console.warn("Failed to load cert status", e);
+          statusDiv.textContent = "Warning: Could not load certificate status list.";
+        }
+      }
+
+      function formatDisplayNameFromPath(path) {
+        if (!path) return null;
+        const base = path.split('/').pop();
+        if (!base) return null;
+        if (!/\.ipa$/i.test(base) || !/[-_]signed(?:[-_]|$)/i.test(base)) return null;
+        const parts = base.split(/[-_]signed(?:[-_]|$)/i);
+        const afterSigned = parts[1] || "";
+        if (!afterSigned) return null;
+        let slug = afterSigned.replace(/\.ipa$/i, "");
+        slug = slug.replace(/[-_]ios$/i, "");
+        const words = slug.split(/[-_]+/).filter(Boolean);
+        const title = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        return title.replace(/\s+/g, ' ').trim();
+      }
+
+      function decorateWithStatus(displayName) {
+        const status = certStatusMap[normalizeName(displayName)] || "Revoked";
+        const prefix = status === "Signed" ? "✅ " : "❌ ";
+        const suffix = status === "Signed" ? " - Signed" : " - Revoked";
+        return prefix + displayName + suffix;
+      }
+
+      function populateSelect(items) {
+        select.innerHTML = ' < option value = "" > Choose a certificate... < /option>';
+        items.forEach(item => {
+          const opt = document.createElement("option");
+          opt.textContent = item.display;
+          opt.dataset.rawDisplay = item.rawDisplay || "";
+          opt.dataset.name = item.name || "";
+          if (item.url) opt.dataset.url = item.url; // release build
+          if (item.blob) {
+            opt.__blob = item.blob; // attach blob directly to option
+            opt.dataset.isBlob = "true";
+          }
+          select.appendChild(opt);
+        });
+        select.disabled = items.length === 0;
+      }
+      async function loadReleasesList() {
+        releaseSelect.style.display = "none";
+        releaseLabel.style.display = "none";
+        releaseSelect.innerHTML = ' < option value = "" > Loading releases... < /option>';
+        try {
+          statusDiv.textContent = "Loading releases...";
+          const res = await fetch(API_BASE + '?per_page=50', {
+            headers: {
+              Accept: "application/vnd.github.v3+json",
+              ...(GITHUB_PAT && GITHUB_PAT !== "YOUR_GITHUB_PAT_HERE_REPLACE_ME" ? {
+                Authorization: `token ${GITHUB_PAT}`
+              } : {})
+            }
+          });
+          if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+          const releases = await res.json();
+          if (!releases || !releases.length) throw new Error('No releases found');
+          // Filter out drafts, keep prereleases optional
+          const visible = releases.filter(r => !r.draft).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          releasesCache = visible;
+          // populate releaseSelect
+          releaseSelect.innerHTML = '';
+          const placeholder = document.createElement('option');
+          placeholder.value = '';
+          placeholder.textContent = 'Select a release...';
+          releaseSelect.appendChild(placeholder);
+          visible.forEach((r, idx) => {
+            const opt = document.createElement('option');
+            const label = r.name || r.tag_name || `Release ${r.id}`;
+            const date = new Date(r.created_at).toISOString().split('T')[0];
+            opt.value = String(idx);
+            opt.textContent = `${label} — ${date}${r.prerelease ? ' (prerelease)' : ''}`;
+            releaseSelect.appendChild(opt);
+          });
+          releaseSelect.style.display = '';
+          releaseLabel.style.display = '';
+          statusDiv.textContent = '';
+          // Auto-select first (latest) if available
+          if (visible.length) {
+            releaseSelect.selectedIndex = 1; // because 0 is placeholder
+            const ev = new Event('change');
+            releaseSelect.dispatchEvent(ev);
+          }
+        } catch (e) {
+          console.error(e);
+          statusDiv.textContent = 'Error loading releases: ' + e.message;
+          releaseSelect.style.display = 'none';
+          releaseLabel.style.display = 'none';
+        }
+      }
+      async function loadReleaseAssets(release) {
+        // release is an object from GitHub releases API
+        try {
+          resetUI();
+          statusDiv.textContent = 'Scanning assets for chosen release...';
+          const assets = release.assets || [];
+          const signed = assets.map(asset => {
+            const display = formatDisplayNameFromPath(asset.name);
+            return display ? {
+              asset,
+              display: decorateWithStatus(display),
+              rawDisplay: display,
+              url: asset.browser_download_url,
+              name: asset.name
+            } : null;
+          }).filter(Boolean).sort((a, b) => {
+            const sa = certStatusMap[normalizeName(a.rawDisplay)] === "Signed" ? 0 : 1;
+            const sb = certStatusMap[normalizeName(b.rawDisplay)] === "Signed" ? 0 : 1;
+            if (sa !== sb) return sa - sb;
+            return a.rawDisplay.localeCompare(b.rawDisplay);
+          });
+          populateSelect(signed);
+          statusDiv.textContent = signed.length ? '' : 'No signed builds found in this release.';
+        } catch (e) {
+          console.error(e);
+          statusDiv.textContent = 'Error reading release assets: ' + e.message;
+        }
+      }
+      async function loadDevBuilds() {
+        try {
+          resetUI();
+          statusDiv.textContent = "Downloading latest build from GitHub...";
+          const headers = {
+            Accept: "application/vnd.github.v3+json",
+            ...(GITHUB_PAT && GITHUB_PAT !== "YOUR_GITHUB_PAT_HERE_REPLACE_ME" ? {
+              Authorization: `token ${GITHUB_PAT}`
+            } : {})
+          };
+          const runsRes = await fetch(ACTIONS_API + "?per_page=100", {
+            headers
+          });
+          if (!runsRes.ok) throw new Error("Actions API " + runsRes.status);
+          const runs = await runsRes.json();
+          const workflowRuns = (runs.workflow_runs || []).filter(r => r.conclusion === "success" || r.status === "completed").sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+          if (!workflowRuns.length) throw new Error("No successful runs found");
+          statusDiv.textContent = "Scanning for signed builds from GitHub...";
+          let chosenArtifact = null;
+          for (const run of workflowRuns) {
+            try {
+              const artifactsRes = await fetch(run.artifacts_url, {
+                headers
+              });
+              if (!artifactsRes.ok) {
+                console.warn(`artifacts fetch failed for run ${run.id}`, artifactsRes.status);
+                continue;
+              }
+              const artifactsData = await artifactsRes.json();
+              const candidate = (artifactsData.artifacts || []).find(a => {
+                if (!a.name) return false;
+                const lower = a.name.toLowerCase();
+                return lower === 'signed-ipas' || lower === 'signed-ipas.zip';
+              }) || null;
+              if (candidate) {
+                chosenArtifact = {
+                  candidate,
+                  run
+                };
+                break;
+              }
+            } catch (e) {
+              console.warn('artifact check error', e);
+            }
+          }
+          if (!chosenArtifact) throw new Error("No 'signed-ipas' artifact found in recent runs (strict).");
+          statusDiv.textContent = `Downloading ipa files (This may take a while)...`;
+          const zipUrl = chosenArtifact.candidate.archive_download_url;
+          const zipRes = await fetch(zipUrl, {
+            headers
+          });
+          if (!zipRes.ok) throw new Error("Failed to download artifact zip: " + zipRes.status);
+          const zipBlob = await zipRes.blob();
+          const zip = await JSZip.loadAsync(zipBlob);
+          const entries = [];
+          for (const filename of Object.keys(zip.files)) {
+            if (/simulator|unsigned|iossimulator|x86_64|arm64-simulator/i.test(filename)) {
+              continue;
+            }
+            const display = formatDisplayNameFromPath(filename);
+            if (!display) continue;
+            const file = zip.file(filename);
+            if (!file) continue;
+            try {
+              const arrayBuffer = await file.async("arraybuffer");
+              entries.push({
+                rawDisplay: display,
+                display: decorateWithStatus(display),
+                blob: new Blob([arrayBuffer], {
+                  type: "application/octet-stream"
+                }),
+                name: filename
+              });
+            } catch (e) {
+              console.warn('failed to read zip entry', filename, e);
+            }
+          }
+          entries.sort((a, b) => {
+            const sa = certStatusMap[normalizeName(a.rawDisplay)] === "Signed" ? 0 : 1;
+            const sb = certStatusMap[normalizeName(b.rawDisplay)] === "Signed" ? 0 : 1;
+            if (sa !== sb) return sa - sb;
+            return a.rawDisplay.localeCompare(b.rawDisplay);
+          });
+          populateSelect(entries.map(e => ({
+            display: e.display,
+            rawDisplay: e.rawDisplay,
+            blob: e.blob,
+            name: e.name
+          })));
+          statusDiv.textContent = entries.length ? '' : "No signed IPAs found inside the 'signed-ipas' artifact.";
+        } catch (e) {
+          statusDiv.textContent = "Dev build error: " + e.message;
+          console.error(e);
+        }
+      }
+
+      function resetUI() {
+        select.innerHTML = ' < option value = "" > Loading... < /option>';
+        downloadBtn.disabled = true;
+        appInfo.style.display = "none";
+        installBtn.style.display = "none";
+        progressContainer.style.display = "none";
+        progressBar.style.width = "0%";
+        statusDiv.textContent = "";
+        iconImg.src = "";
+        nameDiv.textContent = "";
+        versionDiv.textContent = "";
+      }
+      async function loadBuilds() {
+        resetUI();
+        await fetchCertStatus();
+        if (buildTypeSelect.value === "release") {
+          // Show release list and let user pick
+          await loadReleasesList();
+        } else {
+          // Dev flow
+          releaseSelect.style.display = 'none';
+          releaseLabel.style.display = 'none';
+          await loadDevBuilds();
+        }
+      }
+      buildTypeSelect.addEventListener("change", loadBuilds);
+      releaseSelect.addEventListener('change', () => {
+        const idx = releaseSelect.value;
+        if (!idx) {
+          // clear ipa list
+          select.innerHTML = ' < option value = "" > Select a certificate... < /option>';
+          select.disabled = true;
+          return;
+        }
+        const release = releasesCache[Number(idx)];
+        if (release) loadReleaseAssets(release);
+      });
+      select.addEventListener("change", () => {
+        const hasValue = select.selectedIndex > 0;
+        downloadBtn.disabled = !hasValue;
+        resetUIAfterSelect();
+      });
+
+      function resetUIAfterSelect() {
+        appInfo.style.display = "none";
+        installBtn.style.display = "none";
+        progressContainer.style.display = "none";
+        progressBar.style.width = "0%";
+        statusDiv.textContent = "";
+        iconImg.src = "";
+        nameDiv.textContent = "";
+        versionDiv.textContent = "";
+        downloadBtn.textContent = "Download";
+      }
+      iconImg.addEventListener("error", () => {
+        iconImg.src = "";
+        iconImg.alt = "No icon available";
+      });
+      downloadBtn.addEventListener("click", async () => {
+        if (select.selectedIndex <= 0) return;
+        const option = select.selectedOptions[0];
+        const isDev = option.dataset.isBlob === "true";
+        const rawDisplay = option.dataset.rawDisplay;
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = "Preparing...";
+        progressContainer.style.display = "block";
+        progressBar.style.width = "10%";
+        statusDiv.textContent = isDev ? "Uploading IPA..." : "Generating install link...";
+        try {
+          let ipaUrlForSigning;
+          if (!isDev) {
+            ipaUrlForSigning = option.dataset.url;
+          } else {
+            const blob = option.__blob;
+            if (!blob) throw new Error("IPA blob missing");
+            progressBar.style.width = "30%";
+            statusDiv.textContent = "Uploading IPA...";
+            const form = new FormData();
+            form.append("reqtype", "fileupload");
+            form.append("time", "1h");
+            form.append("fileToUpload", blob, option.dataset.name);
+            const uploadRes = await fetch(LITTERBOX_UPLOAD, {
+              method: "POST",
+              body: form
+            });
+            if (!uploadRes.ok) throw new Error("Litterbox upload failed");
+            ipaUrlForSigning = await uploadRes.text();
+            if (!ipaUrlForSigning.startsWith("http")) throw new Error("Invalid litterbox response");
+          }
+          progressBar.style.width = "60%";
+          statusDiv.textContent = "Preparing signing...";
+          const resp = await fetch(PREFLIGHT_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              url: ipaUrlForSigning
+            })
+          });
+          if (!resp.ok) throw new Error(`Signing service HTTP ${resp.status}`);
+          const data = await resp.json();
+          if (!data || !data.id) throw new Error("No ID from signing service");
+          nameDiv.textContent = data.name || rawDisplay || "ProStore";
+          versionDiv.textContent = `Version ${data.version || "?"} (${data.build || "?"})`;
+          if (data.icon) {
+            const iconVal = data.icon.toString().trim();
+            if (/^data:image\/[a-zA-Z]+;base64,/.test(iconVal)) {
+              iconImg.src = iconVal;
+            } else if (/^https?:\/\//i.test(iconVal)) {
+              iconImg.src = iconVal;
+            } else if (/^[A-Za-z0-9+/=]{20,}$/.test(iconVal)) {
+              iconImg.src = "data:image/png;base64," + iconVal;
+            } else {
+              iconImg.src = iconVal;
+            }
+          }
+          appInfo.style.display = "block";
+          progressBar.style.width = "90%";
+          statusDiv.textContent = "Ready! You can now install.";
+          installBtn.style.display = "block";
+          installBtn.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end'
+          });
+          installBtn.onclick = () => {
+            window.location.href = `${INSTALL_BASE}/${data.id}/install`;
+          };
+          progressBar.style.width = "100%";
+          setTimeout(() => {
+            progressContainer.style.display = "none";
+            progressBar.style.width = "0%";
+          }, 800);
+          downloadBtn.textContent = "Download";
+          downloadBtn.disabled = false;
+        } catch (err) {
+          statusDiv.textContent = `Error: ${err.message}`;
+          console.error(err);
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = "Download";
+          progressBar.style.width = "0%";
+          progressContainer.style.display = "none";
+        }
+      });
+      // Load JSZip from CDN
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+      script.onload = () => loadBuilds();
+      script.onerror = () => statusDiv.textContent = "Failed to load required library (JSZip)";
+      document.head.appendChild(script);
+      // Initial load will start after JSZip loads
+    </script>
+  </body>
+</html>

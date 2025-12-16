@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ProStore Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="certStyles.css">
+  </head>
+  <body>
+      <div class="content-area">
+        <div class="sidebar">
+          <div onclick="window.location.href = 'index.html';" class="sidebar-item">ProStore Installer</div>
+          <div onclick="window.location.href = 'cert.html';" class="sidebar-item active">Certificate Manager</div>
+          <div onclick="window.location.href = 'dns.html';" class="sidebar-item">Anti-Revoke DNS</div>
+          <div onclick="window.location.href = 'docs/';" class="sidebar-item">Guide</div>
+        </div>
+
+        <div class="panel">
+          <h1 class="title">Certificate Manager</h1>
+
+          <!-- Recommended -->
+          <div id="recommended" class="recommended-box" aria-live="polite"></div>
+
+          <!-- Controls row (optional future extension) -->
+          <div class="controls-row">
+            <!-- placeholder: search/filter could go here later -->
+          </div>
+
+          <!-- Cards container -->
+          <div id="certList" class="cert-list" aria-live="polite"></div>
+
+<!-- Updates -->
+<div id="updates" class="updates-box">
+  <div class="updates-header">
+    <h3 class="updates-title">📰 Updates</h3>
+    <!-- The caret button: shows '^' and rotates when expanded -->
+    <button id="updatesToggle" class="updates-toggle" aria-expanded="false" title="Toggle updates">^</button>
+  </div>
+
+  <div id="updatesInner" class="updates-inner"></div>
+</div>
+        </div>
+      </div>
+
+    <!-- Modal for certificate details -->
+    <div id="certModal" class="modal" aria-hidden="true">
+      <div class="modal-panel" role="dialog" aria-modal="true">
+        <button id="modalClose" class="modal-close" title="Close">✕</button>
+        <h2 id="modalName"></h2>
+        <div id="modalMeta" class="modal-meta"></div>
+        <div id="modalDates" class="modal-dates"></div>
+        <div id="modalDownload" class="modal-download"></div>
+      </div>
+    </div>
+
+    <script src="certManager.js"></script>
+
+  </body>
+</html>

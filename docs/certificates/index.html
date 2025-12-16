@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     
+
+    <title>Adding Certificates : ProStore</title>
+    
+
+    <link rel="shortcut icon" href="../assets/images/icon.png" type="image/x-icon">
+ 
+
+    <!-- Define Default Mode (Variable for script) -->
+    <script>
+      window.DOCMD_DEFAULT_MODE = "light";
+    </script>
+
+    <!-- Highlight.js Theme -->
+    
+        <link rel="stylesheet" id="highlight-theme" href="../assets/css/docmd-highlight-light.css" data-base-href="../assets/css/">
+    
+
+    <!-- Main Theme -->
+    <link rel="stylesheet" href="../assets/css/docmd-main.css">
+    
+      <link rel="stylesheet" href="../assets/css/docmd-theme-sky.css">
+ 
+
+    
+
+     
+
+    <!-- This checks storage and updates HTML attr + Highlight CSS before final paint -->
+    <script>// Source file from the docmd project — https://github.com/mgks/docmd
+
+/*
+ * Initialize the theme from localStorage
+ */
+
+(function() {
+  try {
+    // Determine Theme
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_DEFAULT_MODE || 'light'; 
+    var theme = localValue ? localValue : configValue;
+    
+    // Set HTML Attribute (for main CSS variables)
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Handle Highlight.js Theme (if present)
+    var highlightLink = document.getElementById('highlight-theme');
+    if (highlightLink) {
+      var baseHref = highlightLink.getAttribute('data-base-href');
+      // Check if the current href matches the desired theme
+      // If not, swap it immediately before the browser renders code blocks
+      if (baseHref && !highlightLink.href.includes('docmd-highlight-' + theme)) {
+        highlightLink.href = baseHref + 'docmd-highlight-' + theme + '.css';
+      }
+    }
+  } catch (e) {
+    console.error('Theme init failed', e);
+  }
+})();</script>
+
+     
+</head>
+<body class="sidebar-collapsible"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            
+                <a href="/" class="logo-link">
+                    <img src="../assets/images/icon.png" alt="ProStore Logo" class="logo-light" >
+                    <img src="../assets/images/icon.png" alt="ProStore Logo" class="logo-dark" >
+                </a>
+            
+                <span class="mobile-view sidebar-menu-button float-right">
+                    <svg class="lucide-icon icon-ellipsis-vertical" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="1" />
+  <circle cx="12" cy="5" r="1" />
+  <circle cx="12" cy="19" r="1" />
+</svg>
+                </span>
+        </div>
+        
+<nav class="sidebar-nav" aria-label="Main navigation">
+  <ul>
+    
+    <li class="" >
+      <a href="../" class="" >
+         <svg class="lucide-icon icon-home" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg> 
+        <span class="nav-item-title">Welcome</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="collapsible" data-nav-id="#">
+      <a href="#" class="" >
+         <svg class="lucide-icon icon-rocket" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+</svg> 
+        <span class="nav-item-title">Getting Started</span>
+         <svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m9 18 6-6-6-6" />
+</svg> 
+        
+      </a>
+      
+        <ul class="submenu">
+          
+    <li class="" >
+      <a href="../dns" class="" >
+         <svg class="lucide-icon icon-shield-ban" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m4.243 5.21 14.39 12.472" />
+</svg> 
+        <span class="nav-item-title">Anti-Revoke DNS</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="../installation" class="" >
+         <svg class="lucide-icon icon-package" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+  <path d="M12 22V12" />
+  <polyline points="3.29 7 12 12 20.71 7" />
+  <path d="m7.5 4.27 9 5.15" />
+</svg> 
+        <span class="nav-item-title">Installation</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="../setup" class="" >
+         <svg class="lucide-icon icon-settings" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg> 
+        <span class="nav-item-title">Setup</span>
+        
+        
+      </a>
+      
+    </li>
+    
+        </ul>
+      
+    </li>
+    
+    <li class="active" >
+      <a href="../certificates" class="active" >
+         <svg class="lucide-icon icon-signature" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" />
+  <path d="M3 21h18" />
+</svg> 
+        <span class="nav-item-title">Adding Certificates</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="../appInstall" class="" >
+         <svg class="lucide-icon icon-download" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 15V3" />
+  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+  <path d="m7 10 5 5 5-5" />
+</svg> 
+        <span class="nav-item-title">Installing Apps</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="../update" class="" >
+         <svg class="lucide-icon icon-cloud-download" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 13v8l-4-4" />
+  <path d="m12 21 4-4" />
+  <path d="M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284" />
+</svg> 
+        <span class="nav-item-title">Updating ProStore</span>
+        
+        
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="https://github.com/ProStore-iOS/ProStore" class="" target="_blank" rel="noopener">
+         <svg class="lucide-icon icon-github" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+  <path d="M9 18c-4.51 2-5-2-7-2" />
+</svg> 
+        <span class="nav-item-title">GitHub</span>
+        
+         <svg class="lucide-icon icon-external-link nav-external-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg> 
+      </a>
+      
+    </li>
+    
+    <li class="" >
+      <a href="https://github.com/ProStore-iOS/ProStore/issues/new/choose" class="" target="_blank" rel="noopener">
+         <svg class="lucide-icon icon-circle-alert" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10" />
+  <line x1="12" x2="12" y1="8" y2="12" />
+  <line x1="12" x2="12.01" y1="16" y2="16" />
+</svg> 
+        <span class="nav-item-title">Create Issue</span>
+        
+         <svg class="lucide-icon icon-external-link nav-external-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg> 
+      </a>
+      
+    </li>
+    
+  </ul>
+</nav>
+        
+    </aside>
+    <div class="main-content-wrapper">
+        <div class="page-header">
+            <div class="header-left">
+                
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button" aria-label="Toggle Sidebar">
+                    <svg class="lucide-icon icon-panel-left-close" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M9 3v18" />
+  <path d="m16 15-3-3 3-3" />
+</svg>
+                </button>
+                
+                <h1>Adding Certificates</h1>
+            </div>
+            
+            <div class="header-right">
+                
+                <button class="docmd-search-trigger" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+                    <span class="search-label">Search</span>
+                    <span class="search-keys">
+                        <kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">k</kbd>
+                    </span>
+                </button>
+                
+                <button id="theme-toggle-button" aria-label="Toggle theme" class="theme-toggle-button theme-toggle-header">
+                    
+                    <svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+                    <svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+                </button>
+            </div>
+            
+        </div>
+        <main class="content-area">
+            <div class="content-layout">
+                <div class="main-content">
+                    <h1 id="certificates-in-prostore">Certificates in ProStore</h1>
+<p>Before you can install any apps in ProStore, you must add a certificate to sign the apps with. To add a certificate, in ProStore, click on <code>Certificates</code> in the sidebar, and press the <code>+</code> in the top right corner of the app, and press <code>Add from Official</code>.</p>
+<p>In the menu, select the certificate that you used to install ProStore, and tap <code>Add Certificate</code>, which will download it from the <a href="https://github.com/ProStore-iOS/certificates">ProStore certificate repositoy</a> on GitHub. Feel free to add as many certificates as you like. You are also able to add certificates from the files app if you have obtained the <code>.p12</code> and <code>.mobileprovision</code> files.</p>
+<p>The certificate will show the expiry date, and send a request to AppleP12’s <a href="https://check-p12.applep12.com/">P12 Checker</a> to find out whether the cert is revoked or not, which will update after a couple of seconds.</p>
+
+                    
+                    
+                    <div class="page-navigation">
+                        
+                        <a href="../setup/" class="prev-page">
+                            <svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+                            <span>
+                                <small>Previous</small>
+                                <strong>Setup</strong>
+                            </span>
+                        </a>
+                        
+                        
+                        
+                        <a href="../appInstall/" class="next-page">
+                            <span>
+                                <small>Next</small>
+                                <strong>Installing Apps</strong>
+                            </span>
+                            <svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" />
+</svg>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+                
+                <!-- DEBUG: {"headingsLength":1} -->
+                
+                <!-- TOC sidebar -->
+                <div class="toc-sidebar">
+                    
+ 
+                </div>
+            </div>
+
+            <!-- Page footer actions -->
+            <div class="page-footer-actions">
+                
+
+                
+            </div>
+        </main>
+
+        <footer class="page-footer">
+            <div class="footer-content">
+                <div class="user-footer">
+                    © 2025 ProStore iOS
+                </div>
+                <div class="branding-footer">
+                    Build with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://github.com/mgks/docmd" target="_blank" rel="noopener">docmd.</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    
+    <!-- Search Modal -->
+    <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;">
+        <div class="docmd-search-box">
+            <div class="docmd-search-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1.25em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+                <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+                <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+            <div id="docmd-search-results" class="docmd-search-results">
+                <!-- Results injected here -->
+            </div>
+            <div class="docmd-search-footer">
+                <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+                <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+      window.DOCMD_ROOT = "../";
+    </script>
+
+    <script src="../assets/js/docmd-main.js"></script>
+
+    
+    <!-- Search Scripts -->
+    <script src="../assets/js/minisearch.js"></script>
+    <script src="../assets/js/docmd-search.js"></script>
+    
+
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="../assets/js/mermaid.min.js"></script>
+    <script src="../assets/js/docmd-mermaid.js"></script>
+
+    
+
+    
+    
+    
+</body>
+</html>
