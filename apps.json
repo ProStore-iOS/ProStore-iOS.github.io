@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.1.2",
+          "date": "2025-12-16T03:00:07+0000",
+          "localizedDescription": "What's new in Version 1.1.2?\n- Merge pull request #4 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Merge pull request #2 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Merge pull request #3 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Update project.yml\n- Implement error transformation in installApp function\n- Enhance DownloadSignManager with temp cleanup\n- Update project.yml\n- Merge branch 'main' into install-progress-and-user-friendly-errors",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.1.2/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5473198,
+          "sha256": "592f0e083aaab17729455663c3c9aeae737a2f806398b67359eea12f863974d5",
+          "minOSVersion": "16.0",
+          "fullDate": "20251216030007"
+        },
+        {
           "version": "1.1.1",
           "date": "2025-12-16T02:41:05+0000",
           "localizedDescription": "What's new in Version 1.1.1?\n- Update project.yml\n- Update DownloadSignManager.swift\n- Update DownloadSignManager.swift\n- Enhance error handling and message display\n- Update DownloadSignManager.swift\n- Merge branch 'main' into install-progress-and-user-friendly-errors\n- Merge pull request #2 from ProStore-iOS/install-progress-and-user-friendly-errors\n- Update signer.swift\n- Rename 'apps' to 'store' in sidebar navigation\n- Enhance error handling in DownloadSignManager\n- Update AppsDetailView.swift\n- Update DownloadSignManager.swift\n- Update DownloadSignManager.swift\n- Update prostore.swift\n- Merge pull request #3 from ProStore-iOS/install-progress-and-user-friendly-errors",
