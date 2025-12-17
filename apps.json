@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.1.7",
+          "date": "2025-12-17T01:36:02+0000",
+          "localizedDescription": "What's new in Version 1.1.7?\n- Update project.yml\n- Revise README with new installation and feature details\n- Update OfficialCertsDownloader.swift\n- Refactor CertificateView and AddCertificateView",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.1.7/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5481136,
+          "sha256": "1b9ef98aed73ec802a05e1cb992e53b04a8502ec7d92045bf6040d990622b466",
+          "minOSVersion": "16.0",
+          "fullDate": "20251217013602"
+        },
+        {
           "version": "1.1.6",
           "date": "2025-12-17T00:07:35+0000",
           "localizedDescription": "What's new in Version 1.1.6?\n- Update project.yml with new version and properties\n- Update README.md\n- Update UpdaterView.swift",
