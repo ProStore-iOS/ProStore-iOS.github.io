@@ -247,6 +247,16 @@
       ],
       "versions": [
         {
+          "version": "1.2.0",
+          "date": "2025-12-17T03:16:16+0000",
+          "localizedDescription": "What's new in Version 1.2.0?\n- Fix bug\n- Update README with to-do list and credits\n- Rename About to Settings\n- Add Sources Manager",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5517469,
+          "sha256": "64ffba97edede39eb1ee5f067990e84f47f171a9ede5adc5ed23c5c936f3293f",
+          "minOSVersion": "16.0",
+          "fullDate": "20251217031616"
+        },
+        {
           "version": "1.1.8",
           "date": "2025-12-17T02:23:28+0000",
           "localizedDescription": "What's new in Version 1.1.8?\n- Fix cached certificate issues\n- Fix cached status",
