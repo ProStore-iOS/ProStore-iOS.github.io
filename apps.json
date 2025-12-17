@@ -77,6 +77,16 @@
       ],
       "versions": [
         {
+          "version": "1.2.5",
+          "date": "2025-12-17T07:21:43+0000",
+          "localizedDescription": "What's new in Version 1.2.5?\n- Update to v1.2.5\n- Improve Sources Manager",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.5/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5515526,
+          "sha256": "9313512e39ab7ae0f00f7d4bb4c27bacc5d77a2ca8357e4f8a9c4e2d740d5fa1",
+          "minOSVersion": "16.0",
+          "fullDate": "20251217072143"
+        },
+        {
           "version": "1.2.4",
           "date": "2025-12-17T06:10:41+0000",
           "localizedDescription": "What's new in Version 1.2.4?\n- Add Load Defaults button\n- Revise README with updates and new features",
