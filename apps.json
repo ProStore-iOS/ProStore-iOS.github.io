@@ -72,9 +72,20 @@
         "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot1.png",
         "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot2.png",
         "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot3.png",
-        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot4.png"
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot4.png",
+        "https://raw.githubusercontent.com/ProStore-iOS/ProStore/refs/heads/main/gallery/Screenshot5.png"
       ],
       "versions": [
+        {
+          "version": "1.2.1",
+          "date": "2025-12-17T03:39:55+0000",
+          "localizedDescription": "What's new in Version 1.2.1?\n- Fix crash in Sources Manager\n- Fix bug\n- Changed validationStates dictionary key from URL to String",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.1/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5517618,
+          "sha256": "e9aa9989ae876c48463ff5d373906e041d0e6a8c3c558728da0943f8382f5991",
+          "minOSVersion": "16.0",
+          "fullDate": "20251217033955"
+        },
         {
           "version": "1.2.0",
           "date": "2025-12-17T03:16:16+0000",
