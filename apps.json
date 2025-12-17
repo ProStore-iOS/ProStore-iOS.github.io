@@ -77,6 +77,16 @@
       ],
       "versions": [
         {
+          "version": "1.2.4",
+          "date": "2025-12-17T06:10:41+0000",
+          "localizedDescription": "What's new in Version 1.2.4?\n- Add Load Defaults button\n- Revise README with updates and new features",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.4/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5513469,
+          "sha256": "539dad535f50cd342852854415725e5bd69c1740456fcb9e215546c583ddbf82",
+          "minOSVersion": "16.0",
+          "fullDate": "20251217061041"
+        },
+        {
           "version": "1.2.3",
           "date": "2025-12-17T05:58:00+0000",
           "localizedDescription": "What's new in Version 1.2.3?\n- v1.2.3: Improve Sources Manager, add S0n1c credit in settings, and update default sources url.\n- Add back SourceView\n- Add missing SwiftUI import\n- Replace private functions with normal functions",
