@@ -294,14 +294,22 @@
                 <div class="main-content">
                     <h1 id="setup-prostore">Setup ProStore</h1>
 <p>The following steps are also the same as the steps in the ProStore app, just in more detail.</p>
-<h2 id="install-stikdebug">Install StikDebug</h2>
-<p>To install StikDebug, go to the <code>App Store</code> on your iPhone or iPad and search for <code>StikDebug</code>, and install and run it.</p>
+<h2 id="install-localdevvpn">Install LocalDevVPN</h2>
+<p>To install LocalDevVPN, go to the <code>App Store</code> on your iPhone or iPad and search for <code>LocalDevVPN</code>, and install and run it.</p>
 <h2 id="place-the-pairing-file">Place the pairing file</h2>
-<p>Next, follow the steps <a href="https://stikdebug.xyz/#guide">here</a> on your computer to install the prerequisites for your operating system. Then, connect your iPhone/iPad to your computer, and then trust it.</p>
-<p>In <code>iLoader</code>, click <code>Manage Pairing File</code>, and then to the right of <code>StikDebug</code>, click <code>Place</code>. Wait for the message: <code>Pairing file placed successfully!</code>.</p>
-<p>Now, on your iPhone or iPad, go to the <code>StikDebug</code> folder in <code>On My iPhone</code>/<code>iPad</code> in files, and copy the <code>pairingFile.plist</code> file, and then go to the <code>ProStore</code> folder and paste it there.</p>
+<p>First of all, install iLoader for your operating system. You must use ProStore’s version of iLoader.</p>
+<p><strong>Windows</strong><br>
+Either install iTunes from the <a href="https://apple.co/ms">Microsoft Store</a> or <a href="https://www.apple.com/itunes/download/win64">Directly from Apple</a>. Next, download the iLoader <a href="https://github.com/ProStore-iOS/iLoader/releases/download/v1.1.5/iloader_1.1.5_x64-setup.exe">exe</a> installer and run it.</p>
+<hr>
+<p><strong>Linux</strong><br>
+First, install usbmuxd (using your package manager), and then install iLoader: <a href="https://github.com/ProStore-iOS/iLoader/releases/download/v1.1.5/iloader_1.1.5_amd64.deb">Debian</a>, <a href="https://github.com/ProStore-iOS/iLoader/releases/download/v1.1.5/iloader-1.1.5-1.x86_64.rpm">Fedora</a>, or <a href="https://github.com/ProStore-iOS/iLoader/releases/download/v1.1.5/iloader_1.1.5_amd64.AppImage">AppImage</a>.</p>
+<hr>
+<p><strong>MacOS</strong><br>
+Install iLoader for Mac <a href="https://github.com/ProStore-iOS/iLoader/releases/download/v1.1.5/iloader_1.1.5_universal.dmg">here</a>.</p>
+<hr>
+<p>Then, connect your iPhone/iPad to your computer, and then trust it. In <code>iLoader</code>, click <code>Manage Pairing File</code>, and then to the right of <code>ProStore</code>, click <code>Place</code>. Wait for the message: <code>Pairing file placed successfully!</code>.</p>
 <h2 id="prostore-shortcut-optional">ProStore Shortcut (Optional)</h2>
-<p>This step is optional, but recommended. It installs a shortcut which automatically turns on the StikDebug VPN every time you open ProStore so you don’t have to manually turn it on every time. On your iPhone/iPad, go to this link: <a href="https://www.icloud.com/shortcuts/d26821cec58d42fba93e4b216b70c6d5">https://www.icloud.com/shortcuts/d26821cec58d42fba93e4b216b70c6d5</a>, and install the shortcut.</p>
+<p>This step is optional, but recommended. It installs a shortcut which automatically turns on the LocalDevVPN VPN every time you open ProStore so you don’t have to manually turn it on every time. On your iPhone/iPad, go to this link: <a href="https://www.icloud.com/shortcuts/4ff18eec29304b6090a4a3f8d6a821b8">icloud.com/shortcuts/4ff18eec29304b6090a4a3f8d6a821b8</a>, and install the shortcut.</p>
 <p>Now, go to <code>Shortcuts</code> and <code>Automation</code>. Press the <code>+</code> to add an automation, and click on <code>App</code>, then <code>Is Opened</code>, and tick <code>Run Immediately</code>. Click <code>Choose</code>, and select <code>ProStore</code>. Finally, click <code>Next</code> and choose the <code>Turn on VPN</code> shortcut. You have successfully setup the automation.</p>
 
                     
@@ -350,7 +358,7 @@
     <ul class="toc-list">
       
         <li class="toc-item toc-level-2">
-          <a href="#install-stikdebug" class="toc-link">Install StikDebug</a>
+          <a href="#install-localdevvpn" class="toc-link">Install LocalDevVPN</a>
         </li>
       
         <li class="toc-item toc-level-2">
