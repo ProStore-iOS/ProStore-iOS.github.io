@@ -77,6 +77,16 @@
       ],
       "versions": [
         {
+          "version": "1.2.7",
+          "date": "2025-12-19T23:26:45+0000",
+          "localizedDescription": "What's new in Version 1.2.7?\n- Fix Initializer for conditional binding must have Optional type, not 'NSError'\n- Revise README with updated installation and features\n- Improve user-friendly error messages.",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.7/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5535601,
+          "sha256": "6f582d8a0da2e7525ddfc477daecd1e373acfe29c5000f55027edae111d526fa",
+          "minOSVersion": "16.0",
+          "fullDate": "20251219232645"
+        },
+        {
           "version": "1.2.6",
           "date": "2025-12-19T22:32:40+0000",
           "localizedDescription": "What's new in Version 1.2.6?\n- v1.2.6 - Fix error handling bug and use LocalDevVPN instead of StikDebug\n- Update DownloadSignManager.swift\n- Refactor signing process with session management\n- Update README.md\n- Update credits in SettingsView.swift\n- Update README.md\n- Revise SetupView content and instructions\n- Update installApp.swift\n- Update installApp.swift",
