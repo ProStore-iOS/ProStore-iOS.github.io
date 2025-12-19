@@ -77,6 +77,16 @@
       ],
       "versions": [
         {
+          "version": "1.2.8",
+          "date": "2025-12-19T23:41:08+0000",
+          "localizedDescription": "What's new in Version 1.2.8?\n- Update to v1.2.8\n- Fix Initializer for conditional binding must have Optional type, not 'NSError'",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.8/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5536789,
+          "sha256": "39b3144d238d398f9e4a24f604b59251ccd0dfd06298e506d2f64c284db8b13a",
+          "minOSVersion": "16.0",
+          "fullDate": "20251219234108"
+        },
+        {
           "version": "1.2.7",
           "date": "2025-12-19T23:26:45+0000",
           "localizedDescription": "What's new in Version 1.2.7?\n- Fix Initializer for conditional binding must have Optional type, not 'NSError'\n- Revise README with updated installation and features\n- Improve user-friendly error messages.",
