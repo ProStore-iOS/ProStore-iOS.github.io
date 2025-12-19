@@ -78,6 +78,16 @@
       "versions": [
         {
           "version": "1.2.6",
+          "date": "2025-12-19T22:32:40+0000",
+          "localizedDescription": "What's new in Version 1.2.6?\n- v1.2.6 - Fix error handling bug and use LocalDevVPN instead of StikDebug\n- Update DownloadSignManager.swift\n- Refactor signing process with session management\n- Update README.md\n- Update credits in SettingsView.swift\n- Update README.md\n- Revise SetupView content and instructions\n- Update installApp.swift\n- Update installApp.swift",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.6/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5532643,
+          "sha256": "ec50a7736c342f529573d632947f1ee65af7f2d500e00108bb0b4e163b392da6",
+          "minOSVersion": "16.0",
+          "fullDate": "20251219223240"
+        },
+        {
+          "version": "1.2.6",
           "date": "2025-12-19T04:04:57+0000",
           "localizedDescription": "What's new in Version 1.2.6?\n- v1.2.6 - Fix error handling bug and use LocalDevVPN instead of StikDebug\n- Update DownloadSignManager.swift\n- Refactor signing process with session management\n- Update README.md\n- Update credits in SettingsView.swift\n- Update README.md\n- Revise SetupView content and instructions\n- Update installApp.swift\n- Update installApp.swift",
           "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.6/com.prostoreios.prostore-unsigned-ios.ipa",
