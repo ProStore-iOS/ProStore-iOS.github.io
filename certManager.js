@@ -105,7 +105,7 @@ function renderRecommended(md) {
     if (el) el.style.display = "none";
     return;
   }
-  if (el) el.innerHTML = `<h3>⭐ Recommended Certificate</h3><p>${escapeHtml(rec)}</p>`;
+  if (el) el.innerHTML = `<h3>⭐ Recommended Cert</h3><p>${escapeHtml(rec)}</p>`;
 }
 
 function renderCertCards(certs) {
