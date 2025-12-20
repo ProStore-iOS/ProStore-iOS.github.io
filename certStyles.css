@@ -103,6 +103,11 @@
   color: var(--valid);
   border: 1px solid rgba(16,185,129,0.12);
 }
+.badge.signed {
+  background: rgba(16,185,129,0.08);
+  color: var(--valid);
+  border: 1px solid rgba(16,185,129,0.12);
+}
 
 /* small footer row inside card */
 .card-footer {
