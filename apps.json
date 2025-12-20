@@ -78,6 +78,16 @@
       "versions": [
         {
           "version": "1.2.9",
+          "date": "2025-12-20T01:50:10+0000",
+          "localizedDescription": "What's new in Version 1.2.9?\n- Fix another bug\n- Enhance error handling in installApp function\n- Update project.yml\n- Refactor error handling and installation process\n- Update installApp.swift\n- Refactor error handling and installation logic\n- Fix bug",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.9/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5538114,
+          "sha256": "2ad6c562e45df85d915c0e46374a70be5c86a493ae1843f685b1bdd015102fd0",
+          "minOSVersion": "16.0",
+          "fullDate": "20251220015010"
+        },
+        {
+          "version": "1.2.9",
           "date": "2025-12-20T01:50:05+0000",
           "localizedDescription": "What's new in Version 1.2.9?\n- Update Feather to ProStore\n- Enhance error handling in installApp function\n- Update project.yml\n- Refactor error handling and installation process\n- Update installApp.swift\n- Refactor error handling and installation logic\n- Fix bug\n- Fix another bug",
           "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.2.9/com.prostoreios.prostore-unsigned-ios.ipa",
