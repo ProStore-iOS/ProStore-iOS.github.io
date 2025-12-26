@@ -77,6 +77,16 @@
       ],
       "versions": [
         {
+          "version": "1.3.0",
+          "date": "2025-12-26T04:07:22+0000",
+          "localizedDescription": "What's new in Version 1.3.0?\n- v1.3.0: Use NovaDev Hub's Certificate API\n- Refactor error handling and installation process\n- Update installApp.swift\n- Refactor error handling and installation logic\n- Fix bug\n- Fix another bug\n- Update Feather to ProStore\n- Update README with installation warning and formatting\n- Update README.md\n- Add new contributor to credits in SettingsView\n- Refactor CertChecker for new API and cache structure",
+          "downloadURL": "https://github.com/ProStore-iOS/ProStore/releases/download/v1.3.0/com.prostoreios.prostore-unsigned-ios.ipa",
+          "size": 5532576,
+          "sha256": "257e84d69aec9842f3b583e71da323f2c793fcbb327ce1e0e35ed0f6c4ea629b",
+          "minOSVersion": "16.0",
+          "fullDate": "20251226040722"
+        },
+        {
           "version": "1.2.9",
           "date": "2025-12-20T01:54:54+0000",
           "localizedDescription": "What's new in Version 1.2.9?\n- Update Feather to ProStore\n- Enhance error handling in installApp function\n- Update project.yml\n- Refactor error handling and installation process\n- Update installApp.swift\n- Refactor error handling and installation logic\n- Fix bug\n- Fix another bug",
