@@ -1,5 +1,5 @@
 // certManager.js
-const README_URL = "https://raw.githubusercontent.com/ProStore-iOS/certificates/refs/heads/main/README.md";
+const README_URL = "https://raw.githubusercontent.com/NovaDev404/certificates/refs/heads/main/README.md";
 
 async function init() {
   try {
